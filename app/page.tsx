@@ -11,25 +11,25 @@ export default function Home() {
           <p className="text-base">
             Check out the SDxAI 2023 Hackathon
             <span className="mx-1">
-              <Link className="underline" href="#">
+              <Link className="underline" target="_blank"  href="https://twitter.com/SDxCommunity/status/1683885108724658182">
                 video reel
               </Link>
             </span>
           </p>
           <p className="text-base">
           <span className="mx-1">
-            <Link className="underline" href="#">
+            <Link className="underline" target="_blank" href="https://airtable.com/applYd5Md0JPIJen4/shrwA56KnaWg17sV7">
               Sign Up
             </Link>
           </span>for 2024 events.</p>
           <div className="space-y-2">
-            <Link className="block text-base underline" href="#">
+            <Link className="block text-base underline" target="_blank" href="https://twitter.com/SDxCommunity">
               Twitter
             </Link>
-            <Link className="block text-base underline" href="#">
+            <Link className="block text-base underline" target="_blank" href="https://lu.ma/sdx">
               Events
             </Link>
-            <Link className="block text-base underline" href="#">
+            <Link className="block text-base underline" target="_blank" href="https://discord.gg/tuFeXZDn7m">
               Discord
             </Link>
           </div>
