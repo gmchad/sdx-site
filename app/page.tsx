@@ -5,7 +5,14 @@ export default function Home() {
   return (
     <main className="">
        <div className="bg-[#0f0f0f] text-white min-h-screen flex flex-col items-center justify-center">
-        <div className="text-8xl font-black tracking-wider mb-12">SDx</div>
+        <div className="mb-12">
+          <Image
+            src="/sdx-logo-white.svg"
+            alt="SDx Community Logo"
+            width={200}
+            height={200}
+          />
+        </div>
         <div className="max-w-lg text-center space-y-6">
           <p className="text-xl">The next-gen startup community for builders in San Diego.</p>
           <p className="text-base">
