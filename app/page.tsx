@@ -9,13 +9,13 @@ export default function Home() {
           <Image
             src="/sdx-logo-white.svg"
             alt="SDx Community Logo"
-            width={200}
-            height={200}
+            width={400}
+            height={400}
           />
         </div>
         <div className="max-w-lg text-center space-y-6">
-          <p className="text-xl">The next-gen startup community for builders in San Diego.</p>
-          <p className="text-base">
+          <p className="text-2xl">The next-gen startup community for builders in San Diego.</p>
+          <p className="text-lg">
             Check out the SDxAI 2023 Hackathon
             <span className="mx-1">
               <Link className="underline" target="_blank"  href="https://twitter.com/SDxCommunity/status/1683885108724658182">
@@ -23,13 +23,13 @@ export default function Home() {
               </Link>
             </span>
           </p>
-          <p className="text-base">
+          <p className="text-lg">
           <span className="mx-1">
             <Link className="underline" target="_blank" href="https://airtable.com/applYd5Md0JPIJen4/shrwA56KnaWg17sV7">
               Sign Up
             </Link>
           </span>for 2024 events.</p>
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Link className="block text-base underline" target="_blank" href="https://twitter.com/SDxCommunity">
               Twitter
             </Link>
