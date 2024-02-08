@@ -9,8 +9,8 @@ export default function Home() {
           <Image
             src="/sdx-logo-white.svg"
             alt="SDx Community Logo"
-            width={400}
-            height={400}
+            width={250}
+            height={250}
           />
         </div>
         <div className="max-w-lg text-center space-y-6">
