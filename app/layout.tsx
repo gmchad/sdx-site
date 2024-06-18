@@ -1,6 +1,8 @@
+import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from "next";
 import { inter, space } from '@/app/ui/fonts';
 import "./globals.css";
+
 
 export const metadata: Metadata = {
   title: "SDx",
@@ -14,6 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <GoogleAnalytics gaId="G-M1FV7BZY8T"/>
       <body className={space.className}>{children}</body>
     </html>
   );

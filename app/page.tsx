@@ -1,5 +1,8 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link"
+import { sendGAEvent } from '@next/third-parties/google'
 
 export default function Home() {
   return (
@@ -18,7 +21,7 @@ export default function Home() {
           <p className="text-lg">
             Check out the SDxAI 2023 Hackathon
             <span className="mx-1">
-              <Link className="underline" target="_blank"  href="https://twitter.com/SDxCommunity/status/1683885108724658182">
+              <Link className="underline" target="_blank"  href="https://twitter.com/SDxCommunity/status/1683885108724658182" >
                 video reel
               </Link>
             </span>
@@ -36,7 +39,7 @@ export default function Home() {
             <Link className="block text-base underline" target="_blank" href="https://lu.ma/sdx">
               Events
             </Link>
-            <Link className="block text-base underline" target="_blank" href="https://discord.gg/tuFeXZDn7m">
+            <Link href="https://discord.gg/Rkgyzx2ykV" target="_blank" className="block text-base underline" onClick={() => sendGAEvent({ event: 'clicked', value: 'https://discord.gg/Rkgyzx2ykV'})}>
               Discord
             </Link>
           </div>
