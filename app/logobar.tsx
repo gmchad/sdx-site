@@ -21,7 +21,7 @@ const logos: Logo[] = [
 
 const LogoBar: React.FC = () => {
 	return (
-		<div className="fixed bottom-0 left-0 w-full overflow-hidden py-6">
+		<div className="fixed top-0 left-0 w-full overflow-hidden py-6">
 			<div className="animate-marquee whitespace-nowrap inline-block">
 				{[...logos, ...logos].map((logo, index) => (
 				<div key={index} className="inline-block align-middle mx-6">
