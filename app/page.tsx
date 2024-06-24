@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link"
 import { sendGAEvent } from '@next/third-parties/google'
+import LogoBar from "./logobar";
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
        <div className="bg-[#0f0f0f] text-white min-h-screen flex flex-col items-center justify-center">
         <div className="mb-12">
           <Image
-            src="/sdx-logo-white.svg"
+            src="/sdx-v2.png"
             alt="SDx Community Logo"
-            width={250}
+            width={300}
             height={250}
           />
         </div>
@@ -45,6 +46,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <LogoBar/>
     </main>
   );
 }
