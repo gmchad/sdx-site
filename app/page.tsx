@@ -7,8 +7,9 @@ import LogoBar from "./logobar";
 
 export default function Home() {
   return (
-    <main className="">
-       <div className="bg-[#0f0f0f] text-white min-h-screen flex flex-col items-center justify-center">
+    <main className="relative min-h-screen bg-[#0f0f0f] text-white">
+      <LogoBar />
+      <div className="flex flex-col items-center justify-center min-h-screen pt-24 pb-16">
         <div className="mb-12">
           <Image
             src="/sdx-v2.png"
@@ -37,33 +38,35 @@ export default function Home() {
             </span>
           </p>
 
-          {/* <p className="text-lg">
-          <span className="mx-1">
-            <Link className="underline" target="_blank" href="https://airtable.com/applYd5Md0JPIJen4/shrwA56KnaWg17sV7">
-              Sign Up
-            </Link>
-          </span>for 2024 events.</p> */}
-
            <nav className="flex justify-center space-x-6 text-lg">
-            {/* <Link href="https://lu.ma/sdx" target="_blank" className="hover:text-gray-300 transition-colors underline">Events</Link> */}
             <Link 
               href="https://discord.gg/Rkgyzx2ykV" 
               target="_blank" 
               className="hover:text-gray-300 transition-colors underline"
-              onClick={() => sendGAEvent({ event: 'clicked', value: 'https://discord.gg/Rkgyzx2ykV'})}
+              onClick={() => sendGAEvent('clicked', {
+                link_url: 'https://discord.gg/Rkgyzx2ykV'
+              })}
             >
               Discord
             </Link>
             <Link href="https://twitter.com/SDxCommunity" target="_blank" className="hover:text-gray-300 transition-colors underline">Twitter</Link>
           </nav>
-          {/* <iframe
-            src="https://lu.ma/embed/calendar/cal-V10NR2qI5uuUnOH/events?lt=dark?compact=true"
-            className="w-full h-96 md:h-128 border-0 rounded-lg shadow-lg" // Style the iframe
-            allowFullScreen
-          ></iframe> */}
         </div>
       </div>
-      <LogoBar/>
+      
+      {/* AI Talent Link - Fixed to bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#0f0f0f] text-white py-4 text-center">
+        <Link 
+          href="https://airtable.com/appHsy3IiApTDvksA/shrOxmPTtfryRvHij" 
+          target="_blank" 
+          className="text-md hover:text-gray-300 transition-colors underline"
+          onClick={() => sendGAEvent('clicked', {
+            link_url: 'https://airtable.com/appHsy3IiApTDvksA/shrOxmPTtfryRvHij'
+          })}
+        >
+          Find Top AI Talent In Our Network
+        </Link>
+      </div>
     </main>
   );
 }
