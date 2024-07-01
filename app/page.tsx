@@ -64,7 +64,7 @@ export default function Home() {
             link_url: 'https://airtable.com/appHsy3IiApTDvksA/shrOxmPTtfryRvHij'
           })}
         >
-          Find Top AI Talent In Our Network
+          Work With Top AI Talent In Our Network
         </Link>
       </div>
     </main>
