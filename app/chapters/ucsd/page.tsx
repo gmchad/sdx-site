@@ -21,7 +21,7 @@ export default function Home() {
           <h1 className="text-3xl font-bold mb-4 text-center">SDx @ UC San Diego </h1>
           <p className="text-lg mb-6 text-left">
             SDx @ UC San Diego is an invite-only meetup where the best UCSD students building with AI get to share their latest experiments and projects with peers.
-            We curate small groups for each event to make sure it's a safe and fun place to demo and to keep the quality high.
+            We curate small groups for each event to make sure it is a safe and fun place to demo and to keep the quality high.
           </p>
           <div className="text-center">
             <Link 
