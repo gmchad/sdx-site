@@ -26,7 +26,7 @@ export default function Home() {
             className="inline-block bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors"
             target="_blank"
           >
-            Sign Up for 2024 Events
+            Sign Up for 2025 Events
           </Link>
 
           <p className="text-lg">
