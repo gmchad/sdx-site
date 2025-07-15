@@ -1,0 +1,206 @@
+[
+  {
+    "id": "echo-chunk",
+    "name": "Echo Chunk",
+    "description": "AI-powered voice processing platform that enables real-time audio analysis and processing for enterprise applications. Built by SDx community members to revolutionize how businesses handle audio data.",
+    "category": "AI Infrastructure",
+    "logoUrl": "/startups/echo-chunk.png",
+    "founders": ["Alex Chen", "Sarah Rodriguez"],
+    "websiteUrl": "https://echochunk.ai",
+    "metrics": {
+      "funding": "$2.5M",
+      "users": "10K+",
+      "revenue": "$500K ARR"
+    },
+    "story": "Started at an SDx hackathon, Echo Chunk has grown from a weekend project to a funded startup serving Fortune 500 companies.",
+    "status": "Series A",
+    "year": 2023
+  },
+  {
+    "id": "big-agi",
+    "name": "Big AGI",
+    "description": "Open-source AI interface that provides a unified platform for interacting with multiple AI models. Popular among developers and researchers for its flexibility and extensibility.",
+    "category": "Developer Tools",
+    "logoUrl": "/startups/big-agi.png",
+    "founders": ["David Kim", "Emma Thompson"],
+    "websiteUrl": "https://bigagi.com",
+    "metrics": {
+      "githubStars": "15K+",
+      "users": "50K+",
+      "revenue": "Open Source"
+    },
+    "story": "Born from the need for a better AI interface, Big AGI has become one of the most popular open-source AI tools in the community.",
+    "status": "Open Source",
+    "year": 2023
+  },
+  {
+    "id": "chat-shape",
+    "name": "Chat Shape",
+    "description": "No-code chatbot builder that enables businesses to create intelligent customer service bots without programming knowledge. Focuses on ease of use and powerful AI capabilities.",
+    "category": "SaaS",
+    "logoUrl": "/startups/chat-shape.png",
+    "founders": ["Michael Park", "Jennifer Liu"],
+    "websiteUrl": "https://chatshape.com",
+    "metrics": {
+      "funding": "$1.2M",
+      "users": "25K+",
+      "revenue": "$2M ARR"
+    },
+    "story": "Created to democratize AI chatbot development, Chat Shape has helped thousands of businesses implement AI customer service.",
+    "status": "Seed",
+    "year": 2022
+  },
+  {
+    "id": "neural-search",
+    "name": "Neural Search",
+    "description": "Advanced semantic search engine that understands context and intent, providing more relevant results than traditional keyword-based search systems.",
+    "category": "Search Technology",
+    "logoUrl": "/startups/neural-search.png",
+    "founders": ["Ryan Chang", "Lisa Wang"],
+    "websiteUrl": "https://neuralsearch.ai",
+    "metrics": {
+      "funding": "$800K",
+      "users": "5K+",
+      "revenue": "$200K ARR"
+    },
+    "story": "Addressing the limitations of traditional search, Neural Search brings semantic understanding to enterprise search solutions.",
+    "status": "Pre-Series A",
+    "year": 2024
+  },
+  {
+    "id": "code-mentor",
+    "name": "Code Mentor",
+    "description": "AI-powered code review and mentoring platform that helps developers improve their coding skills through personalized feedback and suggestions.",
+    "category": "EdTech",
+    "logoUrl": "/startups/code-mentor.png",
+    "founders": ["Jason Wu", "Maria Gonzalez"],
+    "websiteUrl": "https://codementor.ai",
+    "metrics": {
+      "funding": "$1.5M",
+      "users": "30K+",
+      "revenue": "$800K ARR"
+    },
+    "story": "Combining AI with educational expertise, Code Mentor has helped thousands of developers level up their programming skills.",
+    "status": "Seed",
+    "year": 2023
+  },
+  {
+    "id": "data-viz-ai",
+    "name": "DataViz AI",
+    "description": "Automated data visualization platform that turns complex datasets into beautiful, interactive charts and dashboards using AI-powered insights.",
+    "category": "Data Analytics",
+    "logoUrl": "/startups/data-viz-ai.png",
+    "founders": ["Kevin Lee", "Amanda Foster"],
+    "websiteUrl": "https://datavizai.com",
+    "metrics": {
+      "funding": "$600K",
+      "users": "8K+",
+      "revenue": "$300K ARR"
+    },
+    "story": "Making data visualization accessible to everyone, DataViz AI automates the creation of stunning visualizations from raw data.",
+    "status": "Pre-Seed",
+    "year": 2024
+  },
+  {
+    "id": "smart-contracts-ai",
+    "name": "Smart Contracts AI",
+    "description": "AI-powered smart contract auditing and optimization platform that helps blockchain developers create secure and efficient smart contracts.",
+    "category": "Blockchain",
+    "logoUrl": "/startups/smart-contracts-ai.png",
+    "founders": ["Tony Zhang", "Rachel Kim"],
+    "websiteUrl": "https://smartcontractsai.com",
+    "metrics": {
+      "funding": "$1M",
+      "users": "3K+",
+      "revenue": "$400K ARR"
+    },
+    "story": "Bringing AI to blockchain security, Smart Contracts AI helps developers build more secure and efficient smart contracts.",
+    "status": "Seed",
+    "year": 2023
+  },
+  {
+    "id": "content-craft",
+    "name": "Content Craft",
+    "description": "AI content creation platform that helps marketing teams generate high-quality, brand-consistent content at scale across multiple channels.",
+    "category": "Marketing Tech",
+    "logoUrl": "/startups/content-craft.png",
+    "founders": ["Sophie Martinez", "James Wilson"],
+    "websiteUrl": "https://contentcraft.ai",
+    "metrics": {
+      "funding": "$900K",
+      "users": "12K+",
+      "revenue": "$600K ARR"
+    },
+    "story": "Addressing the content creation bottleneck, Content Craft helps marketing teams scale their content production while maintaining quality.",
+    "status": "Seed",
+    "year": 2023
+  },
+  {
+    "id": "ai-recruiter",
+    "name": "AI Recruiter",
+    "description": "Intelligent recruiting platform that uses AI to match candidates with job opportunities based on skills, experience, and cultural fit.",
+    "category": "HR Tech",
+    "logoUrl": "/startups/ai-recruiter.png",
+    "founders": ["Daniel Brown", "Ashley Chen"],
+    "websiteUrl": "https://airecruiter.com",
+    "metrics": {
+      "funding": "$1.8M",
+      "users": "15K+",
+      "revenue": "$1.2M ARR"
+    },
+    "story": "Revolutionizing talent acquisition, AI Recruiter has helped hundreds of companies find the right talent faster and more efficiently.",
+    "status": "Series A",
+    "year": 2022
+  },
+  {
+    "id": "health-ai",
+    "name": "Health AI",
+    "description": "AI-powered health monitoring platform that provides personalized health insights and recommendations based on wearable device data.",
+    "category": "HealthTech",
+    "logoUrl": "/startups/health-ai.png",
+    "founders": ["Dr. Sam Patel", "Nina Rodriguez"],
+    "websiteUrl": "https://healthai.com",
+    "metrics": {
+      "funding": "$2M",
+      "users": "40K+",
+      "revenue": "$1.5M ARR"
+    },
+    "story": "Making personalized healthcare accessible, Health AI uses AI to provide actionable health insights from everyday data.",
+    "status": "Series A",
+    "year": 2023
+  },
+  {
+    "id": "finance-forecaster",
+    "name": "Finance Forecaster",
+    "description": "AI-driven financial planning platform that helps individuals and businesses make better financial decisions through predictive analytics.",
+    "category": "FinTech",
+    "logoUrl": "/startups/finance-forecaster.png",
+    "founders": ["Robert Johnson", "Grace Liu"],
+    "websiteUrl": "https://financeforecaster.ai",
+    "metrics": {
+      "funding": "$1.3M",
+      "users": "20K+",
+      "revenue": "$900K ARR"
+    },
+    "story": "Democratizing financial planning, Finance Forecaster uses AI to make professional-grade financial analysis accessible to everyone.",
+    "status": "Seed",
+    "year": 2023
+  },
+  {
+    "id": "eco-optimizer",
+    "name": "Eco Optimizer",
+    "description": "AI platform that helps businesses optimize their environmental impact through data-driven sustainability recommendations and tracking.",
+    "category": "CleanTech",
+    "logoUrl": "/startups/eco-optimizer.png",
+    "founders": ["Elena Vasquez", "Mark Thompson"],
+    "websiteUrl": "https://ecooptimizer.com",
+    "metrics": {
+      "funding": "$700K",
+      "users": "6K+",
+      "revenue": "$250K ARR"
+    },
+    "story": "Combining AI with environmental science, Eco Optimizer helps businesses achieve their sustainability goals through data-driven insights.",
+    "status": "Pre-Seed",
+    "year": 2024
+  }
+] 
