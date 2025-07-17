@@ -10,22 +10,24 @@ export default function Home() {
     <main className="relative bg-background text-foreground">
       <LogoBar />
       
-      {/* Hero Section with dual paths */}
-      <HeroSection />
+      {/* Builder-focused Hero Section */}
+      <div className="pt-32">
+        <HeroSection />
+      </div>
       
       {/* Additional content sections can be added here */}
       
-      {/* AI Talent Link - Fixed to bottom */}
+      {/* Community Join Link - Fixed to bottom */}
       <div className="fixed bottom-0 left-0 right-0 bg-background text-foreground py-4 text-center z-40 border-t border-border">
         <Link 
-          href="https://airtable.com/appHsy3IiApTDvksA/shrOxmPTtfryRvHij" 
+          href="https://lu.ma/sdx" 
           target="_blank" 
           className="text-md hover:text-gray-300 transition-colors underline"
           onClick={() => sendGAEvent('clicked', {
-            link_url: 'https://airtable.com/appHsy3IiApTDvksA/shrOxmPTtfryRvHij'
+            link_url: 'https://lu.ma/sdx'
           })}
         >
-          Work With Top AI Talent In Our Network
+          Join San Diego's Premier AI Builder Community
         </Link>
       </div>
     </main>

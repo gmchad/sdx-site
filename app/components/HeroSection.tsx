@@ -7,7 +7,7 @@ import { sendGAEvent } from '@next/third-parties/google';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, ExternalLink } from 'lucide-react';
+import { Check, ExternalLink, Users, Calendar, Code, Rocket } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const handleLinkClick = (linkUrl: string, label: string) => {
@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
     <section className="relative min-h-screen bg-background text-foreground flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto text-center">
         {/* Logo */}
-        <div className="mb-8">
+        <div className="mb-8 mt-16">
           <Image
             src="/sdx-v2.png"
             alt="SDx Community Logo"
@@ -33,89 +33,107 @@ const HeroSection: React.FC = () => {
 
         {/* Main Headline */}
         <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          The next-gen startup community for 
-          <span className="text-blue-400"> AI builders</span> in San Diego
+          San Diego's premier community for 
+          <span className="text-blue-400"> AI builders</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Join 1000+ builders creating the future of AI through events, mentorship, and collaboration
+        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
+          Join 1000+ builders creating the future of AI through hands-on projects, collaborative events, and a supportive community of innovators
         </p>
 
-        {/* Dual Path Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-          {/* Builders Path */}
-          <Card className="border-border hover:border-blue-500 transition-all duration-300 transform hover:scale-105">
-            <CardHeader>
-              <div className="text-4xl mb-4">🛠️</div>
-              <CardTitle className="text-2xl">For Builders</CardTitle>
-              <CardDescription>
-                Connect with fellow AI builders, attend hackathons, and grow your startup in our supportive community
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2" />
-                  Weekly events & hackathons
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2" />
-                  Access to top AI talent
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2" />
-                  Startup mentorship
-                </div>
+        {/* Main CTA Card */}
+        <Card className="border-border hover:border-blue-500 transition-all duration-300 transform hover:scale-105 max-w-2xl mx-auto mb-16">
+          <CardHeader>
+            <div className="text-5xl mb-4">🚀</div>
+            <CardTitle className="text-3xl">Join the Builder Community</CardTitle>
+            <CardDescription className="text-lg">
+              Connect with fellow AI builders, share your projects, get feedback, and grow together in San Diego's most active AI community
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center text-green-400">
+                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                <span>Weekly events & hackathons</span>
               </div>
+              <div className="flex items-center text-green-400">
+                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                <span>Project showcase opportunities</span>
+              </div>
+              <div className="flex items-center text-green-400">
+                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                <span>Mentorship from industry leaders</span>
+              </div>
+              <div className="flex items-center text-green-400">
+                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                <span>Access to startup resources</span>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
                 asChild
                 onClick={() => handleLinkClick('https://lu.ma/sdx', 'builders-signup')}
               >
                 <Link href="https://lu.ma/sdx" target="_blank">
-                  Join the Community
-                  <ExternalLink className="w-4 h-4 ml-2" />
+                  Join Community
+                  <ExternalLink className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
+              <Button 
+                variant="outline"
+                size="lg" 
+                className="text-lg px-8 py-3"
+                asChild
+                onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'discord-join')}
+              >
+                <Link href="https://discord.gg/Rkgyzx2ykV" target="_blank">
+                  Join Discord
+                  <ExternalLink className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Community Features */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+          <Card className="text-center">
+            <CardHeader>
+              <Users className="w-8 h-8 mx-auto mb-2 text-blue-400" />
+              <CardTitle className="text-lg">Active Community</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Connect with 1000+ AI builders and innovators</p>
             </CardContent>
           </Card>
-
-          {/* Executives Path */}
-          <Card className="border-border hover:border-green-500 transition-all duration-300 transform hover:scale-105">
+          <Card className="text-center">
             <CardHeader>
-              <div className="text-4xl mb-4">👔</div>
-              <CardTitle className="text-2xl">For Executives</CardTitle>
-              <CardDescription>
-                Access our curated network of AI talent and stay ahead of the innovation curve
-              </CardDescription>
+              <Calendar className="w-8 h-8 mx-auto mb-2 text-green-400" />
+              <CardTitle className="text-lg">Regular Events</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2" />
-                  Curated talent network
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2" />
-                  Executive programming
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2" />
-                  Innovation insights
-                </div>
-              </div>
-              <Button 
-                size="lg" 
-                className="w-full bg-green-600 hover:bg-green-700"
-                asChild
-                onClick={() => handleLinkClick('/executives', 'executives-signup')}
-              >
-                <Link href="/executives">
-                  Learn More
-                </Link>
-              </Button>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Weekly meetups, hackathons, and workshops</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center">
+            <CardHeader>
+              <Code className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+              <CardTitle className="text-lg">Hands-on Projects</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">Build real AI applications with peer support</p>
+            </CardContent>
+          </Card>
+          <Card className="text-center">
+            <CardHeader>
+              <Rocket className="w-8 h-8 mx-auto mb-2 text-orange-400" />
+              <CardTitle className="text-lg">Startup Support</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">From idea to launch with community backing</p>
             </CardContent>
           </Card>
         </div>
@@ -124,7 +142,7 @@ const HeroSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="text-center">
             <div className="text-3xl font-bold text-blue-400 mb-2">1000+</div>
-            <div className="text-muted-foreground">Community Members</div>
+            <div className="text-muted-foreground">Active Builders</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-green-400 mb-2">50+</div>

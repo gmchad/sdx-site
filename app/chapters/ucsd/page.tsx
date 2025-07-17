@@ -11,9 +11,9 @@ import { Users, Calendar, MapPin, Mail, ExternalLink } from 'lucide-react';
 
 export default function UCSDChapterPage() {
   return (
-    <main className="relative bg-background text-foreground pt-20">
+    <main className="relative bg-background text-foreground">
       <LogoBar />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-32">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="mb-8">

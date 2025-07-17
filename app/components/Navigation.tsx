@@ -32,7 +32,6 @@ const Navigation: React.FC = () => {
                 height={40}
                 className="h-8 w-auto"
               />
-              <span className="text-xl font-bold text-foreground">SDx</span>
             </Link>
           </div>
 
