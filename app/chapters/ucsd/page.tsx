@@ -174,7 +174,7 @@ export default function UCSDChapterPage() {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Interested in joining our UCSD chapter? We're always looking for motivated students who are passionate about AI and want to share their work with the community.
+                             Interested in joining our UCSD chapter? We&apos;re always looking for motivated students who are passionate about AI and want to share their work with the community.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

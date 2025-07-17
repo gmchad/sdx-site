@@ -243,7 +243,7 @@ export default function StartupsPage() {
 
         {/* Categories Overview */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Industries We're Building</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">Industries We&apos;re Building</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {categories.map(category => {
               const categoryCount = startupsData.filter(s => s.category === category).length;

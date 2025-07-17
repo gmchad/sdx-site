@@ -27,7 +27,7 @@ export default function Home() {
             link_url: 'https://lu.ma/sdx'
           })}
         >
-          Join San Diego's Premier AI Builder Community
+          Join San Diego&apos;s Premier AI Builder Community
         </Link>
       </div>
     </main>

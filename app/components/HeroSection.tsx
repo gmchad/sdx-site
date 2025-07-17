@@ -33,7 +33,7 @@ const HeroSection: React.FC = () => {
 
         {/* Main Headline */}
         <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          San Diego's premier community for 
+          San Diego&apos;s premier community for 
           <span className="text-blue-400"> AI builders</span>
         </h1>
 
@@ -48,7 +48,7 @@ const HeroSection: React.FC = () => {
             <div className="text-5xl mb-4">🚀</div>
             <CardTitle className="text-3xl">Join the Builder Community</CardTitle>
             <CardDescription className="text-lg">
-              Connect with fellow AI builders, share your projects, get feedback, and grow together in San Diego's most active AI community
+              Connect with fellow AI builders, share your projects, get feedback, and grow together in San Diego&apos;s most active AI community
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">

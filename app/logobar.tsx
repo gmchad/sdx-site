@@ -28,9 +28,11 @@ const LogoBar: React.FC = () => {
 			<div className="animate-marquee whitespace-nowrap inline-block">
 				{[...logos, ...logos].map((logo, index) => (
 				<div key={index} className="inline-block align-middle mx-6">
-					<img 
+					<Image 
 						src={logo.src} 
 						alt={logo.alt} 
+						width={96}
+						height={48}
 						className="w-24 h-12 object-contain opacity-80 hover:opacity-100 transition-opacity"
 					/>
 				</div>

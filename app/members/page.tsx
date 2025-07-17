@@ -127,7 +127,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
         
         <div className="bg-muted/30 p-4 rounded-lg">
           <blockquote className="text-sm italic text-muted-foreground text-center">
-            "{member.testimonial}"
+            &quot;{member.testimonial}&quot;
           </blockquote>
         </div>
         
@@ -243,7 +243,7 @@ export default function MembersPage() {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Ready to connect with San Diego's most innovative AI builders? Join our community and be part of the next generation of AI innovation.
+                             Ready to connect with San Diego&apos;s most innovative AI builders? Join our community and be part of the next generation of AI innovation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
@@ -269,7 +269,7 @@ export default function MembersPage() {
           </CardHeader>
           <CardContent className="text-center space-y-4">
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Help us discover more incredible AI builders in our community. Nominate someone who's making an impact and deserves recognition.
+                             Help us discover more incredible AI builders in our community. Nominate someone who&apos;s making an impact and deserves recognition.
             </p>
             <Button size="lg" asChild>
               <Link href="mailto:community@sdx.community?subject=Member Spotlight Nomination">

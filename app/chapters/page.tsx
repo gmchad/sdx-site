@@ -199,7 +199,7 @@ export default function ChaptersPage() {
         <div className="mb-16">
           <h2 className="text-3xl font-bold mb-4">Expanding Nationwide</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-3xl">
-            We're working to bring SDx chapters to more universities and cities. 
+            We&apos;re working to bring SDx chapters to more universities and cities. 
             Each new chapter will maintain our core values of quality, community, and innovation.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -248,7 +248,7 @@ export default function ChaptersPage() {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Interested in bringing SDx to your university or city? We're looking for passionate leaders 
+                             Interested in bringing SDx to your university or city? We&apos;re looking for passionate leaders 
               to help grow our community and create local ecosystems of AI innovation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

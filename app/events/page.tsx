@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -201,9 +202,11 @@ export default function EventsPage() {
           {filteredEvents.map((event) => (
             <Card key={event.id} className="hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                <img 
+                <Image 
                   src={event.coverUrl} 
                   alt={event.title}
+                  width={400}
+                  height={225}
                   className="w-full h-full object-cover"
                 />
               </div>

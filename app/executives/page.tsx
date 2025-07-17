@@ -23,14 +23,14 @@ export default function ExecutivesPage() {
     const subject = encodeURIComponent('Interest in SDx Executive Program');
     const body = encodeURIComponent(`Hi SDx Team,
 
-I'm interested in learning more about the upcoming executive program for AI leaders.
+I&apos;m interested in learning more about the upcoming executive program for AI leaders.
 
 Name: [Please fill in your name]
 Email: ${email}
 Company: ${company}
 Role: ${role}
 
-I'd like to be notified when the program launches and learn more about partnership opportunities.
+I&apos;d like to be notified when the program launches and learn more about partnership opportunities.
 
 Best regards`);
     
@@ -57,7 +57,7 @@ Best regards`);
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-lg text-muted-foreground">
-                Your interest has been recorded. We'll be in touch soon with more details about our executive program.
+                Your interest has been recorded. We&apos;ll be in touch soon with more details about our executive program.
               </p>
               <Button asChild>
                 <Link href="/">Return Home</Link>
@@ -84,7 +84,7 @@ Best regards`);
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             An exclusive program designed for AI executives, Chief AI Officers, and senior leaders 
-            looking to stay ahead of the innovation curve and connect with San Diego's AI ecosystem
+            looking to stay ahead of the innovation curve and connect with San Diego&apos;s AI ecosystem
           </p>
         </div>
 
@@ -106,7 +106,7 @@ Best regards`);
                 <Crown className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
                 <h3 className="text-lg font-semibold mb-2">Strategic Partnerships</h3>
                 <p className="text-muted-foreground text-sm">
-                  Direct access to San Diego's top AI talent and emerging startups for collaboration opportunities
+                  Direct access to San Diego&apos;s top AI talent and emerging startups for collaboration opportunities
                 </p>
               </div>
               <div className="text-center">
@@ -129,7 +129,7 @@ Best regards`);
             </CardTitle>
             <p className="text-center text-muted-foreground">
               Be among the first to know when our executive program launches. 
-              Leave your details and we'll reach out with exclusive information.
+                             Leave your details and we&apos;ll reach out with exclusive information.
             </p>
           </CardHeader>
           <CardContent>

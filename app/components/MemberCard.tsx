@@ -96,7 +96,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
         
         {testimonial && (
           <blockquote className="border-l-4 border-muted pl-4 italic text-sm text-muted-foreground">
-            "{testimonial}"
+            &quot;{testimonial}&quot;
           </blockquote>
         )}
         
