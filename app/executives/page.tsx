@@ -136,38 +136,50 @@ export default function ExecutivesPage() {
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   // Filter to only show featured executives
   const featuredExecutives = executives.filter((executive: typeof executives[0]) => executive.featured === true);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError('');
     
-    // Create mailto link with pre-filled subject and body
-    const subject = encodeURIComponent('Application for SDx Executive Network');
-    const body = encodeURIComponent(`Hi SDx Team,
+    try {
+      const response = await fetch('/api/executives', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          company,
+          role,
+        }),
+      });
 
-I&apos;m interested in applying to join the SDx Executive Network.
+      const data = await response.json();
 
-Name: [Please fill in your name]
-Email: ${email}
-Company: ${company}
-Role: ${role}
-
-I&apos;d like to learn more about joining the executive network and connecting with San Diego's top AI builders.
-
-Best regards`);
-    
-    const mailtoLink = `mailto:contact@sdx.community?subject=${subject}&body=${body}`;
-    window.open(mailtoLink);
-    
-    sendGAEvent('form_submit', {
-      form_name: 'executives-application',
-      email: email,
-      company: company
-    });
-    
-    setIsSubmitted(true);
+      if (response.ok) {
+        // Send Google Analytics event
+        sendGAEvent('form_submit', {
+          form_name: 'executives-application',
+          email: email,
+          company: company
+        });
+        
+        setIsSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Failed to submit application');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError('Network error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -257,6 +269,12 @@ Best regards`);
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {submitError && (
+                <div className="p-4 bg-red-900/30 border border-red-500 rounded-lg text-red-400 text-sm">
+                  {submitError}
+                </div>
+              )}
+              
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address *</Label>
                 <Input
@@ -266,6 +284,7 @@ Best regards`);
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               
@@ -278,6 +297,7 @@ Best regards`);
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               
@@ -290,11 +310,12 @@ Best regards`);
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               
-              <Button type="submit" className="w-full" size="lg">
-                Submit Application
+              <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
               </Button>
             </form>
             
