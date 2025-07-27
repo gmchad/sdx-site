@@ -1,5 +1,20 @@
 [
   {
+      "id": "grayson-lafrenz",
+      "name": "Grayson Lafrenz",
+      "title": "Founder & CEO",
+      "company": "Cadre AI",
+      "bio": "Founder & Chairman of Power Digital, YPO San Diego Member, and EO San Diego Member. Leading AI innovation in San Diego through Cadre AI and fostering the next generation of AI entrepreneurs.",
+      "photoUrl": "https://8pd3tfjq1bxzh5qx.public.blob.vercel-storage.com/spotlight_executives/grayson_lafrenz.jpeg",
+      "location": "San Diego, CA",
+      "skills": ["AI Strategy", "Leadership", "Entrepreneurship", "Digital Marketing"],
+      "testimonial": null,
+      "linkedin": "https://www.linkedin.com/in/graysonlafrenz/",
+      "additionalRoles": [],
+      "joinedYear": null,
+      "featured": true
+  },
+  {
     "id": "bryan-landers",
     "name": "Bryan Landers",
     "title": "Member of Technical Staff",
@@ -10,21 +25,6 @@
     "skills": [],
     "testimonial": null,
     "linkedin": "https://www.linkedin.com/in/bryanlanders/",
-    "additionalRoles": [],
-    "joinedYear": null,
-    "featured": true
-  },
-  {
-    "id": "grayson-lafrenz",
-    "name": "Grayson Lafrenz",
-    "title": "Founder & CEO",
-    "company": "Cadre AI",
-    "bio": "Founder & Chairman of Power Digital, YPO San Diego Member, and EO San Diego Member. Leading AI innovation in San Diego through Cadre AI and fostering the next generation of AI entrepreneurs.",
-    "photoUrl": "https://8pd3tfjq1bxzh5qx.public.blob.vercel-storage.com/spotlight_executives/grayson_lafrenz.jpeg",
-    "location": "San Diego, CA",
-    "skills": ["AI Strategy", "Leadership", "Entrepreneurship", "Digital Marketing"],
-    "testimonial": null,
-    "linkedin": "https://www.linkedin.com/in/graysonlafrenz/",
     "additionalRoles": [],
     "joinedYear": null,
     "featured": true

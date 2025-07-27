@@ -7,7 +7,7 @@ import { sendGAEvent } from '@next/third-parties/google';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, ExternalLink, Users, Calendar, Code, Rocket } from 'lucide-react';
+import { Check, ExternalLink, Users, Calendar, Code, Rocket, Crown } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const handleLinkClick = (linkUrl: string, label: string) => {
@@ -39,7 +39,7 @@ const HeroSection: React.FC = () => {
 
         {/* Subheadline */}
         <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-          Join 1000+ builders creating the future of AI through hands-on projects, collaborative events, and a supportive community of innovators
+          Join 1000+ builders and executives creating the future of AI through hands-on projects, collaborative events, and a supportive community of innovators
         </p>
 
         {/* Main CTA Card */}
@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
               </div>
               <div className="flex items-center text-green-400">
                 <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                <span>Mentorship from industry leaders</span>
+                <span>Executive network access</span>
               </div>
               <div className="flex items-center text-green-400">
                 <Check className="w-5 h-5 mr-2 flex-shrink-0" />
@@ -98,6 +98,31 @@ const HeroSection: React.FC = () => {
           </CardContent>
         </Card>
 
+        {/* Executive Network Funnel */}
+        <div className="text-center mb-16">
+          <Badge className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600">
+            <Crown className="w-4 h-4 mr-2" />
+            For AI Leaders
+          </Badge>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Are you an AI executive or senior leader?
+          </h2>
+          <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+            Join our exclusive executive network of 50 AI leaders for quarterly roundtables, strategic insights, and direct access to San Diego&apos;s top AI talent.
+          </p>
+          <Button 
+            variant="outline" 
+            size="lg"
+            asChild
+            onClick={() => handleLinkClick('/executives', 'executive-funnel')}
+          >
+            <Link href="/executives">
+              Learn About Executive Network
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
+        </div>
+
         {/* Community Features */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
           <Card className="text-center">
@@ -106,7 +131,7 @@ const HeroSection: React.FC = () => {
               <CardTitle className="text-lg">Active Community</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">Connect with 1000+ AI builders and innovators</p>
+              <p className="text-sm text-muted-foreground">Connect with 1000+ AI builders and industry executives</p>
             </CardContent>
           </Card>
           <Card className="text-center">
