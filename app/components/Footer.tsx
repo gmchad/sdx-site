@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-lg font-semibold mb-4">SDx Community</h3>
             <p className="text-muted-foreground mb-4 max-w-md">
-              San Diego's premier community for AI builders. Join 1000+ innovators creating the future through hands-on projects and collaborative events.
+              San Diego&apos;s premier community for AI builders. Join 1000+ innovators creating the future through hands-on projects and collaborative events.
             </p>
             <div className="flex space-x-4">
               <Button 

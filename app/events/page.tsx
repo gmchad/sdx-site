@@ -278,11 +278,11 @@ export default function EventsPage() {
               Follow our calendar to stay informed about upcoming workshops, meetups, and conferences.
             </p>
             <div className="flex justify-center gap-4">
-              <Button onClick={() => window.open('https://lu.ma/sdx-ai-community', '_blank')}>
+              <Button onClick={() => window.open('https://lu.ma/sdx', '_blank')}>
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Follow on Lu.ma
               </Button>
-              <Button variant="outline" onClick={() => window.open('https://lu.ma/sdx-ai-community/calendar', '_blank')}>
+              <Button variant="outline" onClick={() => window.open('https://lu.ma/sdx', '_blank')}>
                 <Calendar className="w-4 h-4 mr-2" />
                 Subscribe to Calendar
               </Button>
