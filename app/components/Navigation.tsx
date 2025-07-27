@@ -82,7 +82,7 @@ const Navigation: React.FC = () => {
               asChild
               onClick={() => handleLinkClick('/executives')}
             >
-              <Link href="/executives">For Executives</Link>
+              <Link href="/executives">For AI Executives</Link>
             </Button>
           </div>
 
