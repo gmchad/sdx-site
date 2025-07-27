@@ -41,7 +41,7 @@ export default function StartupsPage() {
   }, 0);
 
   return (
-    <main className="relative bg-background text-foreground pt-24">
+    <main className="relative bg-background text-foreground pt-48">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <div className="text-center mb-16">

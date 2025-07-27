@@ -51,7 +51,6 @@ export async function fetchLumaEvents(options: LumaApiOptions = {}): Promise<Lum
     }
 
     const data = await response.json();
-    console.log('Lu.ma API response structure:', JSON.stringify(data, null, 2));
     return data;
   } catch (error) {
     console.error('Error fetching Lu.ma events:', error);

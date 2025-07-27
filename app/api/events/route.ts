@@ -86,7 +86,6 @@ export async function GET(request: NextRequest) {
       case 'all':
       default:
         events = await getAllEvents(limit);
-        console.log('events', events);
         break;
     }
 

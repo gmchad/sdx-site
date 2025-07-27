@@ -26,11 +26,11 @@ const Navigation: React.FC = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/sdx-logo-white.svg"
+                src="/sdx-v2.png"
                 alt="SDx"
-                width={40}
-                height={40}
-                className="h-8 w-auto"
+                width={80}
+                height={80}
+                className="h-auto w-auto"
               />
             </Link>
           </div>

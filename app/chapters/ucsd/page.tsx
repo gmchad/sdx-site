@@ -6,14 +6,12 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import LogoBar from '../../logobar';
 import { Users, Calendar, MapPin, Mail, ExternalLink } from 'lucide-react';
 
 export default function UCSDChapterPage() {
   return (
     <main className="relative bg-background text-foreground">
-      <LogoBar />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-32">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-48">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="mb-8">

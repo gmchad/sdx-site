@@ -2,6 +2,8 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from "next";
 import { inter, space } from '@/app/ui/fonts';
 import Navigation from '@/app/components/Navigation';
+import LogoBar from '@/app/logobar';
+import Footer from '@/app/components/Footer';
 import "./globals.css";
 
 
@@ -20,7 +22,9 @@ export default function RootLayout({
       <GoogleAnalytics gaId="G-M1FV7BZY8T"/>
       <body className={`${space.className} dark bg-background text-foreground`}>
         <Navigation />
+        <LogoBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -1,94 +1,30 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Linkedin, Github, Twitter, Globe, Users, Star } from 'lucide-react';
+import { ExternalLink, Linkedin, Github, Twitter, Globe, Users, Star, ChevronDown, ChevronUp } from 'lucide-react';
 
 // Spotlight members data
-const spotlightMembers = [
-  {
-    id: "alex-chen",
-    name: "Alex Chen",
-    title: "Co-founder & CTO",
-    company: "Echo Chunk",
-    bio: "AI engineer passionate about voice processing and real-time audio analysis. Previously worked at Google DeepMind before starting Echo Chunk at an SDx hackathon.",
-    photoUrl: "/members/alex-chen.jpg",
-    skills: ["Machine Learning", "Audio Processing", "Python", "TensorFlow"],
-    testimonial: "SDx has been instrumental in connecting me with like-minded AI builders. The community's support helped turn our hackathon project into a successful startup.",
-    linkedin: "https://linkedin.com/in/alexchen",
-    github: "https://github.com/alexchen",
-  },
-  {
-    id: "sarah-rodriguez",
-    name: "Sarah Rodriguez",
-    title: "Co-founder & CEO",
-    company: "Echo Chunk",
-    bio: "Business leader with a background in AI product development. Expertise in scaling AI companies and building enterprise partnerships.",
-    photoUrl: "/members/sarah-rodriguez.jpg",
-    skills: ["Product Management", "AI Strategy", "Enterprise Sales", "Leadership"],
-    testimonial: "The SDx community provided the perfect environment for technical and business minds to collaborate. It's where innovation meets execution.",
-    linkedin: "https://linkedin.com/in/sarahrodriguez",
-    twitter: "https://twitter.com/sarahrodriguez",
-  },
-  {
-    id: "david-kim",
-    name: "David Kim",
-    title: "Open Source Maintainer",
-    company: "Big AGI",
-    bio: "Full-stack developer and open source advocate. Maintainer of Big AGI, one of the most popular open-source AI interfaces with 15K+ GitHub stars.",
-    photoUrl: "/members/david-kim.jpg",
-    skills: ["React", "Node.js", "AI APIs", "Open Source"],
-    testimonial: "SDx's open and collaborative culture inspired me to create Big AGI. The community's feedback and contributions have been invaluable.",
-    linkedin: "https://linkedin.com/in/davidkim",
-    github: "https://github.com/davidkim",
-  },
-  {
-    id: "michael-park",
-    name: "Michael Park",
-    title: "CEO & Founder",
-    company: "Chat Shape",
-    bio: "Serial entrepreneur with expertise in SaaS and AI. Previously sold two startups before founding Chat Shape, a no-code chatbot builder.",
-    photoUrl: "/members/michael-park.jpg",
-    skills: ["Entrepreneurship", "SaaS", "AI Chatbots", "No-Code"],
-    testimonial: "The SDx community's entrepreneurial spirit is contagious. The connections I've made here have been crucial to Chat Shape's success.",
-    linkedin: "https://linkedin.com/in/michaelpark",
-    twitter: "https://twitter.com/michaelpark",
-  },
-  {
-    id: "ryan-chang",
-    name: "Ryan Chang",
-    title: "AI Research Engineer",
-    company: "Neural Search",
-    bio: "AI researcher focused on semantic search and information retrieval. Former research scientist at OpenAI with expertise in transformer models.",
-    photoUrl: "/members/ryan-chang.jpg",
-    skills: ["Deep Learning", "Search Algorithms", "PyTorch", "Research"],
-    testimonial: "SDx attracts top-tier AI talent from around the world. The technical discussions and collaborations here push the boundaries of what's possible.",
-    linkedin: "https://linkedin.com/in/ryanchang",
-    github: "https://github.com/ryanchang",
-  },
-  {
-    id: "maria-gonzalez",
-    name: "Maria Gonzalez",
-    title: "VP of Engineering",
-    company: "Code Mentor",
-    bio: "Engineering leader with expertise in scaling technical teams and building educational technology. Advocate for diversity in tech.",
-    photoUrl: "/members/maria-gonzalez.jpg",
-    skills: ["Engineering Leadership", "EdTech", "Team Building", "Diversity & Inclusion"],
-    testimonial: "SDx's commitment to diversity and inclusion creates an environment where everyone can thrive and contribute their unique perspectives.",
-    linkedin: "https://linkedin.com/in/mariagonzalez",
-    twitter: "https://twitter.com/mariagonzalez",
-  }
-];
+const spotlightMembers = require('../../data/members.json');
 
 interface MemberCardProps {
   member: typeof spotlightMembers[0];
 }
 
 const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Truncate testimonial if it's longer than 150 characters
+  const testimonialLimit = 150;
+  const shouldTruncate = member.testimonial && member.testimonial.length > testimonialLimit;
+  const displayedTestimonial = shouldTruncate && !isExpanded 
+    ? member.testimonial.substring(0, testimonialLimit) + '...'
+    : member.testimonial;
+
   return (
     <Card className="h-full hover:shadow-lg transition-shadow duration-300">
       <CardHeader className="text-center">
@@ -109,40 +45,64 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
             />
           ) : (
             <span className="text-2xl font-bold">
-              {member.name.split(' ').map(n => n[0]).join('')}
+              {member.name.split(' ').map((n: string) => n[0]).join('')}
             </span>
           )}
           <span className="text-2xl font-bold hidden">
-            {member.name.split(' ').map(n => n[0]).join('')}
+            {member.name.split(' ').map((n: string) => n[0]).join('')}
           </span>
         </div>
         <CardTitle className="text-xl">{member.name}</CardTitle>
-        <p className="text-muted-foreground">{member.title}</p>
-        <Badge variant="secondary" className="w-fit mx-auto">{member.company}</Badge>
+        {member.title && <p className="text-muted-foreground">{member.title}</p>}
+        {member.company && <Badge variant="secondary" className="w-fit mx-auto">{member.company}</Badge>}
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {member.bio}
-        </p>
+        {member.bio && (
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {member.bio}
+          </p>
+        )}
         
-        <div className="bg-muted/30 p-4 rounded-lg">
-          <blockquote className="text-sm italic text-muted-foreground text-center">
-            &quot;{member.testimonial}&quot;
-          </blockquote>
-        </div>
+        {member.testimonial && (
+          <div className="bg-muted/30 p-4 rounded-lg">
+            <blockquote className="text-sm italic text-muted-foreground text-center">
+              &quot;{displayedTestimonial}&quot;
+            </blockquote>
+            {shouldTruncate && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-full mt-2 h-6 text-xs"
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                {isExpanded ? (
+                  <>
+                    Show Less <ChevronUp className="w-3 h-3 ml-1" />
+                  </>
+                ) : (
+                  <>
+                    Read More <ChevronDown className="w-3 h-3 ml-1" />
+                  </>
+                )}
+              </Button>
+            )}
+          </div>
+        )}
         
-        <div className="flex flex-wrap gap-1">
-          {member.skills.slice(0, 3).map((skill, index) => (
-            <Badge key={index} variant="outline" className="text-xs">
-              {skill}
-            </Badge>
-          ))}
-          {member.skills.length > 3 && (
-            <Badge variant="outline" className="text-xs">
-              +{member.skills.length - 3} more
-            </Badge>
-          )}
-        </div>
+        {member.skills && member.skills.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {member.skills.slice(0, 3).map((skill: string, index: number) => (
+              <Badge key={index} variant="outline" className="text-xs">
+                {skill}
+              </Badge>
+            ))}
+            {member.skills.length > 3 && (
+              <Badge variant="outline" className="text-xs">
+                +{member.skills.length - 3} more
+              </Badge>
+            )}
+          </div>
+        )}
         
         <div className="flex gap-2 justify-center pt-2">
           {member.linkedin && (
@@ -173,8 +133,11 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
 };
 
 export default function MembersPage() {
+  // Filter to only show featured members
+  const featuredMembers = spotlightMembers.filter((member: typeof spotlightMembers[0]) => member.featured === true);
+
   return (
-    <main className="relative bg-background text-foreground pt-24">
+    <main className="relative bg-background text-foreground pt-48">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <div className="text-center mb-16">
@@ -206,10 +169,10 @@ export default function MembersPage() {
           <Card className="text-center">
             <CardHeader>
               <Star className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
-              <CardTitle className="text-3xl font-bold text-yellow-400">15+</CardTitle>
+              <CardTitle className="text-3xl font-bold text-yellow-400">{featuredMembers.length}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">Startups Launched</p>
+              <p className="text-muted-foreground">Featured Members</p>
             </CardContent>
           </Card>
           
@@ -230,7 +193,7 @@ export default function MembersPage() {
         <div className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center">Community Spotlight</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {spotlightMembers.map(member => (
+            {featuredMembers.map((member: typeof spotlightMembers[0]) => (
               <MemberCard key={member.id} member={member} />
             ))}
           </div>
@@ -263,7 +226,7 @@ export default function MembersPage() {
         </Card>
 
         {/* Member Nomination CTA */}
-        <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30">
+        {/* <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30">
           <CardHeader>
             <CardTitle className="text-2xl text-center">Know an Amazing Builder?</CardTitle>
           </CardHeader>
@@ -277,7 +240,7 @@ export default function MembersPage() {
               </Link>
             </Button>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </main>
   );

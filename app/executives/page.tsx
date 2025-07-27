@@ -48,7 +48,7 @@ Best regards`);
 
   if (isSubmitted) {
     return (
-      <main className="relative bg-background text-foreground pt-24">
+      <main className="relative bg-background text-foreground pt-48">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Card className="text-center bg-gradient-to-r from-green-900/30 to-blue-900/30">
             <CardHeader>
@@ -70,7 +70,7 @@ Best regards`);
   }
 
   return (
-    <main className="relative bg-background text-foreground pt-24">
+    <main className="relative bg-background text-foreground pt-48">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <div className="text-center mb-16">

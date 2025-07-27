@@ -42,7 +42,6 @@ export default function EventsPage() {
         
         // Try to fetch from API
         const result = await getEventsFromAPI(50);
-        console.log('apiEvents', result);
         
         setEvents(result.events);
         setUsingFallback(result.usingFallback);
@@ -91,7 +90,7 @@ export default function EventsPage() {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-background py-12">
+      <div className="min-h-screen bg-background py-12 pt-48">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -103,11 +102,11 @@ export default function EventsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background py-12 pt-24">
+    <div className="min-h-screen bg-background py-12 pt-48">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Community Events
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -148,7 +147,7 @@ export default function EventsPage() {
             <Card>
               <CardContent className="p-6 text-center">
                 <Clock className="w-8 h-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">{pastCount}</div>
+                <div className="text-2xl font-bold text-foreground">{pastCount}+</div>
                 <div className="text-sm text-muted-foreground">Past Events</div>
               </CardContent>
             </Card>
