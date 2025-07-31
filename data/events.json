@@ -1,0 +1,498 @@
+{
+  "entries": [
+    {
+      "api_id": "cal-entry-ai-builders-summit-2025",
+      "event": {
+        "api_id": "evt-ai-builders-summit-2025",
+        "created_at": "2024-12-01T10:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-1.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Join 500+ AI builders for our flagship annual conference featuring keynotes from industry leaders, technical workshops, and networking opportunities. Explore the latest in AI research and applications.",
+        "description_md": "Join **500+ AI builders** for our flagship annual conference featuring keynotes from industry leaders, technical workshops, and networking opportunities.\n\nExplore the latest in AI research and applications with:\n- Keynote presentations from leading AI researchers\n- Hands-on technical workshops\n- Networking sessions with industry professionals\n- Startup pitch competitions\n- AI demo showcases",
+        "duration_interval": "PT9H",
+        "end_at": "2025-03-15T18:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "University of California San Diego, La Jolla, CA 92093, USA",
+          "place_id": "ChIJSTKnstArEoAROyOEQz8iUn8"
+        },
+        "geo_latitude": "32.8801",
+        "geo_longitude": "-117.2340",
+        "meeting_url": null,
+        "name": "AI Builders Summit 2025",
+        "start_at": "2025-03-15T17:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/ai-builders-summit-2025",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-conference",
+            "name": "Conference"
+          },
+          {
+            "api_id": "tag-ai",
+            "name": "AI"
+          },
+          {
+            "api_id": "tag-networking",
+            "name": "Networking"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-monthly-ai-meetup-feb",
+      "event": {
+        "api_id": "evt-monthly-ai-meetup-feb",
+        "created_at": "2024-11-15T08:30:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-2.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Monthly meetup for AI builders to share projects, discuss latest developments, and network. This month's theme: 'AI in Production - Best Practices and Lessons Learned'.",
+        "description_md": "Monthly meetup for AI builders to share projects, discuss latest developments, and network.\n\n**This month's theme:** *AI in Production - Best Practices and Lessons Learned*\n\n- Lightning talks from community members\n- Panel discussion on production AI systems\n- Networking with fellow AI builders\n- Food and drinks provided",
+        "duration_interval": "PT3H",
+        "end_at": "2025-02-21T02:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "WeWork UTC, 4370 La Jolla Village Dr, San Diego, CA 92122, USA",
+          "place_id": "ChIJK7uvKPwH3IAR8JvYJTgWHAA"
+        },
+        "geo_latitude": "32.8719",
+        "geo_longitude": "-117.2077",
+        "meeting_url": null,
+        "name": "February AI Builders Meetup",
+        "start_at": "2025-02-20T23:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-feb-meetup",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-meetup",
+            "name": "Meetup"
+          },
+          {
+            "api_id": "tag-ai",
+            "name": "AI"
+          },
+          {
+            "api_id": "tag-monthly",
+            "name": "Monthly"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-llm-workshop-march",
+      "event": {
+        "api_id": "evt-llm-workshop-march",
+        "created_at": "2024-11-20T12:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-3.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Hands-on workshop covering advanced techniques for fine-tuning large language models. Learn about parameter-efficient fine-tuning, evaluation metrics, and deployment strategies.",
+        "description_md": "Hands-on workshop covering advanced techniques for fine-tuning large language models.\n\n**What you'll learn:**\n- Parameter-efficient fine-tuning (LoRA, QLoRA)\n- Evaluation metrics for LLM performance\n- Deployment strategies for production\n- Cost optimization techniques\n- Hands-on coding exercises\n\n**Prerequisites:** Basic knowledge of Python and machine learning",
+        "duration_interval": "PT6H",
+        "end_at": "2025-03-02T22:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "Qualcomm Innovation Center, 5775 Morehouse Dr, San Diego, CA 92121, USA",
+          "place_id": "ChIJbeYHpPsH3IAR6VZvYJTgWHAA"
+        },
+        "geo_latitude": "32.8935",
+        "geo_longitude": "-117.2073",
+        "meeting_url": null,
+        "name": "Advanced LLM Fine-tuning Workshop",
+        "start_at": "2025-03-02T18:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-llm-workshop",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-workshop",
+            "name": "Workshop"
+          },
+          {
+            "api_id": "tag-llm",
+            "name": "LLM"
+          },
+          {
+            "api_id": "tag-hands-on",
+            "name": "Hands-on"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-startup-pitch-night-q1",
+      "event": {
+        "api_id": "evt-startup-pitch-night-q1",
+        "created_at": "2024-12-05T14:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/startup-1.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Watch promising AI startups pitch their ideas to investors and the community. Open to all community members. Food and networking provided.",
+        "description_md": "Watch promising AI startups pitch their ideas to investors and the community.\n\n**Event highlights:**\n- 8 AI startups presenting 5-minute pitches\n- Panel of investors and industry experts\n- Networking reception with food and drinks\n- Community voting for People's Choice Award\n- Open to all community members\n\n**Confirmed investors:** Sequoia Capital, Andreessen Horowitz, Founders Fund",
+        "duration_interval": "PT3H",
+        "end_at": "2025-03-29T01:30:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "Downtown San Diego Innovation District, 750 B St, San Diego, CA 92101, USA",
+          "place_id": "ChIJPzWKHGBU2YARTbQ_2PBjJVE"
+        },
+        "geo_latitude": "32.7147",
+        "geo_longitude": "-117.1638",
+        "meeting_url": null,
+        "name": "Q1 Startup Pitch Night",
+        "start_at": "2025-03-28T22:30:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-pitch-night-q1",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-startup",
+            "name": "Startup"
+          },
+          {
+            "api_id": "tag-pitch",
+            "name": "Pitch"
+          },
+          {
+            "api_id": "tag-networking",
+            "name": "Networking"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-ai-ethics-panel",
+      "event": {
+        "api_id": "evt-ai-ethics-panel",
+        "created_at": "2024-12-10T09:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/panel-1.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Panel discussion on ethical AI development, bias mitigation, and responsible AI deployment. Featuring experts from academia, industry, and policy.",
+        "description_md": "Panel discussion on ethical AI development, bias mitigation, and responsible AI deployment.\n\n**Panelists:**\n- Dr. Rachel Kim - Stanford AI Ethics Lab\n- Dr. Sam Patel - UCSD Computer Science\n- Maria Gonzalez - AI Policy Institute\n- Tech industry representatives\n\n**Topics:**\n- Bias detection and mitigation\n- Responsible AI deployment practices\n- Regulatory landscape and compliance\n- Building ethical AI teams",
+        "duration_interval": "PT2H",
+        "end_at": "2025-04-11T02:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "UCSD Jacobs School of Engineering, 9500 Gilman Dr, La Jolla, CA 92093, USA",
+          "place_id": "ChIJA7STKstArEoAROyOEQz8iUn8"
+        },
+        "geo_latitude": "32.8801",
+        "geo_longitude": "-117.2340",
+        "meeting_url": null,
+        "name": "AI Ethics & Responsible Development Panel",
+        "start_at": "2025-04-11T00:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-ethics-panel",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-panel",
+            "name": "Panel"
+          },
+          {
+            "api_id": "tag-ethics",
+            "name": "Ethics"
+          },
+          {
+            "api_id": "tag-responsible-ai",
+            "name": "Responsible AI"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-hackathon-2024-fall",
+      "event": {
+        "api_id": "evt-hackathon-2024-fall",
+        "created_at": "2024-09-01T10:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/hackathon-1.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "48-hour hackathon where 200+ builders created innovative AI solutions. Winner: Echo Chunk's real-time audio processing platform. Over $50K in prizes awarded.",
+        "description_md": "48-hour hackathon where 200+ builders created innovative AI solutions.\n\n**Event Results:**\n- **Winner:** Echo Chunk's real-time audio processing platform\n- **Runner-up:** AI-powered code review system\n- **People's Choice:** Accessibility AI assistant\n- Over $50K in prizes awarded\n- 45 teams participated\n- 200+ attendees\n\n**Sponsors:** OpenAI, Anthropic, HuggingFace, Replit",
+        "duration_interval": "PT48H",
+        "end_at": "2024-11-17T18:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "UCSD Computer Science and Engineering Building, 9500 Gilman Dr, La Jolla, CA 92093, USA",
+          "place_id": "ChIJSTKnstArEoAROyOEQz8iUn8"
+        },
+        "geo_latitude": "32.8801",
+        "geo_longitude": "-117.2340",
+        "meeting_url": null,
+        "name": "SDxAI Fall Hackathon 2024",
+        "start_at": "2024-11-15T18:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-hackathon-2024",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-hackathon",
+            "name": "Hackathon"
+          },
+          {
+            "api_id": "tag-competition",
+            "name": "Competition"
+          },
+          {
+            "api_id": "tag-48h",
+            "name": "48h"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-ai-builders-summit-2024",
+      "event": {
+        "api_id": "evt-ai-builders-summit-2024",
+        "created_at": "2024-01-15T10:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-4.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Our inaugural summit brought together 300+ AI builders. Keynotes from industry leaders, technical workshops, and the launch of our startup accelerator program.",
+        "description_md": "Our inaugural summit brought together 300+ AI builders.\n\n**Event Highlights:**\n- Keynotes from Yann LeCun, Andrej Karpathy, and Chelsea Finn\n- 12 technical workshops\n- Launch of SDxAI startup accelerator program\n- 300+ attendees from 15 countries\n- $2M in startup funding announced\n\n**Media Coverage:** Featured in TechCrunch, VentureBeat, and The Information",
+        "duration_interval": "PT9H",
+        "end_at": "2024-03-20T18:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "University of California San Diego, La Jolla, CA 92093, USA",
+          "place_id": "ChIJSTKnstArEoAROyOEQz8iUn8"
+        },
+        "geo_latitude": "32.8801",
+        "geo_longitude": "-117.2340",
+        "meeting_url": null,
+        "name": "AI Builders Summit 2024",
+        "start_at": "2024-03-20T17:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-summit-2024",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-conference",
+            "name": "Conference"
+          },
+          {
+            "api_id": "tag-inaugural",
+            "name": "Inaugural"
+          },
+          {
+            "api_id": "tag-summit",
+            "name": "Summit"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-monthly-ai-meetup-jan",
+      "event": {
+        "api_id": "evt-monthly-ai-meetup-jan",
+        "created_at": "2024-12-01T08:30:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-5.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Kicked off 2025 with discussions on AI trends and predictions. Featured lightning talks from community members on their latest projects.",
+        "description_md": "Kicked off 2025 with discussions on AI trends and predictions.\n\n**Event Recap:**\n- 15 lightning talks from community members\n- Panel on 2025 AI predictions\n- Networking with 120+ attendees\n- Demo sessions of latest AI projects\n- Pizza and drinks provided\n\n**Popular Topics:** Multi-modal AI, AI agents, open-source models",
+        "duration_interval": "PT3H",
+        "end_at": "2025-01-17T02:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "WeWork UTC, 4370 La Jolla Village Dr, San Diego, CA 92122, USA",
+          "place_id": "ChIJK7uvKPwH3IAR8JvYJTgWHAA"
+        },
+        "geo_latitude": "32.8719",
+        "geo_longitude": "-117.2077",
+        "meeting_url": null,
+        "name": "January AI Builders Meetup",
+        "start_at": "2025-01-16T23:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-jan-meetup",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-meetup",
+            "name": "Meetup"
+          },
+          {
+            "api_id": "tag-lightning-talks",
+            "name": "Lightning Talks"
+          },
+          {
+            "api_id": "tag-predictions",
+            "name": "Predictions"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-computer-vision-workshop",
+      "event": {
+        "api_id": "evt-computer-vision-workshop",
+        "created_at": "2024-10-15T12:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-6.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Hands-on workshop covering computer vision model deployment, optimization, and real-world applications. Participants built and deployed CV models.",
+        "description_md": "Hands-on workshop covering computer vision model deployment, optimization, and real-world applications.\n\n**Workshop Outcomes:**\n- 60 participants completed the workshop\n- All participants deployed a working CV model\n- 12 teams built real-world applications\n- Covered YOLO, ResNet, and Transformer models\n- Performance optimization techniques\n\n**Tools Used:** PyTorch, OpenCV, Docker, AWS",
+        "duration_interval": "PT6H",
+        "end_at": "2024-12-08T22:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "Qualcomm Innovation Center, 5775 Morehouse Dr, San Diego, CA 92121, USA",
+          "place_id": "ChIJbeYHpPsH3IAR6VZvYJTgWHAA"
+        },
+        "geo_latitude": "32.8935",
+        "geo_longitude": "-117.2073",
+        "meeting_url": null,
+        "name": "Computer Vision for Production Workshop",
+        "start_at": "2024-12-08T18:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-cv-workshop",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-workshop",
+            "name": "Workshop"
+          },
+          {
+            "api_id": "tag-computer-vision",
+            "name": "Computer Vision"
+          },
+          {
+            "api_id": "tag-deployment",
+            "name": "Deployment"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-ai-safety-symposium",
+      "event": {
+        "api_id": "evt-ai-safety-symposium",
+        "created_at": "2024-08-20T11:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/panel-2.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Symposium focused on AI safety, security, and alignment. Featured research presentations and discussions on responsible AI development.",
+        "description_md": "Symposium focused on AI safety, security, and alignment.\n\n**Research Presentations:**\n- AI alignment challenges and solutions\n- Robustness testing frameworks\n- Interpretability methods for large models\n- Safety evaluation benchmarks\n- Red teaming methodologies\n\n**Featured Speakers:** Leading researchers from OpenAI, Anthropic, DeepMind, and academia",
+        "duration_interval": "PT5H",
+        "end_at": "2024-10-25T23:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "UCSD Jacobs School of Engineering, 9500 Gilman Dr, La Jolla, CA 92093, USA",
+          "place_id": "ChIJA7STKstArEoAROyOEQz8iUn8"
+        },
+        "geo_latitude": "32.8801",
+        "geo_longitude": "-117.2340",
+        "meeting_url": null,
+        "name": "AI Safety & Security Symposium",
+        "start_at": "2024-10-25T21:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-safety-symposium",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-symposium",
+            "name": "Symposium"
+          },
+          {
+            "api_id": "tag-ai-safety",
+            "name": "AI Safety"
+          },
+          {
+            "api_id": "tag-research",
+            "name": "Research"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-open-source-ai-day",
+      "event": {
+        "api_id": "evt-open-source-ai-day",
+        "created_at": "2024-07-10T09:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/tech-7.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Celebration of open source AI projects. Featured demos, contribution sessions, and discussions on building sustainable open source AI communities.",
+        "description_md": "Celebration of open source AI projects.\n\n**Event Highlights:**\n- 25 open source project demos\n- Contribution sessions with maintainers\n- Panel on sustainable open source development\n- Funding opportunities for OSS projects\n- Networking with 180+ contributors\n\n**Featured Projects:** Llama, Stable Diffusion, Transformers, PyTorch, and many more",
+        "duration_interval": "PT8H",
+        "end_at": "2024-09-15T02:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "Liberty Station, 2640 Historic Decatur Rd, San Diego, CA 92106, USA",
+          "place_id": "ChIJA7STKstArEoAROyOEQz8iUn8"
+        },
+        "geo_latitude": "32.7338",
+        "geo_longitude": "-117.2044",
+        "meeting_url": null,
+        "name": "Open Source AI Day",
+        "start_at": "2024-09-14T18:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-oss-day",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-open-source",
+            "name": "Open Source"
+          },
+          {
+            "api_id": "tag-demo",
+            "name": "Demo"
+          },
+          {
+            "api_id": "tag-community",
+            "name": "Community"
+          }
+        ]
+      }
+    },
+    {
+      "api_id": "cal-entry-startup-accelerator-demo",
+      "event": {
+        "api_id": "evt-startup-accelerator-demo",
+        "created_at": "2024-06-01T10:00:00.000Z",
+        "cover_url": "https://images.lu.ma/cdn-cgi/image/format=auto,fit=cover,dpr=2,quality=75,width=400,height=400/event-defaults/startup-2.jpg",
+        "calendar_api_id": "cal-sdx-ai-community",
+        "description": "Demo day for our first cohort of startup accelerator companies. 8 startups pitched to investors and the community.",
+        "description_md": "Demo day for our first cohort of startup accelerator companies.\n\n**Participating Startups:**\n- Echo Chunk (audio processing)\n- Big AGI (infrastructure)\n- Chat Shape (conversational AI)\n- Neural Nexus (computer vision)\n- Code Craft (developer tools)\n- Data Dynamo (analytics)\n- Smart Sync (workflow automation)\n- AI Assist (accessibility)\n\n**Results:** $5M in funding raised, 6 startups received offers",
+        "duration_interval": "PT4H",
+        "end_at": "2024-08-31T00:00:00.000Z",
+        "geo_address_json": {
+          "formatted_address": "Downtown San Diego Innovation District, 750 B St, San Diego, CA 92101, USA",
+          "place_id": "ChIJPzWKHGBU2YARTbQ_2PBjJVE"
+        },
+        "geo_latitude": "32.7147",
+        "geo_longitude": "-117.1638",
+        "meeting_url": null,
+        "name": "Startup Accelerator Demo Day",
+        "start_at": "2024-08-30T20:00:00.000Z",
+        "timezone": "America/Los_Angeles",
+        "url": "https://lu.ma/sdx-demo-day",
+        "user_api_id": "usr-sdx-organizer",
+        "visibility": "public",
+        "zoom_meeting_url": null,
+        "tags": [
+          {
+            "api_id": "tag-demo-day",
+            "name": "Demo Day"
+          },
+          {
+            "api_id": "tag-accelerator",
+            "name": "Accelerator"
+          },
+          {
+            "api_id": "tag-investors",
+            "name": "Investors"
+          }
+        ]
+      }
+    }
+  ],
+  "has_more": false,
+  "next_cursor": ""
+} 
