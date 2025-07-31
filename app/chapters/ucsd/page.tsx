@@ -123,46 +123,21 @@ export default function UCSDChapterPage() {
           </CardContent>
         </Card>
 
-        {/* Featured Projects */}
+        {/* Student Projects - Coming Soon */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Featured Student Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card>
-              <CardHeader>
-                <Badge className="w-fit mb-2">AI Research</Badge>
-                <CardTitle>Neural Architecture Search</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Automated neural architecture optimization using reinforcement learning techniques.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <Badge className="w-fit mb-2">Computer Vision</Badge>
-                <CardTitle>Real-time Object Detection</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Mobile-optimized object detection system for augmented reality applications.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <Badge className="w-fit mb-2">NLP</Badge>
-                <CardTitle>Academic Paper Summarizer</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  AI-powered tool for generating concise summaries of academic research papers.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <h2 className="text-3xl font-bold mb-8 text-center">Student Projects</h2>
+          <Card className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 max-w-2xl mx-auto">
+            <CardHeader>
+              <Badge className="w-fit mb-2 mx-auto bg-yellow-600">Coming Soon</Badge>
+              <CardTitle className="text-2xl text-center">2025 Cohort Projects</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center space-y-4">
+              <p className="text-lg text-muted-foreground">
+                We&apos;re preparing to showcase amazing projects from our 2025 cohort of UCSD AI builders. 
+                Stay tuned for innovative research, creative applications, and cutting-edge AI experiments from our student community.
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Connect Section */}
