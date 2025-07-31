@@ -48,13 +48,6 @@ const Navigation: React.FC = () => {
               <Button 
                 variant="ghost"
                 asChild
-                onClick={() => handleLinkClick('/startups')}
-              >
-                <Link href="/startups">Startups</Link>
-              </Button>
-              <Button 
-                variant="ghost"
-                asChild
                 onClick={() => handleLinkClick('/members')}
               >
                 <Link href="/members">Members</Link>
@@ -104,14 +97,6 @@ const Navigation: React.FC = () => {
                     className="justify-start"
                   >
                     <Link href="/events">Events</Link>
-                  </Button>
-                  <Button 
-                    variant="ghost"
-                    asChild
-                    onClick={() => handleLinkClick('/startups')}
-                    className="justify-start"
-                  >
-                    <Link href="/startups">Startups</Link>
                   </Button>
                   <Button 
                     variant="ghost"

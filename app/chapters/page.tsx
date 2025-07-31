@@ -32,22 +32,10 @@ const chapters = [
 
 const upcomingChapters = [
   {
-    name: "Stanford University",
-    location: "Palo Alto, CA",
+    name: "San Diego State University",
+    location: "San Diego, CA",
     status: "coming_soon",
-    description: "Expanding to connect Stanford's AI researchers and builders."
-  },
-  {
-    name: "UC Berkeley",
-    location: "Berkeley, CA", 
-    status: "coming_soon",
-    description: "Building bridges with Berkeley's renowned AI and ML community."
-  },
-  {
-    name: "MIT",
-    location: "Cambridge, MA",
-    status: "planning",
-    description: "Connecting with the East Coast's leading AI innovation hub."
+    description: "Expanding SDx's presence across San Diego's university landscape with SDSU's vibrant student community."
   }
 ];
 
