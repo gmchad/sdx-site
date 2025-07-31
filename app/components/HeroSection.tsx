@@ -42,85 +42,112 @@ const HeroSection: React.FC = () => {
           Join 1000+ builders and executives creating the future of AI through hands-on projects, collaborative events, and a supportive community of innovators
         </p>
 
-        {/* Main CTA Card */}
-        <Card className="border-border hover:border-blue-500 transition-all duration-300 transform hover:scale-105 max-w-2xl mx-auto mb-16">
-          <CardHeader>
-            <div className="text-5xl mb-4">🚀</div>
-            <CardTitle className="text-3xl">Join the Builder Community</CardTitle>
-            <CardDescription className="text-lg">
-              Connect with fellow AI builders, share your projects, get feedback, and grow together in San Diego&apos;s most active AI community
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-center text-green-400">
-                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                <span>Weekly events & hackathons</span>
+        {/* Main CTAs - Side by Side on Desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 max-w-6xl mx-auto">
+          {/* Builders Card */}
+          <Card className="border-border hover:border-blue-500 transition-all duration-300 transform hover:scale-105">
+            <CardHeader>
+              <Badge className="mb-4 bg-gradient-to-r from-blue-600 to-green-600 w-fit mx-auto">
+                <Code className="w-4 h-4 mr-2" />
+                For AI Builders
+              </Badge>
+              <CardTitle className="text-2xl lg:text-3xl">Builder Community</CardTitle>
+              <CardDescription className="text-base lg:text-lg">
+                Connect with fellow AI builders, share your projects, get feedback, and grow together in San Diego&apos;s most active AI community
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 gap-3">
+                <div className="flex items-center text-green-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Weekly events & hackathons</span>
+                </div>
+                <div className="flex items-center text-green-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Project showcase opportunities</span>
+                </div>
+                <div className="flex items-center text-green-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Executive network access</span>
+                </div>
+                <div className="flex items-center text-green-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Access to startup resources</span>
+                </div>
               </div>
-              <div className="flex items-center text-green-400">
-                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                <span>Project showcase opportunities</span>
+              <div className="flex flex-col gap-3">
+                <Button 
+                  size="lg" 
+                  className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3 w-full"
+                  asChild
+                  onClick={() => handleLinkClick('https://lu.ma/sdx', 'builders-signup')}
+                >
+                  <Link href="https://lu.ma/sdx" target="_blank">
+                    Join Community
+                    <ExternalLink className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+                <Button 
+                  variant="outline"
+                  size="lg" 
+                  className="text-lg px-8 py-3 w-full"
+                  asChild
+                  onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'discord-join')}
+                >
+                  <Link href="https://discord.gg/Rkgyzx2ykV" target="_blank">
+                    Join Discord
+                    <ExternalLink className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
               </div>
-              <div className="flex items-center text-green-400">
-                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                <span>Executive network access</span>
-              </div>
-              <div className="flex items-center text-green-400">
-                <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                <span>Access to startup resources</span>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
-                asChild
-                onClick={() => handleLinkClick('https://lu.ma/sdx', 'builders-signup')}
-              >
-                <Link href="https://lu.ma/sdx" target="_blank">
-                  Join Community
-                  <ExternalLink className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg" 
-                className="text-lg px-8 py-3"
-                asChild
-                onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'discord-join')}
-              >
-                <Link href="https://discord.gg/Rkgyzx2ykV" target="_blank">
-                  Join Discord
-                  <ExternalLink className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        {/* Executive Network Funnel */}
-        <div className="text-center mb-16">
-          <Badge className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600">
-            <Crown className="w-4 h-4 mr-2" />
-            For AI Leaders
-          </Badge>
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Are you an AI executive or senior leader?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Join our exclusive executive network of 50 AI leaders for quarterly roundtables, strategic insights, and direct access to San Diego&apos;s top AI talent.
-          </p>
-          <Button 
-            variant="outline" 
-            size="lg"
-            asChild
-            onClick={() => handleLinkClick('/executives', 'executive-funnel')}
-          >
-            <Link href="/executives">
-              Learn About Executive Network
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
+          {/* Executive Network Card */}
+          <Card className="border-border hover:border-purple-500 transition-all duration-300 transform hover:scale-105">
+            <CardHeader>
+              <Badge className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600 w-fit mx-auto">
+                <Crown className="w-4 h-4 mr-2" />
+                For AI Executives
+              </Badge>
+              <CardTitle className="text-2xl lg:text-3xl">Executive Network</CardTitle>
+              <CardDescription className="text-base lg:text-lg">
+                Join our exclusive executive network of 50 AI leaders for quarterly roundtables, strategic insights, and direct access to San Diego&apos;s top AI talent.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 gap-3">
+                <div className="flex items-center text-purple-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Quarterly executive roundtables</span>
+                </div>
+                <div className="flex items-center text-purple-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Strategic AI insights & trends</span>
+                </div>
+                <div className="flex items-center text-purple-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Access to top AI talent</span>
+                </div>
+                <div className="flex items-center text-purple-400">
+                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span>Exclusive network of 50 leaders</span>
+                </div>
+              </div>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="text-lg px-8 py-3 w-full border-purple-500 hover:bg-purple-500/10"
+                asChild
+                onClick={() => handleLinkClick('/executives', 'executive-funnel')}
+              >
+                <Link href="/executives">
+                  Apply to Executive Network
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Community Features */}
