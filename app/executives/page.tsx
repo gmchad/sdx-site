@@ -209,7 +209,7 @@ export default function ExecutivesPage() {
     <main className="relative bg-background text-foreground pt-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <Badge className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600">
             <Crown className="w-6 h-6 mr-2" />
             Executive Network
@@ -223,39 +223,6 @@ export default function ExecutivesPage() {
           </p>
         </div>
 
-        {/* Community Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <Card className="text-center">
-            <CardHeader>
-              <Users className="w-12 h-12 mx-auto mb-4 text-blue-500" />
-              <CardTitle className="text-3xl font-bold text-blue-400">1000+</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">AI Builders in Network</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="text-center">
-            <CardHeader>
-              <Crown className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
-              <CardTitle className="text-3xl font-bold text-yellow-400">50</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Executive Member Limit</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="text-center">
-            <CardHeader>
-              <Calendar className="w-12 h-12 mx-auto mb-4 text-green-500" />
-              <CardTitle className="text-3xl font-bold text-green-400">4</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Roundtables per Year</p>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Apply to Join */}
         <Card className="max-w-2xl mx-auto mb-16">
           <CardHeader>
@@ -263,9 +230,6 @@ export default function ExecutivesPage() {
               <Mail className="w-6 h-6 inline mr-2" />
               Apply To Join
             </CardTitle>
-            <p className="text-center text-muted-foreground">
-              We cap the executive network at 50 members and are very particular about who&apos;s part of the community to ensure the most high quality experience. No cost to join, funded and sponsored by our technology partners. Apply Below.
-            </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -334,34 +298,71 @@ export default function ExecutivesPage() {
           </CardContent>
         </Card>
 
-        {/* What we Offer */}
-        <Card className="mb-16">
+        {/* Next Roundtable Event */}
+        <Card className="mb-16 border-2 border-blue-400/50 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
           <CardHeader>
-            <CardTitle className="text-3xl text-center">What we Offer</CardTitle>
+            <CardTitle className="text-3xl text-center mb-2">Next Executive Roundtable</CardTitle>
+            <div className="text-center space-y-2">
+              <Badge variant="outline" className="text-lg px-4 py-2">
+                <Calendar className="w-5 h-5 mr-2" />
+                September 30th, 12-2pm
+              </Badge>
+              <Badge variant="outline" className="text-lg px-4 py-2">
+                <Building className="w-5 h-5 mr-2" />
+                Cadre HQ
+              </Badge>
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-blue-500" />
-                <h3 className="text-lg font-semibold mb-2">Quarterly Executive Roundtables</h3>
-                <p className="text-muted-foreground text-sm">
-                  Exclusive strategic discussions with fellow AI executives on implementation, trends, and industry insights
-                </p>
+          <CardContent className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-2xl font-semibold mb-4 text-blue-400">AI Implementation: Real-World Insights</h3>
+              <p className="text-lg text-muted-foreground mb-6">
+                Join us for an exclusive 2-hour executive roundtable focused on practical AI implementation
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Key Use Cases</h4>
+                    <p className="text-sm text-muted-foreground">Share and explore successful AI implementations across industries</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Biggest Inhibitors & Roadblocks</h4>
+                    <p className="text-sm text-muted-foreground">Discuss common challenges and proven solutions</p>
+                  </div>
+                </div>
               </div>
-              <div className="text-center">
-                <Users className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
-                <h3 className="text-lg font-semibold mb-2">Access to San Diego&apos;s top AI Builders</h3>
-                <p className="text-muted-foreground text-sm">
-                  SDx has a thriving community of the most talented AI engineers, researchers, and product folks with 1000+ members. We work to connect you with them.
-                </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Open Experience Sharing</h4>
+                    <p className="text-sm text-muted-foreground">Collaborative environment for honest discussions</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <Star className="w-5 h-5 text-yellow-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">OpenAI Leadership in Attendance</h4>
+                    <p className="text-sm text-muted-foreground">Share universal insights and industry perspectives</p>
+                  </div>
+                </div>
               </div>
-              <div className="text-center">
-                <Star className="w-12 h-12 mx-auto mb-4 text-green-500" />
-                <h3 className="text-lg font-semibold mb-2">Innovation & Insights</h3>
-                <p className="text-muted-foreground text-sm">
-                  Early access to breakthrough technologies and research emerging from our builder community
-                </p>
-              </div>
+            </div>
+            
+            <div className="text-center pt-4">
+              <p className="text-muted-foreground">
+                Limited to 50 executive members • Apply above to secure your spot
+              </p>
             </div>
           </CardContent>
         </Card>
