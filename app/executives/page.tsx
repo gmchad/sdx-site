@@ -61,9 +61,20 @@ const ExecutiveCard: React.FC<ExecutiveCardProps> = ({ executive }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         {executive.bio && (
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {executive.bio}
-          </p>
+          <div className="space-y-2">
+            {Array.isArray(executive.bio) ? (
+              executive.bio.map((point: string, index: number) => (
+                <div key={index} className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 flex-shrink-0" />
+                  <p className="text-sm text-muted-foreground leading-relaxed">{point}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {executive.bio}
+              </p>
+            )}
+          </div>
         )}
         
         {executive.additionalRoles && executive.additionalRoles.length > 0 && (
