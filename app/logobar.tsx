@@ -15,6 +15,7 @@ const logos: Logo[] = [
 	{ src: '/sponsors/openai.png', alt: 'openai' },
 	{ src: '/sponsors/qualcomm.png', alt: 'qualcomm' },
 	{ src: '/sponsors/replit.png', alt: 'replit' },
+	{ src: '/sponsors/groq.png', alt: 'groq' },
 	{ src: '/sponsors/vercel.png', alt: 'vercel' },
 	{ src: '/sponsors/ucsd.png', alt: 'ucsd' }
 ];
