@@ -2,141 +2,115 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { sendGAEvent } from '@next/third-parties/google';
-import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
+
+const navLinks = [
+  { href: '/events', label: 'Events' },
+  { href: '/members', label: 'Members' },
+  { href: '/chapters', label: 'Chapters' },
+];
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLinkClick = (linkUrl: string) => {
-    sendGAEvent('clicked', {
-      link_url: linkUrl
-    });
+    sendGAEvent('clicked', { link_url: linkUrl });
     setIsMenuOpen(false);
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm z-50 border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-50 border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src="/sdx-v2.png"
-                alt="SDx"
-                width={80}
-                height={80}
-                className="h-auto w-auto"
-              />
-            </Link>
-          </div>
+          <Link href="/" className="flex-shrink-0" onClick={() => handleLinkClick('/')}>
+            <span className="font-display text-2xl text-white tracking-tight">SDx</span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Button 
-                variant="ghost"
-                asChild
-                onClick={() => handleLinkClick('/events')}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => handleLinkClick(link.href)}
+                className="px-3 py-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-200"
               >
-                <Link href="/events">Events</Link>
-              </Button>
-              <Button 
-                variant="ghost"
-                asChild
-                onClick={() => handleLinkClick('/members')}
-              >
-                <Link href="/members">Members</Link>
-              </Button>
-              <Button 
-                variant="ghost"
-                asChild
-                onClick={() => handleLinkClick('/chapters')}
-              >
-                <Link href="/chapters">Chapters</Link>
-              </Button>
-            </div>
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button 
-              variant="ghost"
-              asChild
-              onClick={() => handleLinkClick('https://lu.ma/sdx')}
-            >
-              <Link href="https://lu.ma/sdx" target="_blank">Join Community</Link>
-            </Button>
-            <Button 
-              asChild
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/executives"
               onClick={() => handleLinkClick('/executives')}
+              className="px-3 py-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-200"
             >
-              <Link href="/executives">For AI Executives</Link>
-            </Button>
+              Executives
+            </Link>
+            <Link
+              href="https://lu.ma/sdx"
+              target="_blank"
+              onClick={() => handleLinkClick('https://lu.ma/sdx')}
+              className="holographic-border px-4 py-1.5 text-xs uppercase tracking-widest text-white rounded-sm"
+            >
+              Join
+            </Link>
           </div>
 
           {/* Mobile menu */}
           <div className="md:hidden">
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                <button className="p-2 text-white/60 hover:text-white transition-colors duration-200">
+                  <Menu className="h-5 w-5" />
                   <span className="sr-only">Open main menu</span>
-                </Button>
+                </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <div className="flex flex-col space-y-4 mt-8">
-                  <Button 
-                    variant="ghost"
-                    asChild
-                    onClick={() => handleLinkClick('/events')}
-                    className="justify-start"
-                  >
-                    <Link href="/events">Events</Link>
-                  </Button>
-                  <Button 
-                    variant="ghost"
-                    asChild
-                    onClick={() => handleLinkClick('/members')}
-                    className="justify-start"
-                  >
-                    <Link href="/members">Members</Link>
-                  </Button>
-                  <Button 
-                    variant="ghost"
-                    asChild
-                    onClick={() => handleLinkClick('/chapters')}
-                    className="justify-start"
-                  >
-                    <Link href="/chapters">Chapters</Link>
-                  </Button>
-                  <Button 
-                    variant="ghost"
-                    asChild
-                    onClick={() => handleLinkClick('https://lu.ma/sdx')}
-                    className="justify-start"
-                  >
-                    <Link href="https://lu.ma/sdx" target="_blank">Join Community</Link>
-                  </Button>
-                  <Button 
-                    asChild
+              <SheetContent side="right" className="w-[280px] bg-black border-white/5 p-0">
+                <div className="flex flex-col pt-12">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => handleLinkClick(link.href)}
+                      className="px-6 py-3 text-xs uppercase tracking-widest text-white/60 hover:text-white hover:bg-white/[0.03] transition-colors duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className="border-t border-white/5 my-2" />
+                  <Link
+                    href="/executives"
                     onClick={() => handleLinkClick('/executives')}
-                    className="justify-start"
+                    className="px-6 py-3 text-xs uppercase tracking-widest text-white/60 hover:text-white hover:bg-white/[0.03] transition-colors duration-200"
                   >
-                    <Link href="/executives">For Executives</Link>
-                  </Button>
+                    Executives
+                  </Link>
+                  <div className="px-6 pt-4">
+                    <Link
+                      href="https://lu.ma/sdx"
+                      target="_blank"
+                      onClick={() => handleLinkClick('https://lu.ma/sdx')}
+                      className="holographic-border block text-center px-4 py-2 text-xs uppercase tracking-widest text-white rounded-sm"
+                    >
+                      Join
+                    </Link>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
         </div>
       </div>
+      {/* Holographic line separator */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </nav>
   );
 };
 
-export default Navigation; 
+export default Navigation;

@@ -4,213 +4,258 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { sendGAEvent } from '@next/third-parties/google';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Check, ExternalLink, Users, Calendar, Code, Rocket, Crown } from 'lucide-react';
+import BackgroundEffects from './BackgroundEffects';
+import MetaballCanvas from './MetaballCanvas';
+
+const partnerLogos = [
+  { src: '/sponsors/cadre.png', alt: 'Cadre' },
+  { src: '/sponsors/anthropic.png', alt: 'Anthropic' },
+  { src: '/sponsors/elevenlabs.png', alt: 'ElevenLabs' },
+  { src: '/sponsors/hf.png', alt: 'Hugging Face' },
+  { src: '/sponsors/openai.png', alt: 'OpenAI' },
+  { src: '/sponsors/qualcomm.png', alt: 'Qualcomm' },
+  { src: '/sponsors/replit.png', alt: 'Replit' },
+  { src: '/sponsors/vercel.png', alt: 'Vercel' },
+  { src: '/sponsors/ucsd.png', alt: 'UCSD' },
+];
+
+const eventTypes = [
+  {
+    name: 'Paper Club',
+    description: 'Deep dives into fundamental ML research. Come prepared to debate.',
+  },
+  {
+    name: 'AI Coffee',
+    description: 'Open discussion on the latest in AI. Practitioner-level signal.',
+  },
+  {
+    name: 'Hack Days',
+    description: 'Show up, build something real, demo what you made.',
+  },
+  {
+    name: 'Hackathons',
+    description: 'Full-day build events with sponsor credits and prizes.',
+  },
+  {
+    name: 'OpenClaw',
+    description: 'Building with the OpenClaw agentic AI framework.',
+  },
+  {
+    name: 'Executive Roundtables',
+    description: 'Peer-level AI implementation exchange for senior leaders.',
+  },
+];
+
+const metrics = [
+  { value: '1000+', label: 'builders' },
+  { value: '50+', label: 'events' },
+  { value: '15+', label: 'startups' },
+];
 
 const HeroSection: React.FC = () => {
   const handleLinkClick = (linkUrl: string, label: string) => {
-    sendGAEvent('clicked', {
-      link_url: linkUrl,
-      label: label
-    });
+    sendGAEvent('clicked', { link_url: linkUrl, label });
   };
 
   return (
-    <section className="relative min-h-screen bg-background text-foreground flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto text-center">
-        {/* Logo */}
-        <div className="mb-8 mt-16">
-          <Image
-            src="/sdx-v2.png"
-            alt="SDx Community Logo"
-            width={300}
-            height={250}
-            className="mx-auto"
-          />
+    <>
+      {/* Section 1: Hero */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <BackgroundEffects />
+        <MetaballCanvas />
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6">
+            Build here.
+          </h1>
+          <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-10">
+            San Diego&apos;s builder-first technology community.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <Link
+              href="https://lu.ma/sdx"
+              target="_blank"
+              onClick={() => handleLinkClick('https://lu.ma/sdx', 'hero-cta')}
+              className="holographic-border px-8 py-3 text-xs uppercase tracking-widest text-white rounded-sm"
+            >
+              Start Building
+            </Link>
+            <Link
+              href="/executives"
+              onClick={() => handleLinkClick('/executives', 'hero-exec')}
+              className="px-6 py-3 text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
+            >
+              Executive Network &rarr;
+            </Link>
+          </div>
         </div>
 
-        {/* Main Headline */}
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          San Diego&apos;s premier community for 
-          <span className="text-blue-400"> AI builders</span>
-        </h1>
+        {/* Partners — full width with edge fade */}
+        <div className="absolute bottom-40 left-[10%] right-[10%] z-10">
+          <p className="text-xs uppercase tracking-widest text-white/40 text-center mb-4">Partners</p>
+          <div
+            className="overflow-hidden w-full"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
+            }}
+          >
+            <div className="animate-marquee whitespace-nowrap inline-block">
+              {[...partnerLogos, ...partnerLogos].map((logo, index) => (
+                <div key={index} className="inline-block align-middle mx-8">
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={96}
+                    height={48}
+                    className="w-20 h-10 object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
-        {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto">
-          Join 1000+ builders and executives creating the future of AI through hands-on projects, collaborative events, and a supportive community of innovators
-        </p>
+        {/* Metrics bar */}
+        <div className="relative z-10 flex items-center gap-8 md:gap-12">
+          {metrics.map((metric, i) => (
+            <React.Fragment key={metric.label}>
+              {i > 0 && <div className="w-px h-6 bg-white/10" />}
+              <div className="text-center">
+                <span className="holographic-text text-xl md:text-2xl font-bold">{metric.value}</span>
+                <span className="block text-xs uppercase tracking-widest text-white/30 mt-1">{metric.label}</span>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
 
-        {/* Main CTAs - Side by Side on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 max-w-6xl mx-auto">
-          {/* Builders Card */}
-          <Card className="border-border hover:border-blue-500 transition-all duration-300 transform hover:scale-105">
-            <CardHeader>
-              <Badge className="mb-4 bg-gradient-to-r from-blue-600 to-green-600 w-fit mx-auto">
-                <Code className="w-4 h-4 mr-2" />
-                For AI Builders
-              </Badge>
-              <CardTitle className="text-2xl lg:text-3xl">Builder Community</CardTitle>
-              <CardDescription className="text-base lg:text-lg">
-                Connect with fellow AI builders, share your projects, get feedback, and grow together in San Diego&apos;s most active AI community
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 gap-3">
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Weekly events & hackathons</span>
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Project showcase opportunities</span>
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Executive network access</span>
-                </div>
-                <div className="flex items-center text-green-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Access to startup resources</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3">
-                <Button 
-                  size="lg" 
-                  className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3 w-full"
-                  asChild
-                  onClick={() => handleLinkClick('https://lu.ma/sdx', 'builders-signup')}
-                >
-                  <Link href="https://lu.ma/sdx" target="_blank">
-                    Join Community
-                    <ExternalLink className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-                <Button 
-                  variant="outline"
-                  size="lg" 
-                  className="text-lg px-8 py-3 w-full"
-                  asChild
-                  onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'discord-join')}
-                >
-                  <Link href="https://discord.gg/Rkgyzx2ykV" target="_blank">
-                    Join Discord
-                    <ExternalLink className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+      {/* Section 2: Event Types */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12">
+            <span className="text-xs uppercase tracking-widest text-white/30">What we do</span>
+            <h2 className="font-display text-3xl md:text-4xl text-white mt-2">
+              Where builders build.
+            </h2>
+          </div>
 
-          {/* Executive Network Card */}
-          <Card className="border-border hover:border-purple-500 transition-all duration-300 transform hover:scale-105">
-            <CardHeader>
-              <Badge className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600 w-fit mx-auto">
-                <Crown className="w-4 h-4 mr-2" />
-                For AI Executives
-              </Badge>
-              <CardTitle className="text-2xl lg:text-3xl">Executive Network</CardTitle>
-              <CardDescription className="text-base lg:text-lg">
-                Join our exclusive executive network of 50 AI leaders for quarterly roundtables, strategic insights, and direct access to San Diego&apos;s top AI talent.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 gap-3">
-                <div className="flex items-center text-purple-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Quarterly executive roundtables</span>
-                </div>
-                <div className="flex items-center text-purple-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Strategic AI insights & trends</span>
-                </div>
-                <div className="flex items-center text-purple-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Access to top AI talent</span>
-                </div>
-                <div className="flex items-center text-purple-400">
-                  <Check className="w-5 h-5 mr-2 flex-shrink-0" />
-                  <span>Exclusive network of 50 leaders</span>
-                </div>
-              </div>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="text-lg px-8 py-3 w-full border-purple-500 hover:bg-purple-500/10"
-                asChild
-                onClick={() => handleLinkClick('/executives', 'executive-funnel')}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {eventTypes.map((event) => (
+              <div
+                key={event.name}
+                className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-6
+                  hover:border-white/[0.15] hover:shadow-glow-white
+                  transition-[border-color,box-shadow] duration-300 ease-out"
               >
-                <Link href="/executives">
-                  Apply to Executive Network
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Community Features */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-          <Card className="text-center">
-            <CardHeader>
-              <Users className="w-8 h-8 mx-auto mb-2 text-blue-400" />
-              <CardTitle className="text-lg">Active Community</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Connect with 1000+ AI builders and industry executives</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardHeader>
-              <Calendar className="w-8 h-8 mx-auto mb-2 text-green-400" />
-              <CardTitle className="text-lg">Regular Events</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Weekly meetups, hackathons, and workshops</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardHeader>
-              <Code className="w-8 h-8 mx-auto mb-2 text-purple-400" />
-              <CardTitle className="text-lg">Hands-on Projects</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Build real AI applications with peer support</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardHeader>
-              <Rocket className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-              <CardTitle className="text-lg">Startup Support</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">From idea to launch with community backing</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Impact Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-blue-400 mb-2">1000+</div>
-            <div className="text-muted-foreground">Active Builders</div>
+                <h3 className="text-base font-bold text-white mb-2">{event.name}</h3>
+                <p className="text-sm text-white/40 leading-relaxed">{event.description}</p>
+              </div>
+            ))}
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-green-400 mb-2">50+</div>
-            <div className="text-muted-foreground">Events Hosted</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-purple-400 mb-2">15+</div>
-            <div className="text-muted-foreground">Startups Launched</div>
+
+          <div className="mt-8">
+            <Link
+              href="/events"
+              className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
+            >
+              See all events &rarr;
+            </Link>
           </div>
         </div>
+      </section>
 
-        {/* Social Links */}
+      {/* Section 3: Community Proof */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+              <span className="text-xs uppercase tracking-widest text-white/30">Chapters</span>
+              <h3 className="font-display text-2xl text-white mt-2 mb-4">University chapters</h3>
+              <p className="text-sm text-white/40 leading-relaxed mb-4">
+                SDx extends into campus communities, bringing builders together before they even graduate.
+              </p>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-sdx-teal" />
+                  <span className="text-sm text-white/60">SDx UCSD — Active</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-sdx-blue" />
+                  <span className="text-sm text-white/60">SDx SDSU — Active</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                  <span className="text-sm text-white/40">SDx USD — Planned</span>
+                </div>
+              </div>
+            </div>
 
-      </div>
-    </section>
+            <div>
+              <span className="text-xs uppercase tracking-widest text-white/30">Partners</span>
+              <h3 className="font-display text-2xl text-white mt-2 mb-4">Who we work with</h3>
+              <p className="text-sm text-white/40 leading-relaxed">
+                Connected to the organizations that matter. Y Combinator, OpenAI, Anthropic, Qualcomm, Supabase, Vercel, Replit, and the university systems across San Diego.
+              </p>
+            </div>
+
+            <div>
+              <span className="text-xs uppercase tracking-widest text-white/30">Output</span>
+              <h3 className="font-display text-2xl text-white mt-2 mb-4">What gets built</h3>
+              <p className="text-sm text-white/40 leading-relaxed mb-4">
+                SDx members have launched 15+ startups, shipped open-source tools, and built projects that matter.
+              </p>
+              <Link
+                href="/startups"
+                className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
+              >
+                See startups &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: Final CTA */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 holographic-bg" />
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <h2 className="font-display text-4xl md:text-5xl text-white mb-6">
+            Come build.
+          </h2>
+          <p className="text-base text-white/50 mb-10 max-w-md mx-auto">
+            You don&apos;t need to know how to code to join SDx. You need to want to learn.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="https://lu.ma/sdx"
+              target="_blank"
+              onClick={() => handleLinkClick('https://lu.ma/sdx', 'cta-luma')}
+              className="holographic-border px-8 py-3 text-xs uppercase tracking-widest text-white rounded-sm"
+            >
+              Join on Lu.ma
+            </Link>
+            <Link
+              href="https://discord.gg/Rkgyzx2ykV"
+              target="_blank"
+              onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'cta-discord')}
+              className="px-6 py-3 text-xs uppercase tracking-widest text-white/40 hover:text-white border border-white/10 hover:border-white/20 rounded-sm transition-[color,border-color] duration-200"
+            >
+              Join Discord
+            </Link>
+          </div>
+          <Link
+            href="/executives"
+            onClick={() => handleLinkClick('/executives', 'cta-exec')}
+            className="inline-block mt-6 text-xs uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors duration-200"
+          >
+            Executive Network &rarr;
+          </Link>
+        </div>
+      </section>
+    </>
   );
 };
 
-export default HeroSection; 
+export default HeroSection;

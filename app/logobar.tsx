@@ -1,4 +1,3 @@
-// components/LogoBar.tsx
 import React from 'react';
 import Image from 'next/image';
 
@@ -8,37 +7,41 @@ interface Logo {
 }
 
 const logos: Logo[] = [
-	{ src: '/sponsors/cadre.png', alt: 'cadre' },
-	{ src: '/sponsors/anthropic.png', alt: 'anthropic' },
-	{ src: '/sponsors/elevenlabs.png', alt: 'elevenlabs' },
-	{ src: '/sponsors/hf.png', alt: 'hf' },
-	{ src: '/sponsors/openai.png', alt: 'openai' },
-	{ src: '/sponsors/qualcomm.png', alt: 'qualcomm' },
-	{ src: '/sponsors/replit.png', alt: 'replit' },
-	{ src: '/sponsors/vercel.png', alt: 'vercel' },
-	{ src: '/sponsors/ucsd.png', alt: 'ucsd' }
+	{ src: '/sponsors/cadre.png', alt: 'Cadre' },
+	{ src: '/sponsors/anthropic.png', alt: 'Anthropic' },
+	{ src: '/sponsors/elevenlabs.png', alt: 'ElevenLabs' },
+	{ src: '/sponsors/hf.png', alt: 'Hugging Face' },
+	{ src: '/sponsors/openai.png', alt: 'OpenAI' },
+	{ src: '/sponsors/qualcomm.png', alt: 'Qualcomm' },
+	{ src: '/sponsors/replit.png', alt: 'Replit' },
+	{ src: '/sponsors/vercel.png', alt: 'Vercel' },
+	{ src: '/sponsors/ucsd.png', alt: 'UCSD' },
 ];
 
 const LogoBar: React.FC = () => {
 	return (
-		<div className="fixed top-16 left-0 w-full overflow-hidden py-4 bg-background/80 backdrop-blur-sm z-30 border-b border-border">
-			<div className="flex align-middle justify-center text-muted-foreground text-sm mb-2">
-				Sponsors
-			</div>
-			<div className="animate-marquee whitespace-nowrap inline-block">
-				{[...logos, ...logos].map((logo, index) => (
-				<div key={index} className="inline-block align-middle mx-6">
-					<Image 
-						src={logo.src} 
-						alt={logo.alt} 
-						width={96}
-						height={48}
-						className="w-24 h-12 object-contain opacity-80 hover:opacity-100 transition-opacity"
-					/>
+		<section className="py-12 border-t border-white/5">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<p className="text-[10px] uppercase tracking-widest text-white/30 text-center mb-8">
+					Partners
+				</p>
+				<div className="overflow-hidden">
+					<div className="animate-marquee whitespace-nowrap inline-block">
+						{[...logos, ...logos].map((logo, index) => (
+							<div key={index} className="inline-block align-middle mx-8">
+								<Image
+									src={logo.src}
+									alt={logo.alt}
+									width={96}
+									height={48}
+									className="w-20 h-10 object-contain opacity-30 hover:opacity-60 transition-opacity duration-300"
+								/>
+							</div>
+						))}
+					</div>
 				</div>
-				))}
 			</div>
-		</div>
+		</section>
 	);
 };
 

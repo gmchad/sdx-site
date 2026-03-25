@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 
 interface StartupCardProps {
@@ -33,76 +32,78 @@ const StartupCard: React.FC<StartupCardProps> = ({
   category
 }) => {
   return (
-    <Card className="border-border hover:border-green-500 transition-all duration-300">
+    <Card>
       <CardHeader>
         <div className="flex items-center mb-2">
           {logoUrl && (
-            <div className="w-12 h-12 bg-muted rounded-lg mr-4 flex items-center justify-center overflow-hidden">
-              <Image 
-                src={logoUrl} 
+            <div className="w-10 h-10 bg-white/[0.04] rounded-lg mr-3 flex items-center justify-center overflow-hidden">
+              <Image
+                src={logoUrl}
                 alt={`${name} logo`}
-                width={48}
-                height={48}
+                width={40}
+                height={40}
                 className="w-full h-full object-cover"
               />
             </div>
           )}
           <div>
-            <CardTitle className="text-xl">{name}</CardTitle>
-            <Badge variant="secondary" className="text-blue-400">{category}</Badge>
+            <CardTitle className="text-base">{name}</CardTitle>
+            <Badge variant="outline" className="mt-1">{category}</Badge>
           </div>
         </div>
       </CardHeader>
-      
-      <CardContent className="space-y-4">
-        <p className="text-muted-foreground">{description}</p>
-        
-        <div className="flex flex-wrap gap-2">
+
+      <CardContent className="space-y-3">
+        <p className="text-sm text-white/40 leading-relaxed">{description}</p>
+
+        <div className="flex flex-wrap gap-1">
           {founders.map((founder, index) => (
-            <Badge key={index} variant="outline">
+            <Badge key={index} variant="secondary">
               {founder}
             </Badge>
           ))}
         </div>
-        
-        <div className="grid grid-cols-2 gap-4">
+
+        <div className="grid grid-cols-2 gap-2">
           {metrics.funding && (
-            <div className="text-center p-3 bg-muted rounded-lg">
-              <div className="text-lg font-bold text-green-400">{metrics.funding}</div>
-              <div className="text-xs text-muted-foreground">Funding</div>
+            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
+              <div className="text-base font-bold holographic-text">{metrics.funding}</div>
+              <div className="text-xs uppercase tracking-widest text-white/30">Funding</div>
             </div>
           )}
           {metrics.users && (
-            <div className="text-center p-3 bg-muted rounded-lg">
-              <div className="text-lg font-bold text-blue-400">{metrics.users}</div>
-              <div className="text-xs text-muted-foreground">Users</div>
+            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
+              <div className="text-base font-bold holographic-text">{metrics.users}</div>
+              <div className="text-xs uppercase tracking-widest text-white/30">Users</div>
             </div>
           )}
           {metrics.revenue && (
-            <div className="text-center p-3 bg-muted rounded-lg">
-              <div className="text-lg font-bold text-purple-400">{metrics.revenue}</div>
-              <div className="text-xs text-muted-foreground">Revenue</div>
+            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
+              <div className="text-base font-bold holographic-text">{metrics.revenue}</div>
+              <div className="text-xs uppercase tracking-widest text-white/30">Revenue</div>
             </div>
           )}
           {metrics.githubStars && (
-            <div className="text-center p-3 bg-muted rounded-lg">
-              <div className="text-lg font-bold text-yellow-400">{metrics.githubStars}</div>
-              <div className="text-xs text-muted-foreground">GitHub Stars</div>
+            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
+              <div className="text-base font-bold holographic-text">{metrics.githubStars}</div>
+              <div className="text-xs uppercase tracking-widest text-white/30">Stars</div>
             </div>
           )}
         </div>
-        
+
         {websiteUrl && (
-          <Button asChild className="w-full">
-            <Link href={websiteUrl} target="_blank">
-              Visit Website
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
+          <Link
+            href={websiteUrl}
+            target="_blank"
+            className="inline-flex items-center text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200 pt-1"
+          >
+            Visit
+            <ExternalLink className="w-3 h-3 ml-1.5" />
+          </Link>
         )}
       </CardContent>
     </Card>
   );
 };
 
-export default StartupCard; 
+export default StartupCard;

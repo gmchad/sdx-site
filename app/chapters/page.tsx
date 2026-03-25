@@ -3,270 +3,167 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Users, Calendar, ExternalLink, Plus, Mail } from 'lucide-react';
+import { MapPin, ExternalLink, Mail } from 'lucide-react';
+import SectionHeader from '@/app/components/SectionHeader';
 
-// Chapters data
 const chapters = [
   {
     id: "ucsd",
-    name: "UC San Diego",
+    name: "SDx UCSD",
+    university: "UC San Diego",
     location: "San Diego, CA",
     status: "active",
     memberCount: "50+",
-    description: "An invite-only community where the best UCSD students building with AI share their latest experiments and projects.",
-    highlights: [
-      "Monthly demo sessions",
-      "Invite-only membership",
-      "Student-focused projects",
-      "Campus-based events"
-    ],
+    founded: "2024",
+    founder: "Dhruv Kanetkar",
+    description: "The flagship chapter. An invite-only community where the best UCSD students building with AI share their latest experiments and projects.",
     href: "/chapters/ucsd",
     contactEmail: "ucsd@sdx.community",
-    image: "/sdx-v2.png",
-    featured: true
-  }
-];
-
-const upcomingChapters = [
+  },
   {
-    name: "San Diego State University",
+    id: "sdsu",
+    name: "SDx SDSU",
+    university: "San Diego State University",
     location: "San Diego, CA",
-    status: "coming_soon",
-    description: "Expanding SDx's presence across San Diego's university landscape with SDSU's vibrant student community."
-  }
+    status: "active",
+    memberCount: "New",
+    founded: "2026",
+    founder: "Matt Attardo",
+    description: "Expanding SDx's presence with SDSU's vibrant student community. Builder-first programming for Aztec engineers and creators.",
+    href: "#",
+    contactEmail: "sdsu@sdx.community",
+  },
 ];
 
-interface ChapterCardProps {
-  chapter: typeof chapters[0];
-}
-
-const ChapterCard: React.FC<ChapterCardProps> = ({ chapter }) => {
-  return (
-    <Card className={`h-full hover:shadow-lg transition-all duration-300 ${chapter.featured ? 'border-blue-500 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20' : ''}`}>
-      <CardHeader>
-        {chapter.featured && (
-          <Badge className="w-fit mb-2 bg-gradient-to-r from-blue-600 to-purple-600">
-            Featured Chapter
-          </Badge>
-        )}
-        <div className="flex items-center space-x-4 mb-4">
-          <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted flex items-center justify-center">
-            <Image
-              src={chapter.image}
-              alt={`${chapter.name} logo`}
-              width={64}
-              height={64}
-              className="w-full h-full object-contain p-2"
-            />
-          </div>
-          <div>
-            <CardTitle className="text-xl">{chapter.name}</CardTitle>
-            <div className="flex items-center text-muted-foreground">
-              <MapPin className="w-4 h-4 mr-1" />
-              <span className="text-sm">{chapter.location}</span>
-            </div>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <p className="text-muted-foreground">
-          {chapter.description}
-        </p>
-        
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex items-center space-x-2">
-            <Users className="w-4 h-4 text-blue-500" />
-            <span className="text-sm font-medium">{chapter.memberCount}</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Calendar className="w-4 h-4 text-green-500" />
-            <span className="text-sm font-medium">Active</span>
-          </div>
-        </div>
-        
-        <div className="space-y-2">
-          <h4 className="font-medium text-sm">Chapter Highlights</h4>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            {chapter.highlights.map((highlight, index) => (
-              <li key={index} className="flex items-center">
-                <span className="text-green-400 mr-2">•</span>
-                {highlight}
-              </li>
-            ))}
-          </ul>
-        </div>
-        
-        <div className="flex flex-col gap-2 pt-4">
-          <Button asChild className="w-full">
-            <Link href={chapter.href}>
-              Learn More
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-          <Button variant="outline" size="sm" asChild>
-            <Link href={`mailto:${chapter.contactEmail}`}>
-              <Mail className="w-4 h-4 mr-2" />
-              Contact Chapter
-            </Link>
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-interface UpcomingChapterCardProps {
-  chapter: typeof upcomingChapters[0];
-}
-
-const UpcomingChapterCard: React.FC<UpcomingChapterCardProps> = ({ chapter }) => {
-  const statusColors = {
-    coming_soon: "bg-yellow-600",
-    planning: "bg-gray-600"
-  };
-  
-  const statusText = {
-    coming_soon: "Coming Soon",
-    planning: "In Planning"
-  };
-
-  return (
-    <Card className="h-full opacity-75 hover:opacity-100 transition-opacity duration-300">
-      <CardHeader>
-        <Badge className={`w-fit mb-2 ${statusColors[chapter.status as keyof typeof statusColors]}`}>
-          {statusText[chapter.status as keyof typeof statusText]}
-        </Badge>
-        <CardTitle className="text-lg">{chapter.name}</CardTitle>
-        <div className="flex items-center text-muted-foreground">
-          <MapPin className="w-4 h-4 mr-1" />
-          <span className="text-sm">{chapter.location}</span>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground mb-4">
-          {chapter.description}
-        </p>
-        <Button variant="outline" size="sm" disabled className="w-full">
-          <Plus className="w-4 h-4 mr-2" />
-          Notify Me
-        </Button>
-      </CardContent>
-    </Card>
-  );
-};
+const plannedChapters = [
+  {
+    name: "SDx USD",
+    university: "University of San Diego",
+    description: "Planned launch 2026 or 2027. Bringing SDx to USD's campus community.",
+  },
+];
 
 export default function ChaptersPage() {
   return (
-    <main className="relative bg-background text-foreground pt-48">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            SDx <span className="text-blue-400">Chapters</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto">
-            Connecting AI builders across top universities and innovation hubs. 
-            Each chapter creates a local ecosystem of innovation, collaboration, and growth.
-          </p>
-        </div>
+    <main className="pt-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-12">
+        <SectionHeader
+          title="Chapters"
+          subtitle="SDx university chapters bring builders together on campus. Same energy, same values, local community."
+          badge="University"
+        />
 
         {/* Active Chapters */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Active Chapters</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="font-display text-2xl text-white mb-6">Active</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {chapters.map(chapter => (
-              <ChapterCard key={chapter.id} chapter={chapter} />
+              <Card key={chapter.id}>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <CardTitle className="text-base">{chapter.name}</CardTitle>
+                      <p className="text-sm text-white/40 mt-0.5">{chapter.university}</p>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-sdx-teal" />
+                      <span className="text-xs uppercase tracking-widest text-white/30">Active</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-white/40 leading-relaxed mb-4">{chapter.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="outline">{chapter.memberCount} members</Badge>
+                    <Badge variant="outline">Founded {chapter.founded}</Badge>
+                    <Badge variant="outline">{chapter.founder}</Badge>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    {chapter.href !== '#' && (
+                      <Link
+                        href={chapter.href}
+                        className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
+                      >
+                        Learn more &rarr;
+                      </Link>
+                    )}
+                    <Link
+                      href={`mailto:${chapter.contactEmail}`}
+                      className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200 flex items-center gap-1"
+                    >
+                      <Mail className="w-3 h-3" />
+                      Contact
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
 
-        {/* Expansion Plans */}
+        {/* Planned */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-4">Expanding Nationwide</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-3xl">
-            We&apos;re working to bring SDx chapters to more universities and cities. 
-            Each new chapter will maintain our core values of quality, community, and innovation.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {upcomingChapters.map((chapter, index) => (
-              <UpcomingChapterCard key={index} chapter={chapter} />
+          <h2 className="font-display text-2xl text-white mb-6">Planned</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {plannedChapters.map((chapter, index) => (
+              <Card key={index} className="opacity-60">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <CardTitle className="text-base">{chapter.name}</CardTitle>
+                    <Badge variant="outline">Planned</Badge>
+                  </div>
+                  <p className="text-sm text-white/40 leading-relaxed">{chapter.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
 
-        {/* Chapter Benefits */}
-        <Card className="mb-16">
-          <CardHeader>
-            <CardTitle className="text-2xl text-center">Why Join a Chapter?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <Users className="w-12 h-12 mx-auto mb-4 text-blue-500" />
-                <h3 className="text-lg font-semibold mb-2">Local Community</h3>
-                <p className="text-muted-foreground text-sm">
-                  Connect with AI builders in your area for in-person collaboration and networking
-                </p>
-              </div>
-              <div className="text-center">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-green-500" />
-                <h3 className="text-lg font-semibold mb-2">Regular Events</h3>
-                <p className="text-muted-foreground text-sm">
-                  Participate in chapter-specific events, workshops, and demo sessions
-                </p>
-              </div>
-              <div className="text-center">
-                <ExternalLink className="w-12 h-12 mx-auto mb-4 text-purple-500" />
-                <h3 className="text-lg font-semibold mb-2">Global Network</h3>
-                <p className="text-muted-foreground text-sm">
-                  Access to the broader SDx community while maintaining local connections
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Why Join */}
+        <div className="mb-16">
+          <h2 className="font-display text-2xl text-white mb-6">Why join a chapter</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { title: 'Build on campus', desc: 'Peer community for learning and building together. Lower the barrier to entry for first-time builders.' },
+              { title: 'Events & demos', desc: 'Chapter-specific Hack Days, demo sessions, and Paper Club discussions.' },
+              { title: 'Pipeline to SDx', desc: 'Connect to the broader ecosystem. Mentors, events, partners, and a reason to stay in San Diego after graduation.' },
+            ].map((item) => (
+              <Card key={item.title}>
+                <CardContent className="p-6">
+                  <h3 className="text-sm font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed">{item.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
 
         {/* Start a Chapter CTA */}
-        <Card className="bg-gradient-to-r from-blue-900/30 to-purple-900/30">
-          <CardHeader>
-            <CardTitle className="text-3xl text-center">Start a Chapter</CardTitle>
-          </CardHeader>
-          <CardContent className="text-center space-y-6">
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                             Interested in bringing SDx to your university or city? We&apos;re looking for passionate leaders 
-              to help grow our community and create local ecosystems of AI innovation.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="mailto:chapters@sdx.community?subject=Start a New Chapter">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Start a Chapter
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link href="https://lu.ma/sdx" target="_blank">
-                  Join Main Community
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </Link>
-              </Button>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              <p>
-                Questions about chapters? Contact us at{' '}
-                <Link 
-                  href="mailto:chapters@sdx.community" 
-                  className="text-blue-400 hover:underline"
-                >
-                  chapters@sdx.community
-                </Link>
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="border-t border-white/5 pt-12 text-center">
+          <h2 className="font-display text-2xl text-white mb-3">Start a chapter.</h2>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+            Interested in bringing SDx to your university? We&apos;re looking for builders who want to lead.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <Link
+              href="mailto:chapters@sdx.community?subject=Start a New Chapter"
+              className="holographic-border px-6 py-2 text-xs uppercase tracking-widest text-white rounded-sm"
+            >
+              Start a Chapter
+            </Link>
+            <Link
+              href="https://lu.ma/sdx"
+              target="_blank"
+              className="px-6 py-2 text-xs uppercase tracking-widest text-white/40 hover:text-white border border-white/10 hover:border-white/20 rounded-sm transition-[color,border-color] duration-200"
+            >
+              Join Main Community
+            </Link>
+          </div>
+        </div>
       </div>
     </main>
   );
-} 
+}

@@ -1,15 +1,16 @@
 import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from "next";
-import { inter, space } from '@/app/ui/fonts';
+import { tiposka, spaceMono } from '@/app/ui/fonts';
 import Navigation from '@/app/components/Navigation';
-import LogoBar from '@/app/logobar';
 import Footer from '@/app/components/Footer';
+import LoadingStinger from '@/app/components/LoadingStinger';
+import PageTransition from '@/app/components/PageTransition';
 import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "SDx - The next-gen startup community for AI builders",
-  description: "Join 1000+ AI builders in San Diego creating the future through events, mentorship, and collaboration.",
+  title: "SDx — San Diego's builder-first technology community",
+  description: "SDx is where San Diego's builders come to build. Hackathons, Paper Club, AI Coffee, and more. Join 1000+ builders shipping real things.",
 };
 
 export default function RootLayout({
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <GoogleAnalytics gaId="G-M1FV7BZY8T"/>
-      <body className={`${space.className} dark bg-background text-foreground`}>
+      <body className={`${tiposka.variable} ${spaceMono.variable} font-mono bg-background text-foreground`}>
+        <LoadingStinger />
         <Navigation />
-        <LogoBar />
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
         <Footer />
       </body>
     </html>

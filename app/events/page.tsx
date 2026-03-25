@@ -2,20 +2,14 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Clock, ExternalLink, Users, AlertCircle } from 'lucide-react';
-import { LumaEventsResponse, LumaEventEntry, ProcessedEvent } from '@/types/luma';
+import { Calendar, MapPin, Clock, ExternalLink, AlertCircle } from 'lucide-react';
+import { ProcessedEvent } from '@/types/luma';
 import { getAllEvents as getEventsFromAPI } from '@/lib/api-client';
 import { formatEventDateTime, formatDuration } from '@/lib/luma-api';
-
-// Helper function to determine if an event is upcoming
-const isEventUpcoming = (startAt: string): boolean => {
-  const eventDate = new Date(startAt);
-  const now = new Date();
-  return eventDate > now;
-};
+import SectionHeader from '@/app/components/SectionHeader';
 
 // Helper function to get location string
 const getLocationString = (event: any): string => {
@@ -33,19 +27,14 @@ export default function EventsPage() {
   const [error, setError] = useState<string | null>(null);
   const [usingFallback, setUsingFallback] = useState(false);
 
-  // Load events on component mount
   useEffect(() => {
     const loadEvents = async () => {
       try {
         setLoading(true);
         setError(null);
-        
-        // Try to fetch from API
         const result = await getEventsFromAPI(50);
-        
         setEvents(result.events);
         setUsingFallback(result.usingFallback);
-        
         if (result.usingFallback) {
           setError('Using demo data - Lu.ma API key not configured');
         }
@@ -58,151 +47,121 @@ export default function EventsPage() {
         setLoading(false);
       }
     };
-
     loadEvents();
   }, []);
 
-  // Get unique event types from tags
   const eventTypes = useMemo(() => {
     const allTypes = events.flatMap(event => event.tags);
     return Array.from(new Set(allTypes)).sort();
   }, [events]);
 
-  // Filter events based on selected filters
   const filteredEvents = useMemo(() => {
     return events.filter(event => {
-      const matchesTimeFilter = filter === 'all' || 
+      const matchesTimeFilter = filter === 'all' ||
         (filter === 'upcoming' && event.isUpcoming) ||
         (filter === 'past' && !event.isUpcoming);
-      
-      const matchesTypeFilter = typeFilter === 'all' || 
+      const matchesTypeFilter = typeFilter === 'all' ||
         event.tags.some(tag => tag.toLowerCase() === typeFilter.toLowerCase());
-      
       return matchesTimeFilter && matchesTypeFilter;
     });
   }, [events, filter, typeFilter]);
 
-  // Statistics
   const upcomingCount = events.filter(event => event.isUpcoming).length;
   const pastCount = events.filter(event => !event.isUpcoming).length;
-  const totalAttendees = events.length * 30; // Approximate average
 
-  // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-background py-12 pt-48">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading events...</p>
-          </div>
+      <div className="min-h-screen pt-24 px-4">
+        <div className="max-w-7xl mx-auto text-center py-24">
+          <div className="animate-spin rounded-full h-8 w-8 border-b border-white/20 mx-auto mb-4" />
+          <p className="text-xs uppercase tracking-widest text-white/30">Loading events</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background py-12 pt-48">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Community Events
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join our vibrant community of AI builders at workshops, meetups, conferences, and hackathons.
-          </p>
-          
-          {/* Error/Fallback Notice */}
-          {error && (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8 max-w-2xl mx-auto">
-              <div className="flex items-center gap-2 text-yellow-800">
-                <AlertCircle className="w-5 h-5" />
-                <span className="font-medium">Notice: {error}</span>
-              </div>
-              {usingFallback && (
-                <p className="text-sm text-yellow-700 mt-2">
-                  To use live Lu.ma data, add your <code className="bg-yellow-100 px-1 rounded">LUMA_API_KEY</code> to <code className="bg-yellow-100 px-1 rounded">.env.local</code>
-                </p>
-              )}
+    <div className="min-h-screen pt-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-12">
+        <SectionHeader
+          title="Events"
+          subtitle="Paper Club, AI Coffee, Hack Days, Hackathons, and more. Show up, build something, learn something."
+        />
+
+        {/* Error Notice */}
+        {error && (
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-4 mb-8 max-w-2xl">
+            <div className="flex items-center gap-2 text-white/40 text-xs">
+              <AlertCircle className="w-4 h-4" />
+              <span>{error}</span>
             </div>
-          )}
-          
-          {/* Statistics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <Card>
-              <CardContent className="p-6 text-center">
-                <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">{upcomingCount}</div>
-                <div className="text-sm text-muted-foreground">Upcoming Events</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6 text-center">
-                <Users className="w-8 h-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">{totalAttendees.toLocaleString()}+</div>
-                <div className="text-sm text-muted-foreground">Total Attendees</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6 text-center">
-                <Clock className="w-8 h-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">{pastCount}+</div>
-                <div className="text-sm text-muted-foreground">Past Events</div>
-              </CardContent>
-            </Card>
+          </div>
+        )}
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-4 mb-12 max-w-lg">
+          <div>
+            <div className="text-2xl font-bold holographic-text">{upcomingCount}</div>
+            <div className="text-xs uppercase tracking-widest text-white/30">Upcoming</div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold holographic-text">{pastCount}</div>
+            <div className="text-xs uppercase tracking-widest text-white/30">Past</div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold holographic-text">{events.length}</div>
+            <div className="text-xs uppercase tracking-widest text-white/30">Total</div>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="flex gap-2">
-            <Button
-              variant={filter === 'all' ? 'default' : 'outline'}
-              onClick={() => setFilter('all')}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {(['all', 'upcoming', 'past'] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-3 py-1.5 text-xs uppercase tracking-widest rounded-sm transition-colors duration-200 ${
+                filter === f
+                  ? 'bg-white text-black'
+                  : 'text-white/40 hover:text-white border border-white/10 hover:border-white/20'
+              }`}
             >
-              All Events
-            </Button>
-            <Button
-              variant={filter === 'upcoming' ? 'default' : 'outline'}
-              onClick={() => setFilter('upcoming')}
+              {f === 'all' ? 'All' : f === 'upcoming' ? `Upcoming (${upcomingCount})` : `Past (${pastCount})`}
+            </button>
+          ))}
+          <div className="w-px h-6 bg-white/10 self-center mx-1" />
+          <button
+            onClick={() => setTypeFilter('all')}
+            className={`px-3 py-1.5 text-xs uppercase tracking-widest rounded-sm transition-colors duration-200 ${
+              typeFilter === 'all'
+                ? 'bg-white text-black'
+                : 'text-white/40 hover:text-white border border-white/10 hover:border-white/20'
+            }`}
+          >
+            All types
+          </button>
+          {eventTypes.slice(0, 4).map(type => (
+            <button
+              key={type}
+              onClick={() => setTypeFilter(type)}
+              className={`px-3 py-1.5 text-xs uppercase tracking-widest rounded-sm transition-colors duration-200 ${
+                typeFilter === type
+                  ? 'bg-white text-black'
+                  : 'text-white/40 hover:text-white border border-white/10 hover:border-white/20'
+              }`}
             >
-              Upcoming ({upcomingCount})
-            </Button>
-            <Button
-              variant={filter === 'past' ? 'default' : 'outline'}
-              onClick={() => setFilter('past')}
-            >
-              Past ({pastCount})
-            </Button>
-          </div>
-          
-          <div className="flex gap-2">
-            <Button
-              variant={typeFilter === 'all' ? 'default' : 'outline'}
-              onClick={() => setTypeFilter('all')}
-            >
-              All Types
-            </Button>
-            {eventTypes.slice(0, 4).map(type => (
-              <Button
-                key={type}
-                variant={typeFilter === type ? 'default' : 'outline'}
-                onClick={() => setTypeFilter(type)}
-              >
-                {type}
-              </Button>
-            ))}
-          </div>
+              {type}
+            </button>
+          ))}
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {filteredEvents.map((event) => (
-            <Card key={event.id} className="hover:shadow-lg transition-shadow">
-              <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                <Image 
-                  src={event.coverUrl} 
+            <Card key={event.id}>
+              <div className="aspect-video bg-white/[0.02] rounded-t-lg overflow-hidden">
+                <Image
+                  src={event.coverUrl}
                   alt={event.title}
                   width={400}
                   height={225}
@@ -216,39 +175,35 @@ export default function EventsPage() {
                   </Badge>
                   <div className="flex gap-1">
                     {event.tags.slice(0, 2).map(tag => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
+                      <Badge key={tag} variant="outline">{tag}</Badge>
                     ))}
                   </div>
                 </div>
-                <CardTitle className="text-lg">{event.title}</CardTitle>
-                <CardDescription className="line-clamp-2">
-                  {event.description}
-                </CardDescription>
+                <CardTitle className="text-base">{event.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="space-y-1.5 text-sm text-white/40 mb-4">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
+                    <Calendar className="w-3.5 h-3.5" />
                     <span>{formatEventDateTime(event.startDate, event.endDate, event.timezone)}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
+                    <MapPin className="w-3.5 h-3.5" />
                     <span className="truncate">{event.location}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>Duration: {formatDuration(getEventDuration(event))}</span>
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>{formatDuration(getEventDuration(event))}</span>
                   </div>
                 </div>
-                <Button 
-                  className="w-full mt-4" 
-                  onClick={() => window.open(event.eventUrl, '_blank')}
+                <Link
+                  href={event.eventUrl}
+                  target="_blank"
+                  className="inline-flex items-center text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
                 >
-                  <ExternalLink className="w-4 h-4 mr-2" />
                   View on Lu.ma
-                </Button>
+                  <ExternalLink className="w-3 h-3 ml-1.5" />
+                </Link>
               </CardContent>
             </Card>
           ))}
@@ -256,58 +211,39 @@ export default function EventsPage() {
 
         {/* Empty state */}
         {filteredEvents.length === 0 && (
-          <Card className="text-center py-12">
-            <CardContent>
-              <Calendar className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-xl font-semibold mb-2">No Events Found</h3>
-              <p className="text-muted-foreground">
-                Try adjusting your filters or check back later for new events.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="text-center py-16">
+            <Calendar className="w-8 h-8 mx-auto mb-4 text-white/20" />
+            <p className="text-xs uppercase tracking-widest text-white/30">No events match your filters</p>
+          </div>
         )}
 
-        {/* Lu.ma Integration CTA */}
-        <Card className="bg-primary/5 border-primary/20">
-          <CardContent className="p-8 text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Never Miss an Event
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              All our events are hosted on Lu.ma for easy registration and updates. 
-              Follow our calendar to stay informed about upcoming workshops, meetups, and conferences.
-            </p>
-            <div className="flex justify-center gap-4">
-              <Button onClick={() => window.open('https://lu.ma/sdx', '_blank')}>
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Follow on Lu.ma
-              </Button>
-              <Button variant="outline" onClick={() => window.open('https://lu.ma/sdx', '_blank')}>
-                <Calendar className="w-4 h-4 mr-2" />
-                Subscribe to Calendar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Lu.ma CTA */}
+        <div className="border-t border-white/5 pt-12 text-center">
+          <h2 className="font-display text-2xl text-white mb-3">Never miss an event</h2>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+            All events are hosted on Lu.ma. Follow our calendar for updates.
+          </p>
+          <Link
+            href="https://lu.ma/sdx"
+            target="_blank"
+            className="holographic-border inline-block px-6 py-2 text-xs uppercase tracking-widest text-white rounded-sm"
+          >
+            Follow on Lu.ma
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
 
-// Helper function to get event duration (used in the component)
 function getEventDuration(event: ProcessedEvent): string {
   const start = new Date(event.startDate);
   const end = new Date(event.endDate);
   const diffMs = end.getTime() - start.getTime();
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-  
-  if (diffHours > 0 && diffMinutes > 0) {
-    return `PT${diffHours}H${diffMinutes}M`;
-  } else if (diffHours > 0) {
-    return `PT${diffHours}H`;
-  } else if (diffMinutes > 0) {
-    return `PT${diffMinutes}M`;
-  }
+  if (diffHours > 0 && diffMinutes > 0) return `PT${diffHours}H${diffMinutes}M`;
+  if (diffHours > 0) return `PT${diffHours}H`;
+  if (diffMinutes > 0) return `PT${diffMinutes}M`;
   return 'PT1H';
-} 
+}

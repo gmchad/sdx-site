@@ -2,91 +2,176 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 0 0% 8%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 100%;
+    --radius: 0.5rem;
+
+    /* SDx brand accent palette */
+    --sdx-teal: 175 70% 40%;
+    --sdx-green: 145 65% 45%;
+    --sdx-amber: 35 85% 55%;
+    --sdx-orange: 20 90% 55%;
+    --sdx-magenta: 330 75% 55%;
+    --sdx-pink: 345 80% 65%;
+    --sdx-blue: 220 75% 55%;
+    --sdx-violet: 270 65% 60%;
+  }
+
+  html {
+    font-size: 18px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground text-base leading-relaxed;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
+/* Holographic utilities */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .font-display {
+    font-family: var(--font-display), sans-serif;
+  }
+
+  .holographic-text {
+    background: linear-gradient(
+      90deg,
+      hsl(175, 70%, 50%),
+      hsl(220, 75%, 60%),
+      hsl(270, 65%, 60%),
+      hsl(330, 75%, 55%),
+      hsl(35, 85%, 55%),
+      hsl(175, 70%, 50%)
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: holographic-shift 8s linear infinite;
+  }
+
+  .holographic-border {
+    position: relative;
+  }
+
+  .holographic-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      var(--holographic-angle, 0deg),
+      hsl(175, 70%, 50%),
+      hsl(220, 75%, 60%),
+      hsl(270, 65%, 60%),
+      hsl(330, 75%, 55%),
+      hsl(35, 85%, 55%),
+      hsl(175, 70%, 50%)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: holographic-rotate 6s linear infinite;
+    pointer-events: none;
+  }
+
+  .holographic-bg {
+    background: linear-gradient(
+      135deg,
+      hsla(175, 70%, 40%, 0.15),
+      hsla(220, 75%, 55%, 0.1),
+      hsla(270, 65%, 60%, 0.08),
+      hsla(330, 75%, 55%, 0.1),
+      hsla(35, 85%, 55%, 0.12)
+    );
+  }
 }
 
-
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+@keyframes holographic-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
+@keyframes holographic-rotate {
+  0% { --holographic-angle: 0deg; }
+  100% { --holographic-angle: 360deg; }
+}
 
+@property --holographic-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 
-@layer base {
-  * {
-    @apply border-border;
+/* Page transition shimmer */
+@keyframes cell-shimmer {
+  0% { background: black; }
+  40% { background: rgba(255, 255, 255, 0.18); }
+  100% { background: black; }
+}
+
+/* Loading stinger */
+@keyframes stinger-text {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stinger-dots {
+  0%, 25% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+  75%, 100% { opacity: 1; }
+}
+
+@keyframes stinger-pop {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .holographic-text {
+    animation: none;
+    background-position: 0% 50%;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .holographic-border::before {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
