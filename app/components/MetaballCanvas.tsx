@@ -7,6 +7,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   const cellsRef = useRef<HTMLDivElement[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const smoothMouseRef = useRef({ x: -1000, y: -1000 });
+  const asciiCanvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
   const built = useRef(false);
 
@@ -19,7 +20,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   const [mouseRadius, setMouseRadius] = useState(280);
   const [mouseStrength, setMouseStrength] = useState(80);
   const [mouseLag, setMouseLag] = useState(0.99);
-  const [clearRadius, setClearRadius] = useState(0.45); // percentage of half-width
+  const [clearRadius, setClearRadius] = useState(0.45);
 
   const buildGrid = () => {
     const el = gooRef.current;
@@ -42,11 +43,10 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
     const offsetX = (w - (cols - 1) * gap) / 2;
     const offsetY = (h - (rows - 1) * gap) / 2;
 
-    // Center clear zone — ellipse where cells thin out
     const centerX = w / 2;
     const centerY = h / 2;
-    const clearW = w * clearRadius; // horizontal radius of clear zone
-    const clearH = h * 0.4; // vertical radius — tighter to text height
+    const clearW = w * clearRadius;
+    const clearH = h * 0.4;
 
     const frag = document.createDocumentFragment();
     let css = '';
@@ -60,30 +60,25 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         const cx = offsetX + c * gap;
         const cy = offsetY + r * gap;
 
-        // Distance from center as normalized ellipse value (1 = on edge, <1 = inside)
         const ex = (cx - centerX) / clearW;
         const ey = (cy - centerY) / clearH;
         const ellipseDist = ex * ex + ey * ey;
 
-        // Inside clear zone: skip most cells, let a few through at lower opacity
         if (ellipseDist < 1) {
-          // Deep center: skip entirely
           if (ellipseDist < 0.4) continue;
-          // Transition zone: only ~15% of cells survive, dimmer
           if (sr(s + 20) > 0.15) continue;
         }
 
-        // Multi-step unpredictable diagonal path
         const wp = [];
         for (let i = 0; i < 4; i++) {
           const angle = Math.floor(sr(s + 10 + i * 3) * 4);
           const dirs = [[1, -1], [-1, -1], [1, 1], [-1, 1]];
           const [dx, dy] = dirs[angle];
-          const dist = 8 + sr(s + 11 + i * 3) * 14; // 8-22px
+          const dist = 8 + sr(s + 11 + i * 3) * 14;
           wp.push({ x: Math.round(dx * dist), y: Math.round(dy * dist) });
         }
 
-        const dur = 8 + sr(s + 3) * 10; // 8-18s per full cycle
+        const dur = 8 + sr(s + 3) * 10;
         const delay = sr(s + 4) * 6;
 
         const div = document.createElement('div');
@@ -136,10 +131,11 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Mouse attraction with lag
+  // Mouse interaction + ASCII swirl rendering
   useEffect(() => {
     const container = gooRef.current?.parentElement;
-    if (!container) return;
+    const asciiCanvas = asciiCanvasRef.current;
+    if (!container || !asciiCanvas) return;
 
     const onDocMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -152,32 +148,38 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         mouseRef.current = { x: -1000, y: -1000 };
       }
     };
-
     document.addEventListener('mousemove', onDocMove);
 
+    const asciiChars = '@#%&*+=-:·.';
+    const charFontSize = 11;
+
     const tick = () => {
+      const rect = container.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      if (w === 0 || h === 0) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      // Mouse interaction
       const target = mouseRef.current;
       const smooth = smoothMouseRef.current;
       smooth.x += (target.x - smooth.x) * mouseLag;
       smooth.y += (target.y - smooth.y) * mouseLag;
 
-      const mx = smooth.x;
-      const my = smooth.y;
-      const r = mouseRadius;
-      const str = mouseStrength;
-
       for (const cell of cellsRef.current) {
         const hx = parseFloat(cell.dataset.homeX || '0');
         const hy = parseFloat(cell.dataset.homeY || '0');
-        const ddx = hx - mx;
-        const ddy = hy - my;
+        const ddx = hx - smooth.x;
+        const ddy = hy - smooth.y;
         const dist = Math.sqrt(ddx * ddx + ddy * ddy);
 
         let targetOffX = 0;
         let targetOffY = 0;
-
-        if (dist < r && dist > 0) {
-          const force = (1 - dist / r) * str;
+        if (dist < mouseRadius && dist > 0) {
+          const force = (1 - dist / mouseRadius) * mouseStrength;
           targetOffX = -(ddx / dist) * force;
           targetOffY = -(ddy / dist) * force;
         }
@@ -193,6 +195,42 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         cell.style.top = `${hy + newOffY}px`;
       }
 
+      // Draw ASCII swirl
+      asciiCanvas.width = w;
+      asciiCanvas.height = h;
+      asciiCanvas.style.width = `${w}px`;
+      asciiCanvas.style.height = `${h}px`;
+
+      const ctx = asciiCanvas.getContext('2d');
+      if (!ctx) { rafRef.current = requestAnimationFrame(tick); return; }
+
+      // Black background is essential — multiply blend: black × anything = black
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = `${charFontSize}px "Space Mono", monospace`;
+      ctx.fillStyle = 'white';
+      ctx.textBaseline = 'top';
+
+      const cols = Math.ceil(w / (charFontSize * 0.62));
+      const rows = Math.ceil(h / charFontSize);
+      const t = performance.now() * 0.0003;
+
+      for (let r = 0; r < rows; r++) {
+        let line = '';
+        for (let c = 0; c < cols; c++) {
+          const px = c * charFontSize * 0.62;
+          const py = r * charFontSize;
+          const dx = px - w / 2;
+          const dy = py - h / 2;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const angle = Math.atan2(dy, dx);
+          const swirl = Math.sin(dist * 0.015 - t * 3 + angle * 2) * 0.5 + 0.5;
+          const idx = Math.floor(swirl * (asciiChars.length - 1));
+          line += asciiChars[idx];
+        }
+        ctx.fillText(line, 0, r * charFontSize);
+      }
+
       rafRef.current = requestAnimationFrame(tick);
     };
 
@@ -202,7 +240,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
       document.removeEventListener('mousemove', onDocMove);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [mouseRadius, mouseStrength, mouseLag]);
+  }, [mouseRadius, mouseStrength, mouseLag, cellSize, opacity]);
 
   useEffect(() => {
     for (const cell of cellsRef.current) cell.style.borderRadius = `${borderRadius}%`;
@@ -244,28 +282,44 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         }}
       />
 
-      {/* Goo-filtered cells */}
-      <div
-        ref={gooRef}
-        className="absolute inset-0"
-        style={{ filter: 'url(#goo)', opacity }}
-      />
+      {/*
+        Compositing: goo blobs (white on black bg) + ASCII on top with multiply blend.
+        Multiply: white × white = white (ASCII visible where blobs are),
+                  black × white = black (ASCII hidden where no blobs).
+      */}
+      <div className="absolute inset-0" style={{ isolation: 'isolate' }}>
+        {/* Goo-filtered blobs on black background */}
+        <div className="absolute inset-0 bg-black">
+          <div
+            ref={gooRef}
+            className="absolute inset-0"
+            style={{ filter: 'url(#goo)', opacity }}
+          />
+        </div>
 
-      {/* Radial fade around center — keeps text readable */}
+        {/* ASCII swirl on top — multiply blend clips it to the white blob areas */}
+        <canvas
+          ref={asciiCanvasRef}
+          className="absolute inset-0"
+          style={{ mixBlendMode: 'multiply' }}
+        />
+      </div>
+
+      {/* Radial fade around center */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse 50% 35% at 50% 48%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)`,
+          background: 'radial-gradient(ellipse 50% 35% at 50% 48%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
         }}
       />
 
-      {/* Bottom fade — blends into rest of site */}
+      {/* Bottom fade */}
       <div
         className="absolute inset-x-0 bottom-0 h-[50%] pointer-events-none"
         style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 40%, black 75%)' }}
       />
 
-      {/* Top subtle fade */}
+      {/* Top fade */}
       <div
         className="absolute inset-x-0 top-0 h-[10%] pointer-events-none"
         style={{ background: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 100%)' }}
@@ -289,7 +343,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
           { label: 'cell size', val: cellSize, set: setCellSize, min: 16, max: 80, step: 2, fmt: (v: number) => `${v}px` },
           { label: 'mouse radius', val: mouseRadius, set: setMouseRadius, min: 40, max: 400, step: 10, fmt: (v: number) => `${v}px` },
           { label: 'mouse strength', val: mouseStrength, set: setMouseStrength, min: 5, max: 120, step: 5, fmt: (v: number) => `${v}px` },
-          { label: 'mouse lag', val: mouseLag, set: setMouseLag, min: 0.01, max: 0.3, step: 0.01, fmt: (v: number) => v.toFixed(2) },
+          { label: 'mouse lag', val: mouseLag, set: setMouseLag, min: 0.01, max: 1, step: 0.01, fmt: (v: number) => v.toFixed(2) },
           { label: 'clear zone', val: clearRadius, set: setClearRadius, min: 0.1, max: 0.6, step: 0.05, fmt: (v: number) => `${(v * 100).toFixed(0)}%` },
         ].map(({ label, val, set, min, max, step, fmt }) => (
           <div key={label} style={{ marginBottom: 8 }}>
@@ -310,7 +364,6 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         ))}
 
         <div style={{ fontSize: 10, color: '#444', marginTop: 4, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 6 }}>
-          filter: blur({blur}) matrix(…{contrast} {threshold})<br />
           cells: {cellsRef.current.length} | clear: {(clearRadius * 100).toFixed(0)}%
         </div>
       </div>
