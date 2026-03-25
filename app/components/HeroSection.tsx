@@ -60,9 +60,15 @@ const HeroSection: React.FC = () => {
   return (
     <>
       {/* Section 1: Hero */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <BackgroundEffects />
-        <MetaballCanvas />
+      <div className="relative min-h-screen">
+        {/* Full-bleed canvas layer — outside the flex/padding context */}
+        <div className="absolute inset-0 w-screen overflow-hidden">
+          <BackgroundEffects />
+          <MetaballCanvas />
+        </div>
+
+        {/* Content layer */}
+        <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6">
@@ -130,6 +136,7 @@ const HeroSection: React.FC = () => {
           ))}
         </div>
       </section>
+      </div>
 
       {/* Section 2: Event Types */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">

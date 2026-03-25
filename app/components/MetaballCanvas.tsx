@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
   const gooRef = useRef<HTMLDivElement>(null);
@@ -11,16 +11,16 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   const rafRef = useRef<number>(0);
   const built = useRef(false);
 
-  const [opacity, setOpacity] = useState(0.50);
-  const [blur, setBlur] = useState(8);
-  const [contrast, setContrast] = useState(40);
-  const [threshold, setThreshold] = useState(-15);
-  const [borderRadius, setBorderRadius] = useState(0);
-  const [cellSize, setCellSize] = useState(42);
-  const [mouseRadius, setMouseRadius] = useState(280);
-  const [mouseStrength, setMouseStrength] = useState(80);
-  const [mouseLag, setMouseLag] = useState(0.99);
-  const [clearRadius, setClearRadius] = useState(0.45);
+  const opacity = 0.50;
+  const blur = 5;
+  const contrast = 40;
+  const threshold = -15;
+  const borderRadius = 0;
+  const cellSize = 42;
+  const mouseRadius = 280;
+  const mouseStrength = 80;
+  const mouseLag = 0.99;
+  const clearRadius = 0.45;
 
   const buildGrid = () => {
     const el = gooRef.current;
@@ -125,9 +125,25 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   };
 
   useEffect(() => {
-    if (built.current) return;
-    built.current = true;
-    requestAnimationFrame(() => buildGrid());
+    if (!built.current) {
+      built.current = true;
+      requestAnimationFrame(() => buildGrid());
+    }
+
+    let resizeTimer: NodeJS.Timeout;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        built.current = false;
+        buildGrid();
+      }, 200);
+    };
+
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      clearTimeout(resizeTimer);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -195,33 +211,37 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         cell.style.top = `${hy + newOffY}px`;
       }
 
-      // Draw ASCII swirl
-      asciiCanvas.width = w;
-      asciiCanvas.height = h;
-      asciiCanvas.style.width = `${w}px`;
-      asciiCanvas.style.height = `${h}px`;
+      // Draw ASCII swirl — use same rect as container for exact match
+      const cw = Math.ceil(w);
+      const ch = Math.ceil(h);
+      if (asciiCanvas.width !== cw || asciiCanvas.height !== ch) {
+        asciiCanvas.width = cw;
+        asciiCanvas.height = ch;
+      }
 
       const ctx = asciiCanvas.getContext('2d');
       if (!ctx) { rafRef.current = requestAnimationFrame(tick); return; }
 
       // Black background is essential — multiply blend: black × anything = black
       ctx.fillStyle = 'black';
-      ctx.fillRect(0, 0, w, h);
+      ctx.fillRect(0, 0, cw, ch);
       ctx.font = `${charFontSize}px "Space Mono", monospace`;
       ctx.fillStyle = 'white';
       ctx.textBaseline = 'top';
 
-      const cols = Math.ceil(w / (charFontSize * 0.62));
-      const rows = Math.ceil(h / charFontSize);
+      // Measure actual character width once instead of guessing
+      const charWidth = ctx.measureText('@').width || charFontSize * 0.6;
+      const cols = Math.ceil(cw / charWidth) + 5; // extra buffer
+      const rows = Math.ceil(ch / charFontSize) + 2;
       const t = performance.now() * 0.0003;
 
       for (let r = 0; r < rows; r++) {
         let line = '';
         for (let c = 0; c < cols; c++) {
-          const px = c * charFontSize * 0.62;
+          const px = c * charWidth;
           const py = r * charFontSize;
-          const dx = px - w / 2;
-          const dy = py - h / 2;
+          const dx = px - cw / 2;
+          const dy = py - ch / 2;
           const dist = Math.sqrt(dx * dx + dy * dy);
           const angle = Math.atan2(dy, dx);
           const swirl = Math.sin(dist * 0.015 - t * 3 + angle * 2) * 0.5 + 0.5;
@@ -242,19 +262,12 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
     };
   }, [mouseRadius, mouseStrength, mouseLag, cellSize, opacity]);
 
-  useEffect(() => {
-    for (const cell of cellsRef.current) cell.style.borderRadius = `${borderRadius}%`;
-  }, [borderRadius]);
-
-  useEffect(() => {
-    for (const cell of cellsRef.current) {
-      cell.style.width = `${cellSize}px`;
-      cell.style.height = `${cellSize}px`;
-    }
-  }, [cellSize]);
 
   return (
-    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
+    <div
+      className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
+      aria-hidden="true"
+    >
       {/* SVG Goo Filter */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <defs>
@@ -300,8 +313,8 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         {/* ASCII swirl on top — multiply blend clips it to the white blob areas */}
         <canvas
           ref={asciiCanvasRef}
-          className="absolute inset-0"
-          style={{ mixBlendMode: 'multiply' }}
+          className="absolute top-0 left-0"
+          style={{ mixBlendMode: 'multiply', width: '100%', height: '100%' }}
         />
       </div>
 
@@ -325,48 +338,6 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         style={{ background: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 100%)' }}
       />
 
-      {/* Debug Controls */}
-      <div
-        className="fixed bottom-4 right-4 z-[9999] bg-black/95 border border-white/20 rounded-lg p-4 pointer-events-auto overflow-y-auto"
-        style={{ width: 290, maxHeight: '80vh', fontFamily: 'monospace', fontSize: 11, color: 'white' }}
-      >
-        <div style={{ fontWeight: 'bold', fontSize: 12, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 6, marginBottom: 8 }}>
-          Metaball Controls
-        </div>
-
-        {[
-          { label: 'opacity', val: opacity, set: setOpacity, min: 0.01, max: 0.5, step: 0.01, fmt: (v: number) => v.toFixed(2) },
-          { label: 'blur', val: blur, set: setBlur, min: 1, max: 40, step: 1, fmt: (v: number) => String(v) },
-          { label: 'contrast', val: contrast, set: setContrast, min: 1, max: 40, step: 1, fmt: (v: number) => String(v) },
-          { label: 'threshold', val: threshold, set: setThreshold, min: -15, max: 0, step: 0.5, fmt: (v: number) => String(v) },
-          { label: 'borderRadius %', val: borderRadius, set: setBorderRadius, min: 0, max: 50, step: 1, fmt: (v: number) => `${v}%` },
-          { label: 'cell size', val: cellSize, set: setCellSize, min: 16, max: 80, step: 2, fmt: (v: number) => `${v}px` },
-          { label: 'mouse radius', val: mouseRadius, set: setMouseRadius, min: 40, max: 400, step: 10, fmt: (v: number) => `${v}px` },
-          { label: 'mouse strength', val: mouseStrength, set: setMouseStrength, min: 5, max: 120, step: 5, fmt: (v: number) => `${v}px` },
-          { label: 'mouse lag', val: mouseLag, set: setMouseLag, min: 0.01, max: 1, step: 0.01, fmt: (v: number) => v.toFixed(2) },
-          { label: 'clear zone', val: clearRadius, set: setClearRadius, min: 0.1, max: 0.6, step: 0.05, fmt: (v: number) => `${(v * 100).toFixed(0)}%` },
-        ].map(({ label, val, set, min, max, step, fmt }) => (
-          <div key={label} style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
-              <span>{label}</span>
-              <span style={{ color: '#888' }}>{fmt(val)}</span>
-            </div>
-            <input
-              type="range"
-              min={min}
-              max={max}
-              step={step}
-              value={val}
-              onChange={e => set(+e.target.value)}
-              style={{ width: '100%', accentColor: '#666' }}
-            />
-          </div>
-        ))}
-
-        <div style={{ fontSize: 10, color: '#444', marginTop: 4, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: 6 }}>
-          cells: {cellsRef.current.length} | clear: {(clearRadius * 100).toFixed(0)}%
-        </div>
-      </div>
     </div>
   );
 };
