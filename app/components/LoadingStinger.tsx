@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 
-const CELLS = [
+const INITIAL_CELLS = [
   { x: '12%', y: '20%', d: '0.0s' },
   { x: '85%', y: '15%', d: '0.1s' },
   { x: '25%', y: '75%', d: '0.2s' },
@@ -19,7 +19,9 @@ const CELLS = [
 
 const LoadingStinger: React.FC = () => {
   const [phase, setPhase] = useState<'building' | 'built' | 'exit' | 'done'>('building');
+  const [cells, setCells] = useState(INITIAL_CELLS);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const spawnRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleTransitionEnd = useCallback(() => {
     if (phase === 'exit') {
@@ -48,6 +50,35 @@ const LoadingStinger: React.FC = () => {
       clearTimeout(exitTimer);
     };
   }, []);
+
+  // Spawn new squares over time
+  useEffect(() => {
+    if (phase === 'exit' || phase === 'done') {
+      if (spawnRef.current) clearInterval(spawnRef.current);
+      return;
+    }
+
+    let count = 0;
+    spawnRef.current = setInterval(() => {
+      count++;
+      if (count > 25) {
+        if (spawnRef.current) clearInterval(spawnRef.current);
+        return;
+      }
+      setCells(prev => [
+        ...prev,
+        {
+          x: `${5 + Math.random() * 90}%`,
+          y: `${5 + Math.random() * 90}%`,
+          d: '0s', // pop in immediately
+        },
+      ]);
+    }, 80);
+
+    return () => {
+      if (spawnRef.current) clearInterval(spawnRef.current);
+    };
+  }, [phase]);
 
   if (phase === 'done') return null;
 
@@ -95,7 +126,7 @@ const LoadingStinger: React.FC = () => {
           </defs>
         </svg>
         <div className="absolute inset-0 opacity-[0.08]" style={{ filter: 'url(#goo-stinger)' }}>
-          {CELLS.map((cell, i) => (
+          {cells.map((cell, i) => (
             <div
               key={i}
               className="absolute"

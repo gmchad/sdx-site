@@ -180,25 +180,22 @@ export default function StartupsPage() {
           </div>
         )}
 
-        {/* CTA */}
-        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
-          <PrismaticCanvas intensity="subtle" />
-          <MotionSection className="relative z-10">
-            <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Build the next one.</h2>
-            <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-              Connect with founders, find co-founders, and access our network.
-            </p>
-            <MotionButton className="inline-block">
-              <Link
-                href="https://lu.ma/sdx"
-                target="_blank"
-                className="block"
-              >
-                <AsciiButton>Join Community</AsciiButton>
-              </Link>
-            </MotionButton>
-          </MotionSection>
-        </div>
+      </div>
+
+      {/* CTA — full width, break out of parent padding */}
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
+        <PrismaticCanvas intensity="subtle" />
+        <MotionSection className="relative z-10">
+          <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Build the next one.</h2>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+            Connect with founders, find co-founders, and access our network.
+          </p>
+          <MotionButton className="inline-block">
+            <Link href="https://lu.ma/sdx" target="_blank" className="block">
+              <AsciiButton>Join Community</AsciiButton>
+            </Link>
+          </MotionButton>
+        </MotionSection>
       </div>
     </main>
   );

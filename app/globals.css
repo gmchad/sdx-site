@@ -89,6 +89,11 @@
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
   }
 
+  .text-outline-thin {
+    color: transparent;
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.7);
+  }
+
   .ghosted-letterform {
     color: transparent;
     -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);

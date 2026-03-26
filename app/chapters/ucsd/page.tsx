@@ -92,34 +92,32 @@ export default function UCSDChapterPage() {
           </Card>
         </div>
 
-        {/* Connect */}
-        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
-          <PrismaticCanvas intensity="subtle" />
-          <div className="relative z-10">
-            <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Join the chapter.</h2>
-            <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-              Motivated UCSD students who are building with AI and want to share their work.
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <Link
-                href="mailto:ucsd@sdx.community"
-                className="block"
-              >
-                <AsciiButton>Contact Lead</AsciiButton>
-              </Link>
-              <Link
-                href="https://discord.gg/Rkgyzx2ykV"
-                target="_blank"
-                className="btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
-              >
-                Discord
-              </Link>
-            </div>
-            <div className="flex items-center justify-center gap-6 mt-6 text-xs uppercase tracking-widest text-white/20">
-              <span>Monthly meetings</span>
-              <span>Invite-only</span>
-              <span>UCSD Campus</span>
-            </div>
+      </div>
+
+      {/* Connect CTA — full width, break out of parent padding */}
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
+        <PrismaticCanvas intensity="subtle" />
+        <div className="relative z-10">
+          <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Join the chapter.</h2>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+            Motivated UCSD students who are building with AI and want to share their work.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <Link href="mailto:ucsd@sdx.community" className="block">
+              <AsciiButton>Contact Lead</AsciiButton>
+            </Link>
+            <Link
+              href="https://discord.gg/Rkgyzx2ykV"
+              target="_blank"
+              className="btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
+            >
+              Discord
+            </Link>
+          </div>
+          <div className="flex items-center justify-center gap-6 mt-6 text-xs uppercase tracking-widest text-white/20">
+            <span>Monthly meetings</span>
+            <span>Invite-only</span>
+            <span>UCSD Campus</span>
           </div>
         </div>
       </div>

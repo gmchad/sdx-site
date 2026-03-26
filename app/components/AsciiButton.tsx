@@ -23,7 +23,7 @@ const AsciiButton: React.FC<{ children: React.ReactNode; className?: string }> =
       const rect = container.getBoundingClientRect();
       canvas.width = Math.ceil(rect.width * dpr);
       canvas.height = Math.ceil(rect.height * dpr);
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     resize();
@@ -80,11 +80,17 @@ const AsciiButton: React.FC<{ children: React.ReactNode; className?: string }> =
   }, []);
 
   return (
-    <div ref={containerRef} className={`relative overflow-hidden rounded-sm ${className}`}>
+    <div
+      ref={containerRef}
+      className={`relative rounded-sm bg-white ${className}`}
+      style={{
+        boxShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 35px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.12)',
+      }}
+    >
       <canvas
         ref={canvasRef}
-        className="absolute inset-0"
-        style={{ width: '100%', height: '100%' }}
+        className="absolute inset-0 rounded-sm"
+        style={{ width: '100%', height: '100%', display: 'block' }}
         aria-hidden="true"
       />
       <span className="relative z-10 block px-8 py-3 text-xs uppercase tracking-widest font-bold text-black">

@@ -240,21 +240,22 @@ export default function EventsPage() {
           </div>
         )}
 
-        {/* Lu.ma CTA */}
-        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
-          <PrismaticCanvas intensity="subtle" />
-          <MotionSection className="relative z-10">
-            <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Never miss an event</h2>
-            <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-              All events are hosted on Lu.ma. Follow our calendar for updates.
-            </p>
-            <MotionButton className="inline-block">
-              <Link href="https://lu.ma/sdx" target="_blank" className="block">
-                <AsciiButton>Follow on Lu.ma</AsciiButton>
-              </Link>
-            </MotionButton>
-          </MotionSection>
-        </div>
+      </div>
+
+      {/* Lu.ma CTA — full width, break out of parent padding */}
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
+        <PrismaticCanvas intensity="subtle" />
+        <MotionSection className="relative z-10">
+          <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Never miss an event</h2>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+            All events are hosted on Lu.ma. Follow our calendar for updates.
+          </p>
+          <MotionButton className="inline-block">
+            <Link href="https://lu.ma/sdx" target="_blank" className="block">
+              <AsciiButton>Follow on Lu.ma</AsciiButton>
+            </Link>
+          </MotionButton>
+        </MotionSection>
       </div>
     </div>
   );

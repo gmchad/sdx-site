@@ -157,10 +157,12 @@ export default function MembersPage() {
           ))}
         </MotionGrid>
 
-        {/* CTA */}
-        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
-          <PrismaticCanvas intensity="subtle" />
-          <MotionSection className="relative z-10">
+      </div>
+
+      {/* CTA — full width, break out of parent padding */}
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
+        <PrismaticCanvas intensity="subtle" />
+        <MotionSection className="relative z-10">
           <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Come build.</h2>
           <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
             Join 3000+ builders shipping real things in San Diego.
@@ -181,8 +183,7 @@ export default function MembersPage() {
               </Link>
             </MotionButton>
           </div>
-          </MotionSection>
-        </div>
+        </MotionSection>
       </div>
     </main>
   );

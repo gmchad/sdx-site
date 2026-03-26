@@ -1,7 +1,6 @@
 'use client'
 
 import { m } from 'motion/react';
-import { transitions } from '@/lib/motion';
 
 interface MotionButtonProps {
   children: React.ReactNode;
@@ -15,9 +14,9 @@ export default function MotionButton({
   return (
     <m.div
       className={className}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.97 }}
-      transition={transitions.buttonHover}
+      whileHover={{ scale: 1.02, filter: 'brightness(1.15)' }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
     >
       {children}
     </m.div>

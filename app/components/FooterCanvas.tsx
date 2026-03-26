@@ -24,6 +24,46 @@ const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
   // Characters ordered by density: sparse → dense
   const fireChars = ' .`-\'_,^:;~=><+!?*/\\)s(d{x}[S]D|X#%&@';
 
+  // Rainbow colors mapped to character density: blue (sparse/top) → orange (dense/bottom)
+  const fireColors = [
+    '#035593', // blue — sparsest
+    '#035593',
+    '#035593',
+    '#035593',
+    '#035593',
+    '#11BBCD', // cyan
+    '#11BBCD',
+    '#11BBCD',
+    '#11BBCD',
+    '#11BBCD',
+    '#11BBCD',
+    '#11BBCD',
+    '#03C661', // green
+    '#03C661',
+    '#03C661',
+    '#03C661',
+    '#03C661',
+    '#03C661',
+    '#03C661',
+    '#fac205', // yellow
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fac205',
+    '#fc5715', // orange — densest
+    '#fc5715',
+    '#fc5715',
+    '#fc5715',
+    '#fc5715',
+    '#fc5715',
+    '#fc5715',
+  ];
+
   // Simple seeded noise for fire turbulence
   const noiseTable = useRef<Float32Array | null>(null);
   if (!noiseTable.current) {
@@ -244,7 +284,6 @@ const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
       ctx.fillStyle = 'black';
       ctx.fillRect(0, 0, cw, ch);
       ctx.font = `${charFontSize}px "Space Mono", monospace`;
-      ctx.fillStyle = 'white';
       ctx.textBaseline = 'top';
 
       const charWidth = ctx.measureText('@').width || charFontSize * 0.6;
@@ -252,31 +291,36 @@ const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
       const rows = Math.ceil(ch / charFontSize) + 2;
       const t = performance.now() * 0.001;
 
-      // Each column has a fixed random phase — only row + time changes
-      // This guarantees upward motion with no horizontal drift
+      // Draw character by character with color mapped to density
+      let lastColor = '';
       for (let r = 0; r < rows; r++) {
-        let line = '';
         const py = r * charFontSize;
         const heightNorm = py / ch; // 0 at top, 1 at bottom
-
-        // Row scroll position — increases over time = moves upward
         const scroll = r * 0.4 + t * 8;
 
         for (let c = 0; c < cols; c++) {
-          // Per-column phase (static, never changes with time)
           const colPhase = Math.sin(c * 2.1 + 0.5) * 3 + Math.sin(c * 0.7 + 1.3) * 5;
 
-          // Layered waves — all based on scroll (row+time), offset by colPhase
           const v1 = Math.sin(scroll + colPhase) * 0.5 + 0.5;
           const v2 = Math.sin(scroll * 2.3 + colPhase * 0.7 + 10) * 0.25 + 0.25;
           const v3 = Math.sin(scroll * 4.1 + colPhase * 0.3 + 20) * 0.125 + 0.125;
-          const combined = v1 + v2 + v3; // 0 to ~1.75
+          const combined = v1 + v2 + v3;
 
-          const intensity = combined * heightNorm * heightNorm;
+          const intensity = combined * heightNorm * 0.85;
           const charIdx = Math.min(fireChars.length - 1, Math.floor(intensity * fireChars.length));
-          line += fireChars[charIdx];
+          const ch2 = fireChars[charIdx];
+
+          if (ch2 === ' ') continue; // skip spaces for performance
+
+          // Color based on character density index
+          const color = fireColors[Math.min(charIdx, fireColors.length - 1)];
+          if (color !== lastColor) {
+            ctx.fillStyle = color;
+            lastColor = color;
+          }
+
+          ctx.fillText(ch2, c * charWidth, py);
         }
-        ctx.fillText(line, 0, py);
       }
 
       rafRef.current = requestAnimationFrame(tick);

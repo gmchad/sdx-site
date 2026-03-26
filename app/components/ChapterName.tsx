@@ -16,7 +16,7 @@ const ChapterName: React.FC<ChapterNameProps> = ({ name, className = '' }) => {
 
   return (
     <span className={className}>
-      {prefix}<span className="text-outline">{suffix}</span>
+      {prefix}<span className="text-outline-thin">{suffix}</span>
     </span>
   );
 };

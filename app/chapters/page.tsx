@@ -159,32 +159,33 @@ export default function ChaptersPage() {
           </MotionGrid>
         </div>
 
-        {/* Start a Chapter CTA */}
-        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
-          <PrismaticCanvas intensity="subtle" />
-          <MotionSection className="relative z-10">
-            <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Start a chapter.</h2>
-            <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-              Interested in bringing SDx to your university? We&apos;re looking for builders who want to lead.
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <MotionButton className="inline-block">
-                <Link href="mailto:chapters@sdx.community?subject=Start a New Chapter" className="block">
-                  <AsciiButton>Start a Chapter</AsciiButton>
-                </Link>
-              </MotionButton>
-              <MotionButton className="inline-block">
-                <Link
-                  href="https://lu.ma/sdx"
-                  target="_blank"
-                  className="block btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
-                >
-                  Join Main Community
-                </Link>
-              </MotionButton>
-            </div>
-          </MotionSection>
-        </div>
+      </div>
+
+      {/* Start a Chapter CTA — full width, break out of parent padding */}
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
+        <PrismaticCanvas intensity="subtle" />
+        <MotionSection className="relative z-10">
+          <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Start a chapter.</h2>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+            Interested in bringing SDx to your university? We&apos;re looking for builders who want to lead.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <MotionButton className="inline-block">
+              <Link href="mailto:chapters@sdx.community?subject=Start a New Chapter" className="block">
+                <AsciiButton>Start a Chapter</AsciiButton>
+              </Link>
+            </MotionButton>
+            <MotionButton className="inline-block">
+              <Link
+                href="https://lu.ma/sdx"
+                target="_blank"
+                className="block btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
+              >
+                Join Main Community
+              </Link>
+            </MotionButton>
+          </div>
+        </MotionSection>
       </div>
     </main>
   );

@@ -22,6 +22,8 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const isTransitioning = useRef(false);
   const pendingHref = useRef<string | null>(null);
   const whiteCellsRef = useRef<Set<number>>(new Set());
+  const [whiteCount, setWhiteCount] = useState(0);
+  const spawnRef = useRef<NodeJS.Timeout | null>(null);
   const [dims, setDims] = useState({ w: 1920, h: 1080 });
 
   useEffect(() => {
@@ -107,7 +109,32 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
     document.addEventListener('click', handleClick, true);
     return () => document.removeEventListener('click', handleClick, true);
-  }, [pathname, children, router]);
+  }, [pathname, children, router, cells]);
+
+  // Progressively turn more grid cells white during transition
+  useEffect(() => {
+    if (phase === 'fill' || phase === 'hold') {
+      let count = 0;
+      spawnRef.current = setInterval(() => {
+        count++;
+        if (count > 50) {
+          if (spawnRef.current) clearInterval(spawnRef.current);
+          return;
+        }
+        // Flip 2-3 random cells to white each tick
+        for (let j = 0; j < 3; j++) {
+          const idx = Math.floor(Math.random() * cells.length);
+          whiteCellsRef.current.add(idx);
+        }
+        setWhiteCount(whiteCellsRef.current.size);
+      }, 25);
+    } else {
+      if (spawnRef.current) clearInterval(spawnRef.current);
+    }
+    return () => {
+      if (spawnRef.current) clearInterval(spawnRef.current);
+    };
+  }, [phase, cells.length]);
 
   // Handle navigation completion
   useEffect(() => {
@@ -147,6 +174,16 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
     <div className="relative">
       {showGrid && (
         <div className="fixed inset-0 z-[9998] pointer-events-none overflow-hidden">
+          {/* Solid black backdrop — prevents content bleeding through gaps between squares */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'black',
+              opacity: phase === 'fill' || phase === 'hold' ? 1 : 0,
+              transition: phase === 'exit' ? 'opacity 200ms ease-out' : 'opacity 100ms ease-out',
+            }}
+          />
           {/* Feather layer */}
           <div style={{ position: 'absolute', inset: 0 }}>
             {cells.map((cell, i) => {
@@ -198,7 +235,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
                     opacity: isFilling ? 1 : 0,
                     transform: isFilling ? 'scale(1)' : isExiting ? 'scale(0.5)' : 'scale(0)',
                     transition: isFilling
-                      ? `opacity 80ms ease-out ${cell.fillDelay}ms, transform 120ms cubic-bezier(0.2, 0, 0, 1) ${cell.fillDelay}ms`
+                      ? `opacity 80ms ease-out ${cell.fillDelay}ms, transform 120ms cubic-bezier(0.2, 0, 0, 1) ${cell.fillDelay}ms, background-color 250ms ease-out`
                       : isExiting
                         ? `opacity 120ms ease-in ${cell.exitDelay}ms, transform 150ms ease-in ${cell.exitDelay}ms`
                         : 'none',
@@ -207,6 +244,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
               );
             })}
           </div>
+
         </div>
       )}
 
