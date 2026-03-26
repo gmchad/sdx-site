@@ -7,6 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Linkedin, Github, Twitter, ChevronDown, ChevronUp } from 'lucide-react';
 import SectionHeader from '@/app/components/SectionHeader';
+import PrismaticCanvas from '@/app/components/PrismaticCanvas';
+import MotionSection from '@/app/components/motion/MotionSection';
+import MotionGrid from '@/app/components/motion/MotionGrid';
+import MotionCard from '@/app/components/motion/MotionCard';
+import MotionButton from '@/app/components/motion/MotionButton';
+import AsciiButton from '@/app/components/AsciiButton';
 
 const spotlightMembers = require('../../data/members.json');
 
@@ -59,7 +65,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
 
         {member.testimonial && (
           <div className="bg-white/[0.02] p-3 rounded-lg">
-            <blockquote className="text-xs italic text-white/30 text-center leading-relaxed">
+            <blockquote className="text-xs italic text-white/30 text-left leading-relaxed">
               &quot;{displayedTestimonial}&quot;
             </blockquote>
             {shouldTruncate && (
@@ -110,8 +116,14 @@ export default function MembersPage() {
   const featuredMembers = spotlightMembers.filter((member: typeof spotlightMembers[0]) => member.featured === true);
 
   return (
-    <main className="pt-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto py-12">
+    <main className="relative pt-24 px-4 sm:px-6 lg:px-8">
+      {/* Ghosted letterform */}
+      <div className="absolute left-0 top-0 bottom-0 w-[50vw] overflow-hidden" aria-hidden="true">
+        <div className="absolute -left-[20%] top-[40%] -translate-y-1/2 font-display text-[45vw] ghosted-letterform -rotate-90 whitespace-nowrap">
+          SDx
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto py-12 relative z-[1]">
         <SectionHeader
           title="Builders"
           subtitle="The people shipping real things in San Diego. Engineers, founders, and operators building at the cutting edge."
@@ -119,50 +131,57 @@ export default function MembersPage() {
         />
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-16 max-w-lg">
-          <div>
-            <div className="text-2xl font-bold holographic-text">1000+</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Builders</div>
+        <MotionSection delay={0.1} className="flex items-center gap-8 md:gap-12 mb-16">
+          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+            <span className="block text-xl md:text-2xl font-bold text-white/90">3000+</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Builders</span>
           </div>
-          <div>
-            <div className="text-2xl font-bold holographic-text">{featuredMembers.length}</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Featured</div>
+          <div className="w-px h-8 bg-white/10" />
+          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+            <span className="block text-xl md:text-2xl font-bold text-white/90">{featuredMembers.length}</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Featured</span>
           </div>
-          <div>
-            <div className="text-2xl font-bold holographic-text">50+</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Projects</div>
+          <div className="w-px h-8 bg-white/10" />
+          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+            <span className="block text-xl md:text-2xl font-bold text-white/90">50+</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Projects</span>
           </div>
-        </div>
+        </MotionSection>
 
         {/* Members Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+        <MotionGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           {featuredMembers.map((member: typeof spotlightMembers[0]) => (
-            <MemberCard key={member.id} member={member} />
+            <MotionCard key={member.id}>
+              <MemberCard member={member} />
+            </MotionCard>
           ))}
-        </div>
+        </MotionGrid>
 
         {/* CTA */}
-        <div className="border-t border-white/5 pt-12 text-center">
-          <h2 className="font-display text-2xl text-white mb-3">Come build.</h2>
+        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
+          <PrismaticCanvas intensity="subtle" />
+          <MotionSection className="relative z-10">
+          <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Come build.</h2>
           <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-            Join 1000+ builders shipping real things in San Diego.
+            Join 3000+ builders shipping real things in San Diego.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Link
-              href="https://lu.ma/sdx"
-              target="_blank"
-              className="holographic-border px-6 py-2 text-xs uppercase tracking-widest text-white rounded-sm"
-            >
-              Join Community
-            </Link>
-            <Link
-              href="https://discord.gg/Rkgyzx2ykV"
-              target="_blank"
-              className="px-6 py-2 text-xs uppercase tracking-widest text-white/40 hover:text-white border border-white/10 hover:border-white/20 rounded-sm transition-[color,border-color] duration-200"
-            >
-              Discord
-            </Link>
+            <MotionButton className="inline-block">
+              <Link href="https://lu.ma/sdx" target="_blank" className="block">
+                <AsciiButton>Join Community</AsciiButton>
+              </Link>
+            </MotionButton>
+            <MotionButton className="inline-block">
+              <Link
+                href="https://discord.gg/Rkgyzx2ykV"
+                target="_blank"
+                className="block btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
+              >
+                Discord
+              </Link>
+            </MotionButton>
           </div>
+          </MotionSection>
         </div>
       </div>
     </main>

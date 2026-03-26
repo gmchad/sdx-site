@@ -4,8 +4,16 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { sendGAEvent } from '@next/third-parties/google';
+import { m } from 'motion/react';
+import { transitions } from '@/lib/motion';
 import BackgroundEffects from './BackgroundEffects';
 import MetaballCanvas from './MetaballCanvas';
+import PrismaticCanvas from './PrismaticCanvas';
+import AsciiButton from './AsciiButton';
+import MotionSection from './motion/MotionSection';
+import MotionGrid from './motion/MotionGrid';
+import MotionCard from './motion/MotionCard';
+import MotionButton from './motion/MotionButton';
 
 const partnerLogos = [
   { src: '/sponsors/cadre.png', alt: 'Cadre' },
@@ -47,7 +55,7 @@ const eventTypes = [
 ];
 
 const metrics = [
-  { value: '1000+', label: 'builders' },
+  { value: '3000+', label: 'builders' },
   { value: '50+', label: 'events' },
   { value: '15+', label: 'startups' },
 ];
@@ -71,30 +79,49 @@ const HeroSection: React.FC = () => {
         <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6">
+          <m.h1
+            className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6 prismatic-glow"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ...transitions.heroEntrance, delay: 2.4 }}
+          >
             Build here.
-          </h1>
-          <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-10">
+          </m.h1>
+          <m.p
+            className="text-base md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ...transitions.appear, delay: 2.8 }}
+          >
             San Diego&apos;s builder-first technology community.
-          </p>
+          </m.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link
-              href="https://lu.ma/sdx"
-              target="_blank"
-              onClick={() => handleLinkClick('https://lu.ma/sdx', 'hero-cta')}
-              className="holographic-border px-8 py-3 text-xs uppercase tracking-widest text-white rounded-sm"
-            >
-              Start Building
-            </Link>
-            <Link
-              href="/executives"
-              onClick={() => handleLinkClick('/executives', 'hero-exec')}
-              className="px-6 py-3 text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
-            >
-              Executive Network &rarr;
-            </Link>
-          </div>
+          <m.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ...transitions.appear, delay: 3.0 }}
+          >
+            <MotionButton>
+              <Link
+                href="https://lu.ma/sdx"
+                target="_blank"
+                onClick={() => handleLinkClick('https://lu.ma/sdx', 'hero-cta')}
+                className="block"
+              >
+                <AsciiButton>Start Building</AsciiButton>
+              </Link>
+            </MotionButton>
+            <MotionButton>
+              <Link
+                href="/executives"
+                onClick={() => handleLinkClick('/executives', 'hero-exec')}
+                className="btn-outline-glow px-6 py-3 text-xs uppercase tracking-widest rounded-sm block"
+              >
+                Executive Network &rarr;
+              </Link>
+            </MotionButton>
+          </m.div>
         </div>
 
         {/* Partners — full width with edge fade */}
@@ -107,16 +134,20 @@ const HeroSection: React.FC = () => {
               WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
             }}
           >
-            <div className="animate-marquee whitespace-nowrap inline-block">
-              {[...partnerLogos, ...partnerLogos].map((logo, index) => (
-                <div key={index} className="inline-block align-middle mx-8">
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={96}
-                    height={48}
-                    className="w-20 h-10 object-contain"
-                  />
+            <div className="animate-marquee flex w-max">
+              {[partnerLogos, partnerLogos].map((set, setIndex) => (
+                <div key={setIndex} className="flex shrink-0">
+                  {set.map((logo, index) => (
+                    <div key={index} className="flex items-center justify-center mx-8">
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={96}
+                        height={48}
+                        className="w-20 h-10 object-contain"
+                      />
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
@@ -124,60 +155,78 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Metrics bar */}
-        <div className="relative z-10 flex items-center gap-8 md:gap-12">
+        <m.div
+          className="relative z-10 flex items-center gap-8 md:gap-12"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...transitions.appear, delay: 3.2 }}
+        >
           {metrics.map((metric, i) => (
             <React.Fragment key={metric.label}>
-              {i > 0 && <div className="w-px h-6 bg-white/10" />}
-              <div className="text-center">
-                <span className="holographic-text text-xl md:text-2xl font-bold">{metric.value}</span>
-                <span className="block text-xs uppercase tracking-widest text-white/30 mt-1">{metric.label}</span>
+              {i > 0 && <div className="w-px h-8 bg-white/10" />}
+              <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+                <span className="block text-xl md:text-2xl font-bold text-white/90">{metric.value}</span>
+                <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">{metric.label}</span>
               </div>
             </React.Fragment>
           ))}
-        </div>
+        </m.div>
       </section>
       </div>
 
       {/* Section 2: Event Types */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
+        {/* Ghosted letterform */}
+        <div className="absolute right-0 top-0 bottom-0 w-[50vw] overflow-hidden" aria-hidden="true">
+          <div className="absolute -right-[20%] top-1/2 -translate-y-1/2 font-display text-[40vw] ghosted-letterform rotate-90 whitespace-nowrap">
+            SDx
+          </div>
+        </div>
+        <div className="max-w-6xl mx-auto relative z-[1]">
+          <MotionSection className="mb-12">
             <span className="text-xs uppercase tracking-widest text-white/30">What we do</span>
-            <h2 className="font-display text-3xl md:text-4xl text-white mt-2">
+            <h2 className="font-display text-3xl md:text-4xl text-white mt-2 prismatic-glow-sm">
               Where builders build.
             </h2>
-          </div>
+          </MotionSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <MotionGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {eventTypes.map((event) => (
-              <div
-                key={event.name}
-                className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-6
-                  hover:border-white/[0.15] hover:shadow-glow-white
-                  transition-[border-color,box-shadow] duration-300 ease-out"
-              >
-                <h3 className="text-base font-bold text-white mb-2">{event.name}</h3>
-                <p className="text-sm text-white/40 leading-relaxed">{event.description}</p>
-              </div>
+              <MotionCard key={event.name}>
+                <div
+                  className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-6
+                    hover:border-white/[0.15] hover:shadow-glow-white
+                    transition-[border-color,box-shadow] duration-300 ease-out h-full"
+                >
+                  <h3 className="text-base font-bold text-white mb-2">{event.name}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed">{event.description}</p>
+                </div>
+              </MotionCard>
             ))}
-          </div>
+          </MotionGrid>
 
-          <div className="mt-8">
+          <MotionSection className="mt-8">
             <Link
               href="/events"
               className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
             >
               See all events &rarr;
             </Link>
-          </div>
+          </MotionSection>
         </div>
       </section>
 
       {/* Section 3: Community Proof */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
+        {/* Ghosted letterform */}
+        <div className="absolute left-0 top-0 bottom-0 w-[50vw] overflow-hidden" aria-hidden="true">
+          <div className="absolute -left-[20%] top-1/2 -translate-y-1/2 font-display text-[40vw] ghosted-letterform -rotate-90 whitespace-nowrap">
+            SDx
+          </div>
+        </div>
+        <div className="max-w-6xl mx-auto relative z-[1]">
+          <MotionGrid className="grid grid-cols-1 md:grid-cols-3 gap-12" staggerDelay={0.12}>
+            <MotionCard enableHover={false}>
               <span className="text-xs uppercase tracking-widest text-white/30">Chapters</span>
               <h3 className="font-display text-2xl text-white mt-2 mb-4">University chapters</h3>
               <p className="text-sm text-white/40 leading-relaxed mb-4">
@@ -186,28 +235,28 @@ const HeroSection: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-sdx-teal" />
-                  <span className="text-sm text-white/60">SDx UCSD — Active</span>
+                  <span className="text-sm text-white/60">SDx<span className="text-outline">UCSD</span> — Active</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-sdx-blue" />
-                  <span className="text-sm text-white/60">SDx SDSU — Active</span>
+                  <span className="text-sm text-white/60">SDx<span className="text-outline">SDSU</span> — Active</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
                   <span className="text-sm text-white/40">SDx USD — Planned</span>
                 </div>
               </div>
-            </div>
+            </MotionCard>
 
-            <div>
+            <MotionCard enableHover={false}>
               <span className="text-xs uppercase tracking-widest text-white/30">Partners</span>
               <h3 className="font-display text-2xl text-white mt-2 mb-4">Who we work with</h3>
               <p className="text-sm text-white/40 leading-relaxed">
                 Connected to the organizations that matter. Y Combinator, OpenAI, Anthropic, Qualcomm, Supabase, Vercel, Replit, and the university systems across San Diego.
               </p>
-            </div>
+            </MotionCard>
 
-            <div>
+            <MotionCard enableHover={false}>
               <span className="text-xs uppercase tracking-widest text-white/30">Output</span>
               <h3 className="font-display text-2xl text-white mt-2 mb-4">What gets built</h3>
               <p className="text-sm text-white/40 leading-relaxed mb-4">
@@ -219,47 +268,53 @@ const HeroSection: React.FC = () => {
               >
                 See startups &rarr;
               </Link>
-            </div>
-          </div>
+            </MotionCard>
+          </MotionGrid>
         </div>
       </section>
 
       {/* Section 4: Final CTA */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 holographic-bg" />
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl text-white mb-6">
+        <PrismaticCanvas intensity="subtle" />
+        <MotionSection className="relative z-10 max-w-3xl mx-auto text-center">
+          <h2 className="font-display text-4xl md:text-5xl text-white mb-6 prismatic-glow">
             Come build.
           </h2>
           <p className="text-base text-white/50 mb-10 max-w-md mx-auto">
             You don&apos;t need to know how to code to join SDx. You need to want to learn.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="https://lu.ma/sdx"
-              target="_blank"
-              onClick={() => handleLinkClick('https://lu.ma/sdx', 'cta-luma')}
-              className="holographic-border px-8 py-3 text-xs uppercase tracking-widest text-white rounded-sm"
-            >
-              Join on Lu.ma
-            </Link>
-            <Link
-              href="https://discord.gg/Rkgyzx2ykV"
-              target="_blank"
-              onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'cta-discord')}
-              className="px-6 py-3 text-xs uppercase tracking-widest text-white/40 hover:text-white border border-white/10 hover:border-white/20 rounded-sm transition-[color,border-color] duration-200"
-            >
-              Join Discord
-            </Link>
+            <MotionButton>
+              <Link
+                href="https://lu.ma/sdx"
+                target="_blank"
+                onClick={() => handleLinkClick('https://lu.ma/sdx', 'cta-luma')}
+                className="block"
+              >
+                <AsciiButton>Join on Lu.ma</AsciiButton>
+              </Link>
+            </MotionButton>
+            <MotionButton>
+              <Link
+                href="https://discord.gg/Rkgyzx2ykV"
+                target="_blank"
+                onClick={() => handleLinkClick('https://discord.gg/Rkgyzx2ykV', 'cta-discord')}
+                className="btn-outline-glow px-6 py-3 text-xs uppercase tracking-widest rounded-sm block"
+              >
+                Join Discord
+              </Link>
+            </MotionButton>
           </div>
-          <Link
-            href="/executives"
-            onClick={() => handleLinkClick('/executives', 'cta-exec')}
-            className="inline-block mt-6 text-xs uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors duration-200"
-          >
-            Executive Network &rarr;
-          </Link>
-        </div>
+          <MotionButton className="inline-block mt-6">
+            <Link
+              href="/executives"
+              onClick={() => handleLinkClick('/executives', 'cta-exec')}
+              className="btn-outline-glow px-4 py-2 text-xs uppercase tracking-widest rounded-sm block"
+            >
+              Executive Network &rarr;
+            </Link>
+          </MotionButton>
+        </MotionSection>
       </section>
     </>
   );

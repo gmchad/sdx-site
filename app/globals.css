@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background: white;
+  color: black;
+}
+
 @layer base {
   :root {
     --background: 0 0% 0%;
@@ -64,12 +69,12 @@
   .holographic-text {
     background: linear-gradient(
       90deg,
-      hsl(175, 70%, 50%),
-      hsl(220, 75%, 60%),
-      hsl(270, 65%, 60%),
-      hsl(330, 75%, 55%),
-      hsl(35, 85%, 55%),
-      hsl(175, 70%, 50%)
+      #d92c2d,
+      #fc5715,
+      #fac205,
+      #03C661,
+      #11BBCD,
+      #d92c2d
     );
     background-size: 200% 100%;
     -webkit-background-clip: text;
@@ -78,41 +83,109 @@
     animation: holographic-shift 8s linear infinite;
   }
 
-  .holographic-border {
-    position: relative;
+  /* Prismatic glow — reusable drop shadow matching the ColorBends palette */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
   }
 
-  .holographic-border::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      var(--holographic-angle, 0deg),
-      hsl(175, 70%, 50%),
-      hsl(220, 75%, 60%),
-      hsl(270, 65%, 60%),
-      hsl(330, 75%, 55%),
-      hsl(35, 85%, 55%),
-      hsl(175, 70%, 50%)
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: holographic-rotate 6s linear infinite;
+  .ghosted-letterform {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);
+    user-select: none;
     pointer-events: none;
+    line-height: 0.85;
+  }
+
+  .prismatic-glow {
+    filter:
+      drop-shadow(0 0 15px rgba(255, 255, 255, 0.3))
+      drop-shadow(0 0 40px rgba(255, 255, 255, 0.15))
+      drop-shadow(0 0 80px rgba(255, 255, 255, 0.08));
+  }
+
+  .prismatic-glow-sm {
+    filter:
+      drop-shadow(0 0 10px rgba(255, 255, 255, 0.25))
+      drop-shadow(0 0 25px rgba(255, 255, 255, 0.12))
+      drop-shadow(0 0 50px rgba(255, 255, 255, 0.06));
+  }
+
+  .btn-secondary {
+    background: white;
+    color: black;
+    font-weight: 700;
+    box-shadow:
+      0 0 15px rgba(255, 255, 255, 0.3),
+      0 0 40px rgba(255, 255, 255, 0.15);
+  }
+
+  .btn-secondary:hover {
+    box-shadow:
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 50px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-outline-glow {
+    font-weight: 700;
+    background: black;
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+      0 0 10px rgba(255, 255, 255, 0.4),
+      0 0 25px rgba(255, 255, 255, 0.2),
+      0 0 50px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn-outline-glow:hover {
+    border-color: white;
+    box-shadow:
+      0 0 15px rgba(255, 255, 255, 0.6),
+      0 0 35px rgba(255, 255, 255, 0.3),
+      0 0 70px rgba(255, 255, 255, 0.15);
+  }
+
+  .holographic-border {
+    font-weight: 700;
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      #2a0808,
+      #2a1505,
+      #2a2502,
+      #052a10,
+      #041e22,
+      #021222,
+      #2a0808
+    );
+    background-size: 400% 100%;
+    animation: holographic-slide 20s linear infinite;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.15),
+      0 0 40px rgba(255, 255, 255, 0.08),
+      inset 0 0 8px rgba(255, 255, 255, 0.05);
+  }
+
+  .holographic-border:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.25),
+      0 0 60px rgba(255, 255, 255, 0.12),
+      inset 0 0 12px rgba(255, 255, 255, 0.08);
   }
 
   .holographic-bg {
     background: linear-gradient(
       135deg,
-      hsla(175, 70%, 40%, 0.15),
-      hsla(220, 75%, 55%, 0.1),
-      hsla(270, 65%, 60%, 0.08),
-      hsla(330, 75%, 55%, 0.1),
-      hsla(35, 85%, 55%, 0.12)
+      rgba(217, 44, 45, 0.15),
+      rgba(252, 87, 21, 0.12),
+      rgba(250, 194, 5, 0.1),
+      rgba(3, 198, 97, 0.1),
+      rgba(17, 187, 205, 0.12)
     );
   }
 }
@@ -122,15 +195,30 @@
   100% { background-position: 200% 50%; }
 }
 
-@keyframes holographic-rotate {
-  0% { --holographic-angle: 0deg; }
-  100% { --holographic-angle: 360deg; }
+@keyframes holographic-slide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
 }
 
-@property --holographic-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+@keyframes prismatic-glow-pulse {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 15px rgba(217, 44, 45, 0.5))
+      drop-shadow(0 0 40px rgba(252, 87, 21, 0.4))
+      drop-shadow(0 0 80px rgba(17, 187, 205, 0.3));
+  }
+  33% {
+    filter:
+      drop-shadow(0 0 15px rgba(250, 194, 5, 0.5))
+      drop-shadow(0 0 40px rgba(3, 198, 97, 0.4))
+      drop-shadow(0 0 80px rgba(217, 44, 45, 0.3));
+  }
+  66% {
+    filter:
+      drop-shadow(0 0 15px rgba(17, 187, 205, 0.5))
+      drop-shadow(0 0 40px rgba(217, 44, 45, 0.4))
+      drop-shadow(0 0 80px rgba(250, 194, 5, 0.3));
+  }
 }
 
 /* Page transition shimmer */

@@ -6,30 +6,35 @@ import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Mail, ExternalLink } from 'lucide-react';
 import SectionHeader from '@/app/components/SectionHeader';
+import ChapterName from '@/app/components/ChapterName';
+import PrismaticCanvas from '@/app/components/PrismaticCanvas';
+import AsciiButton from '@/app/components/AsciiButton';
 
 export default function UCSDChapterPage() {
   return (
     <main className="pt-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto py-12">
         <SectionHeader
-          title="SDx UCSD"
+          title={<ChapterName name="SDxUCSD" />}
           subtitle="An invite-only community where the best UCSD students building with AI share their latest experiments and projects. Founded 2024 by Dhruv Kanetkar."
           badge="Chapter"
         />
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-16 max-w-md">
-          <div>
-            <div className="text-2xl font-bold holographic-text">50+</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Students</div>
+        <div className="flex items-center gap-8 md:gap-12 mb-16">
+          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+            <span className="block text-xl md:text-2xl font-bold text-white/90">50+</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Students</span>
           </div>
-          <div>
-            <div className="text-2xl font-bold holographic-text">Monthly</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Demos</div>
+          <div className="w-px h-8 bg-white/10" />
+          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+            <span className="block text-xl md:text-2xl font-bold text-white/90">Monthly</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Demos</span>
           </div>
-          <div>
-            <div className="text-2xl font-bold holographic-text">UCSD</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Campus</div>
+          <div className="w-px h-8 bg-white/10" />
+          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+            <span className="block text-xl md:text-2xl font-bold text-white/90">UCSD</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Campus</span>
           </div>
         </div>
 
@@ -88,31 +93,33 @@ export default function UCSDChapterPage() {
         </div>
 
         {/* Connect */}
-        <div className="border-t border-white/5 pt-12 text-center">
-          <h2 className="font-display text-2xl text-white mb-3">Join the chapter.</h2>
-          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-            Motivated UCSD students who are building with AI and want to share their work.
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link
-              href="mailto:ucsd@sdx.community"
-              className="holographic-border px-6 py-2 text-xs uppercase tracking-widest text-white rounded-sm flex items-center gap-2"
-            >
-              <Mail className="w-3.5 h-3.5" />
-              Contact Lead
-            </Link>
-            <Link
-              href="https://discord.gg/Rkgyzx2ykV"
-              target="_blank"
-              className="px-6 py-2 text-xs uppercase tracking-widest text-white/40 hover:text-white border border-white/10 hover:border-white/20 rounded-sm transition-[color,border-color] duration-200"
-            >
-              Discord
-            </Link>
-          </div>
-          <div className="flex items-center justify-center gap-6 mt-6 text-xs uppercase tracking-widest text-white/20">
-            <span>Monthly meetings</span>
-            <span>Invite-only</span>
-            <span>UCSD Campus</span>
+        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
+          <PrismaticCanvas intensity="subtle" />
+          <div className="relative z-10">
+            <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Join the chapter.</h2>
+            <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+              Motivated UCSD students who are building with AI and want to share their work.
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <Link
+                href="mailto:ucsd@sdx.community"
+                className="block"
+              >
+                <AsciiButton>Contact Lead</AsciiButton>
+              </Link>
+              <Link
+                href="https://discord.gg/Rkgyzx2ykV"
+                target="_blank"
+                className="btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
+              >
+                Discord
+              </Link>
+            </div>
+            <div className="flex items-center justify-center gap-6 mt-6 text-xs uppercase tracking-widest text-white/20">
+              <span>Monthly meetings</span>
+              <span>Invite-only</span>
+              <span>UCSD Campus</span>
+            </div>
           </div>
         </div>
       </div>

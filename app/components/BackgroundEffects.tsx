@@ -1,9 +1,13 @@
 import React from 'react';
+import PrismaticCanvas from './PrismaticCanvas';
 
 interface BackgroundEffectsProps {
   showLetterforms?: boolean;
   showGrid?: boolean;
   showHolographic?: boolean;
+  showPrismatic?: boolean;
+  prismaticIntensity?: 'subtle' | 'medium' | 'vivid';
+  prismaticPalette?: 'full' | 'cool' | 'warm';
   className?: string;
 }
 
@@ -11,6 +15,9 @@ const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   showLetterforms = true,
   showGrid = true,
   showHolographic = true,
+  showPrismatic = false,
+  prismaticIntensity = 'subtle',
+  prismaticPalette = 'full',
   className = '',
 }) => {
   return (
@@ -41,6 +48,11 @@ const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
         />
       )}
 
+      {/* Prismatic canvas layer */}
+      {showPrismatic && (
+        <PrismaticCanvas intensity={prismaticIntensity} palette={prismaticPalette} />
+      )}
+
       {/* Holographic texture overlay */}
       {showHolographic && (
         <div
@@ -49,12 +61,12 @@ const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
             background: `
               conic-gradient(
                 from 0deg at 50% 50%,
-                hsl(175, 70%, 40%),
-                hsl(220, 75%, 55%),
-                hsl(270, 65%, 60%),
-                hsl(330, 75%, 55%),
-                hsl(35, 85%, 55%),
-                hsl(175, 70%, 40%)
+                #d92c2d,
+                #fc5715,
+                #fac205,
+                #03C661,
+                #11BBCD,
+                #d92c2d
               )
             `,
             mixBlendMode: 'overlay',

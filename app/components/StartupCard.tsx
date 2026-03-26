@@ -31,8 +31,8 @@ const StartupCard: React.FC<StartupCardProps> = ({
   websiteUrl,
   category
 }) => {
-  return (
-    <Card>
+  const content = (
+    <Card className={`h-full ${websiteUrl ? 'transition-colors duration-200 hover:border-white/20' : ''}`}>
       <CardHeader>
         <div className="flex items-center mb-2">
           {logoUrl && (
@@ -53,7 +53,7 @@ const StartupCard: React.FC<StartupCardProps> = ({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-3 flex flex-col flex-1">
         <p className="text-sm text-white/40 leading-relaxed">{description}</p>
 
         <div className="flex flex-wrap gap-1">
@@ -66,44 +66,52 @@ const StartupCard: React.FC<StartupCardProps> = ({
 
         <div className="grid grid-cols-2 gap-2">
           {metrics.funding && (
-            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
-              <div className="text-base font-bold holographic-text">{metrics.funding}</div>
-              <div className="text-xs uppercase tracking-widest text-white/30">Funding</div>
+            <div className="bg-white/[0.06] rounded px-3 py-2">
+              <span className="block text-base font-bold text-white/90">{metrics.funding}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40">Funding</span>
             </div>
           )}
           {metrics.users && (
-            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
-              <div className="text-base font-bold holographic-text">{metrics.users}</div>
-              <div className="text-xs uppercase tracking-widest text-white/30">Users</div>
+            <div className="bg-white/[0.06] rounded px-3 py-2">
+              <span className="block text-base font-bold text-white/90">{metrics.users}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40">Users</span>
             </div>
           )}
           {metrics.revenue && (
-            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
-              <div className="text-base font-bold holographic-text">{metrics.revenue}</div>
-              <div className="text-xs uppercase tracking-widest text-white/30">Revenue</div>
+            <div className="bg-white/[0.06] rounded px-3 py-2">
+              <span className="block text-base font-bold text-white/90">{metrics.revenue}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40">Revenue</span>
             </div>
           )}
           {metrics.githubStars && (
-            <div className="p-2 bg-white/[0.02] rounded border border-white/[0.04]">
-              <div className="text-base font-bold holographic-text">{metrics.githubStars}</div>
-              <div className="text-xs uppercase tracking-widest text-white/30">Stars</div>
+            <div className="bg-white/[0.06] rounded px-3 py-2">
+              <span className="block text-base font-bold text-white/90">{metrics.githubStars}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40">Stars</span>
             </div>
           )}
         </div>
 
         {websiteUrl && (
-          <Link
-            href={websiteUrl}
-            target="_blank"
-            className="inline-flex items-center text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200 pt-1"
-          >
-            Visit
-            <ExternalLink className="w-3 h-3 ml-1.5" />
-          </Link>
+          <div className="mt-auto flex justify-end pt-2">
+            <span className="btn-secondary inline-flex items-center px-4 py-1.5 text-xs uppercase tracking-widest rounded-sm">
+              Visit
+              <ExternalLink className="w-3 h-3 ml-1.5" />
+            </span>
+          </div>
         )}
       </CardContent>
     </Card>
   );
+
+  if (websiteUrl) {
+    return (
+      <Link href={websiteUrl} target="_blank" className="block group">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 };
 
 export default StartupCard;

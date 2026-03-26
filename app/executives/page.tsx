@@ -10,6 +10,10 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
 import SectionHeader from '@/app/components/SectionHeader';
+import PrismaticCanvas from '@/app/components/PrismaticCanvas';
+import MotionSection from '@/app/components/motion/MotionSection';
+import MotionGrid from '@/app/components/motion/MotionGrid';
+import MotionCard from '@/app/components/motion/MotionCard';
 
 const executives = require('../../data/executives.json');
 
@@ -170,7 +174,8 @@ export default function ExecutivesPage() {
         />
 
         {/* Hero: Event + Form */}
-        <div className="grid lg:grid-cols-5 gap-6 mb-16">
+        <MotionSection delay={0.1} className="relative grid lg:grid-cols-5 gap-6 mb-16">
+          <PrismaticCanvas intensity="medium" palette="warm" className="rounded-lg" />
           {/* Event Details */}
           <div className="lg:col-span-3">
             <Card className="h-full">
@@ -287,17 +292,19 @@ export default function ExecutivesPage() {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </MotionSection>
 
         {/* Featured Executives */}
         {featuredExecutives.length > 0 && (
           <div className="mb-16">
             <h2 className="font-display text-2xl text-white mb-6">Members</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MotionGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {featuredExecutives.map((executive: typeof executives[0]) => (
-                <ExecutiveCard key={executive.id} executive={executive} />
+                <MotionCard key={executive.id}>
+                  <ExecutiveCard executive={executive} />
+                </MotionCard>
               ))}
-            </div>
+            </MotionGrid>
           </div>
         )}
       </div>

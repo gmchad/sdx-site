@@ -27,6 +27,16 @@ const LoadingStinger: React.FC = () => {
     }
   }, [phase]);
 
+  // Lock scrolling during stinger
+  useEffect(() => {
+    if (phase !== 'done') {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [phase]);
+
   useEffect(() => {
     // "building..." → "built."
     const builtTimer = setTimeout(() => setPhase('built'), 1400);

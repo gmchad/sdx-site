@@ -10,6 +10,12 @@ import { ProcessedEvent } from '@/types/luma';
 import { getAllEvents as getEventsFromAPI } from '@/lib/api-client';
 import { formatEventDateTime, formatDuration } from '@/lib/luma-api';
 import SectionHeader from '@/app/components/SectionHeader';
+import PrismaticCanvas from '@/app/components/PrismaticCanvas';
+import AsciiButton from '@/app/components/AsciiButton';
+import MotionSection from '@/app/components/motion/MotionSection';
+import MotionGrid from '@/app/components/motion/MotionGrid';
+import MotionCard from '@/app/components/motion/MotionCard';
+import MotionButton from '@/app/components/motion/MotionButton';
 
 // Helper function to get location string
 const getLocationString = (event: any): string => {
@@ -81,36 +87,51 @@ export default function EventsPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto py-12">
-        <SectionHeader
-          title="Events"
-          subtitle="Paper Club, AI Coffee, Hack Days, Hackathons, and more. Show up, build something, learn something."
-        />
+    <div className="min-h-screen">
+      {/* Full-width prismatic header — extends to toolbar */}
+      <div className="relative pt-24">
+        <PrismaticCanvas intensity="subtle" palette="cool" glitchFrequency="rare" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <SectionHeader
+            title="Events"
+            subtitle="Paper Club, AI Coffee, Hack Days, Hackathons, and more. Show up, build something, learn something."
+          />
 
-        {/* Error Notice */}
-        {error && (
-          <div className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-4 mb-8 max-w-2xl">
-            <div className="flex items-center gap-2 text-white/40 text-xs">
-              <AlertCircle className="w-4 h-4" />
-              <span>{error}</span>
+          {/* Error Notice */}
+          {error && (
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-4 mb-8 max-w-2xl">
+              <div className="flex items-center gap-2 text-white/40 text-xs">
+                <AlertCircle className="w-4 h-4" />
+                <span>{error}</span>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-12 max-w-lg">
-          <div>
-            <div className="text-2xl font-bold holographic-text">{upcomingCount}</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Upcoming</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold holographic-text">{pastCount}</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Past</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold holographic-text">{events.length}</div>
-            <div className="text-xs uppercase tracking-widest text-white/30">Total</div>
+          {/* Stats */}
+          <MotionSection className="flex items-center gap-8 md:gap-12" delay={0.1}>
+            <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+              <span className="block text-xl md:text-2xl font-bold text-white/90">{upcomingCount}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Upcoming</span>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+              <span className="block text-xl md:text-2xl font-bold text-white/90">{pastCount}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Past</span>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+              <span className="block text-xl md:text-2xl font-bold text-white/90">{events.length}</span>
+              <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Total</span>
+            </div>
+          </MotionSection>
+        </div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Ghosted letterform */}
+        <div className="absolute right-0 top-0 bottom-0 w-[50vw] overflow-hidden" aria-hidden="true">
+          <div className="absolute -right-[20%] top-1/2 -translate-y-1/2 font-display text-[45vw] ghosted-letterform rotate-90 whitespace-nowrap">
+            SDx
           </div>
         </div>
 
@@ -156,9 +177,10 @@ export default function EventsPage() {
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <MotionGrid key={`${filter}-${typeFilter}`} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {filteredEvents.map((event) => (
-            <Card key={event.id}>
+            <MotionCard key={event.id}>
+              <Card>
               <div className="aspect-video bg-white/[0.02] rounded-t-lg overflow-hidden">
                 <Image
                   src={event.coverUrl}
@@ -205,9 +227,10 @@ export default function EventsPage() {
                   <ExternalLink className="w-3 h-3 ml-1.5" />
                 </Link>
               </CardContent>
-            </Card>
+              </Card>
+            </MotionCard>
           ))}
-        </div>
+        </MotionGrid>
 
         {/* Empty state */}
         {filteredEvents.length === 0 && (
@@ -218,18 +241,19 @@ export default function EventsPage() {
         )}
 
         {/* Lu.ma CTA */}
-        <div className="border-t border-white/5 pt-12 text-center">
-          <h2 className="font-display text-2xl text-white mb-3">Never miss an event</h2>
-          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-            All events are hosted on Lu.ma. Follow our calendar for updates.
-          </p>
-          <Link
-            href="https://lu.ma/sdx"
-            target="_blank"
-            className="holographic-border inline-block px-6 py-2 text-xs uppercase tracking-widest text-white rounded-sm"
-          >
-            Follow on Lu.ma
-          </Link>
+        <div className="relative overflow-hidden border-t border-white/5 pt-12 pb-12 text-center rounded-sm">
+          <PrismaticCanvas intensity="subtle" />
+          <MotionSection className="relative z-10">
+            <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Never miss an event</h2>
+            <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
+              All events are hosted on Lu.ma. Follow our calendar for updates.
+            </p>
+            <MotionButton className="inline-block">
+              <Link href="https://lu.ma/sdx" target="_blank" className="block">
+                <AsciiButton>Follow on Lu.ma</AsciiButton>
+              </Link>
+            </MotionButton>
+          </MotionSection>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 'use client'
 
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { createContext, useEffect, useState, useRef, useMemo } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+
+export const TransitionPhaseContext = createContext<string>('idle');
 
 const CELL_SIZE = 60;
 const GAP = 5;
@@ -121,10 +123,12 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
     setFrozenChildren(children);
     window.scrollTo(0, 0);
 
+    // Brief hold, then exit animation to reveal new page
     const exitTimer = setTimeout(() => {
       setPhase('exit');
     }, 100);
 
+    // After exit animation completes, go to idle so motion animations fire
     const doneTimer = setTimeout(() => {
       setPhase('idle');
       isTransitioning.current = false;
@@ -206,7 +210,9 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
         </div>
       )}
 
-      {frozenChildren}
+      <TransitionPhaseContext.Provider value={phase}>
+        {frozenChildren}
+      </TransitionPhaseContext.Provider>
     </div>
   );
 };

@@ -37,25 +37,6 @@
     "featured": false
   },
   {
-    "id": "chris-dumas",
-    "name": "Chris Dumas",
-    "title": "COO",
-    "company": "Cadre AI",
-    "bio": [
-      "Led a viral media powerhouse as CEO at Brainjolt - reaching 300 million users per month.",
-      "Drove over $1B in GMV Amazon affiliate sales.",
-      "Improved the Employee NPS: -46 -> +42."
-    ],
-    "photoUrl": "https://8pd3tfjq1bxzh5qx.public.blob.vercel-storage.com/spotlight_executives/chris_dumas.jpeg",
-    "location": "San Diego, CA",
-    "skills": [],
-    "testimonial": null,
-    "linkedin": "https://www.linkedin.com/in/chrisdumas/",
-    "additionalRoles": [],
-    "joinedYear": null,
-    "featured": true
-  },
-  {
     "id": "neal-bloom",
     "name": "Neal Bloom",
     "title": "Managing Director",
