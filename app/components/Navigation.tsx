@@ -7,6 +7,7 @@ import { m } from 'motion/react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import AsciiButton from './AsciiButton';
+import LogoContextMenu from './LogoContextMenu';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -28,32 +29,34 @@ const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 group relative" onClick={() => handleLinkClick('/')}>
-            <m.span
-              className="font-display text-4xl tracking-tight flex relative"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            >
-              {['S', 'D', 'x'].map((letter, i) => (
-                <span key={letter} className="relative inline-block">
-                  {/* Filled — visible by default, fades out on hover */}
-                  <span
-                    className="group-hover:opacity-0 transition-opacity duration-200"
-                    style={{ transitionDelay: `${i * 80}ms` }}
-                  >
-                    {letter}
+          <LogoContextMenu>
+            <Link href="/" className="flex-shrink-0 group relative" onClick={() => handleLinkClick('/')}>
+              <m.span
+                className="font-display text-4xl tracking-tight flex relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
+                {['S', 'D', 'x'].map((letter, i) => (
+                  <span key={letter} className="relative inline-block">
+                    {/* Filled — visible by default, fades out on hover */}
+                    <span
+                      className="group-hover:opacity-0 transition-opacity duration-200"
+                      style={{ transitionDelay: `${i * 80}ms` }}
+                    >
+                      {letter}
+                    </span>
+                    {/* Outlined — hidden by default, fades in on hover */}
+                    <span
+                      className="absolute inset-0 text-outline opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      style={{ transitionDelay: `${i * 80}ms` }}
+                    >
+                      {letter}
+                    </span>
                   </span>
-                  {/* Outlined — hidden by default, fades in on hover */}
-                  <span
-                    className="absolute inset-0 text-outline opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ transitionDelay: `${i * 80}ms` }}
-                  >
-                    {letter}
-                  </span>
-                </span>
-              ))}
-            </m.span>
-          </Link>
+                ))}
+              </m.span>
+            </Link>
+          </LogoContextMenu>
 
           {/* Desktop Navigation — centered */}
           <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
