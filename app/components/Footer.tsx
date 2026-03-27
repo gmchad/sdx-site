@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative border-t border-white/5 mt-16 overflow-hidden">
+    <footer className="relative border-t border-white/5 pt-16 overflow-hidden">
       <FooterCanvas />
 
       <MotionSection className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-32">
