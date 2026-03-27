@@ -58,29 +58,6 @@
     "featured": true
   },
   {
-    "id": "cheryl-goodman",
-    "name": "Cheryl Goodman",
-    "title": "CEO",
-    "company": "FindGood.tech",
-    "bio": [
-      "CEO, FindGood.tech — AI consultancy focused on human-centered implementation.",
-      "Author — How to Win Friends and Influence Robots, a top-ranked AI guide for leaders.",
-      "Tech Veteran — Exec roles at Sony, Qualcomm, CBS, MP3.com, and current Vice Chair, StartUp San Diego.",
-      "AI Thought Leader — Forbes contributor on accessible AI and strategy.",
-      "Podcaster & Speaker — Host, Mind The Machine Podcast, Chair, Big Data & AI Expo 2022 - 2025.",
-      "Educator & Advocate — University Guest lecturer, Westminster, Biola Engage X Series, Point Loma Nazarene, SDSU, Cal State San Marcos and Founding member, San Diego's Applied AI Association.",
-      "AI 2030 Leadership Award for academic excellence in AI Education, Certified Google Digital Leader."
-    ],
-    "photoUrl": "https://8pd3tfjq1bxzh5qx.public.blob.vercel-storage.com/spotlight_executives/cheryl_goodman.jpeg",
-    "location": "San Diego, CA",
-    "skills": [],
-    "testimonial": null,
-    "linkedin": "https://www.linkedin.com/in/ckgoodman/",
-    "additionalRoles": [],
-    "joinedYear": null,
-    "featured": true
-  },
-  {
     "id": "fred-grier",
     "name": "Fred Grier",
     "title": null,

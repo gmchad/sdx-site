@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
+import { useCanvasSettings } from './CanvasDebugPanel';
 
 const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
+  const { settings } = useCanvasSettings();
   const rootRef = useRef<HTMLDivElement>(null);
   const gooRef = useRef<HTMLDivElement>(null);
   const cellsRef = useRef<HTMLDivElement[]>([]);
@@ -12,11 +14,11 @@ const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
   const rafRef = useRef<number>(0);
   const built = useRef(false);
 
-  const opacity = 0.50;
-  const blur = 5;
-  const contrast = 40;
-  const threshold = -15;
-  const cellSize = 42;
+  const opacity = settings.footerOpacity;
+  const blur = settings.footerBlur;
+  const contrast = settings.footerContrast;
+  const threshold = settings.footerThreshold;
+  const cellSize = settings.footerCellSize;
   const mouseRadius = 280;
   const mouseStrength = 80;
   const mouseLag = 0.99;
@@ -117,7 +119,7 @@ const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
         const s = r * cols + c + 7;
         // Density: thick at bottom, thinning toward top
         const rowNorm = r / (rows - 1);
-        const spawnChance = rowNorm * rowNorm * 0.7;
+        const spawnChance = rowNorm * rowNorm * settings.footerDensity;
         if (sr(s) > spawnChance) continue;
 
         const cx = offsetX + c * gap;
@@ -204,7 +206,7 @@ const FooterCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
       ro.disconnect();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cellSize, settings.footerDensity]);
 
   // Mouse interaction + ASCII fire rendering
   useEffect(() => {

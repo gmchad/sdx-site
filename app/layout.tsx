@@ -6,6 +6,7 @@ import Footer from '@/app/components/Footer';
 import LoadingStinger from '@/app/components/LoadingStinger';
 import PageTransition from '@/app/components/PageTransition';
 import MotionProvider from '@/app/components/motion/MotionProvider';
+import CanvasDebugPanel, { CanvasSettingsProvider } from '@/app/components/CanvasDebugPanel';
 import "./globals.css";
 
 
@@ -23,14 +24,17 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <GoogleAnalytics gaId="G-M1FV7BZY8T"/>
       <body className={`${tiposka.variable} ${spaceMono.variable} font-mono bg-background text-foreground`}>
-        <MotionProvider>
-          <LoadingStinger />
-          <Navigation />
-          <PageTransition>
-            {children}
-          </PageTransition>
-          <Footer />
-        </MotionProvider>
+        <CanvasSettingsProvider>
+          <MotionProvider>
+            <LoadingStinger />
+            <Navigation />
+            <PageTransition>
+              {children}
+            </PageTransition>
+            <Footer />
+          </MotionProvider>
+          <CanvasDebugPanel />
+        </CanvasSettingsProvider>
       </body>
     </html>
   );

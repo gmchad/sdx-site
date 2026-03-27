@@ -15,16 +15,19 @@ import MotionGrid from './motion/MotionGrid';
 import MotionCard from './motion/MotionCard';
 import MotionButton from './motion/MotionButton';
 
-const partnerLogos = [
+const partnerLogos: { src: string; alt: string; className?: string }[] = [
   { src: '/sponsors/cadre.png', alt: 'Cadre' },
   { src: '/sponsors/anthropic.png', alt: 'Anthropic' },
-  { src: '/sponsors/elevenlabs.png', alt: 'ElevenLabs' },
+  { src: '/sponsors/elevenlabs.svg', alt: 'ElevenLabs' },
   { src: '/sponsors/hf.png', alt: 'Hugging Face' },
   { src: '/sponsors/openai.png', alt: 'OpenAI' },
   { src: '/sponsors/qualcomm.png', alt: 'Qualcomm' },
   { src: '/sponsors/replit.png', alt: 'Replit' },
   { src: '/sponsors/vercel.png', alt: 'Vercel' },
   { src: '/sponsors/ucsd.png', alt: 'UCSD' },
+  { src: '/sponsors/groq.svg', alt: 'Groq', className: 'w-16 h-10 object-contain' },
+  { src: '/sponsors/modal.svg', alt: 'Modal' },
+  { src: '/sponsors/yc.svg', alt: 'Y Combinator' },
 ];
 
 const eventTypes = [
@@ -130,7 +133,7 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Partners — full width with edge fade */}
-        <div className="absolute bottom-40 left-[10%] right-[10%] z-10">
+        <div className="absolute bottom-8 md:bottom-40 left-[10%] right-[10%] z-10">
           <p className="text-xs uppercase tracking-widest text-white/40 text-center mb-4">Partners</p>
           <div
             className="overflow-hidden w-full"
@@ -143,13 +146,13 @@ const HeroSection: React.FC = () => {
               {[partnerLogos, partnerLogos].map((set, setIndex) => (
                 <div key={setIndex} className="flex shrink-0">
                   {set.map((logo, index) => (
-                    <div key={index} className="flex items-center justify-center mx-8">
+                    <div key={index} className="flex items-center justify-center mx-6">
                       <Image
                         src={logo.src}
                         alt={logo.alt}
                         width={96}
                         height={48}
-                        className="w-20 h-10 object-contain"
+                        className={logo.className || 'w-24 h-12 object-contain'}
                       />
                     </div>
                   ))}
@@ -161,14 +164,14 @@ const HeroSection: React.FC = () => {
 
         {/* Metrics bar */}
         <m.div
-          className="relative z-10 flex items-center gap-8 md:gap-12"
+          className="relative z-10 flex flex-wrap items-center gap-4 md:gap-8 lg:gap-12"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transitions.appear, delay: d(3.2, 0.6) }}
         >
           {metrics.map((metric, i) => (
             <React.Fragment key={metric.label}>
-              {i > 0 && <div className="w-px h-8 bg-white/10" />}
+              {i > 0 && <div className="hidden md:block w-px h-8 bg-white/10" />}
               <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
                 <span className="block text-xl md:text-2xl font-bold text-white/90">{metric.value}</span>
                 <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">{metric.label}</span>
@@ -182,8 +185,8 @@ const HeroSection: React.FC = () => {
       {/* Section 2: Event Types */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">
         {/* Ghosted letterform */}
-        <div className="absolute right-0 top-0 bottom-0 w-[50vw] overflow-hidden" aria-hidden="true">
-          <div className="absolute -right-[20%] top-1/2 -translate-y-1/2 font-display text-[40vw] ghosted-letterform rotate-90 whitespace-nowrap">
+        <div className="absolute right-0 top-0 bottom-0 w-[70vw] md:w-[50vw] overflow-hidden" aria-hidden="true">
+          <div className="absolute -right-[10%] md:-right-[20%] top-1/2 -translate-y-1/2 font-display text-[80vw] md:text-[40vw] ghosted-letterform rotate-90 whitespace-nowrap">
             SDx
           </div>
         </div>
@@ -199,7 +202,7 @@ const HeroSection: React.FC = () => {
             {eventTypes.map((event) => (
               <MotionCard key={event.name}>
                 <div
-                  className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-6
+                  className="bg-white/[0.02] backdrop-blur-sm border border-white/[0.06] rounded-lg p-6
                     hover:border-white/[0.15] hover:shadow-glow-white
                     transition-[border-color,box-shadow] duration-300 ease-out h-full"
                 >
@@ -211,11 +214,10 @@ const HeroSection: React.FC = () => {
           </MotionGrid>
 
           <MotionSection className="mt-8">
-            <Link
-              href="/events"
-              className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
-            >
-              See all events &rarr;
+            <Link href="/events" className="inline-block">
+              <span className="btn-outline-glow px-5 py-2 text-xs uppercase tracking-widest rounded-sm inline-block">
+                See all events &rarr;
+              </span>
             </Link>
           </MotionSection>
         </div>
@@ -224,8 +226,8 @@ const HeroSection: React.FC = () => {
       {/* Section 3: Community Proof */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
         {/* Ghosted letterform */}
-        <div className="absolute left-0 top-0 bottom-0 w-[50vw] overflow-hidden" aria-hidden="true">
-          <div className="absolute -left-[20%] top-1/2 -translate-y-1/2 font-display text-[40vw] ghosted-letterform -rotate-90 whitespace-nowrap">
+        <div className="absolute left-0 top-0 bottom-0 w-[70vw] md:w-[50vw] overflow-hidden" aria-hidden="true">
+          <div className="absolute -left-[10%] md:-left-[20%] top-1/2 -translate-y-1/2 font-display text-[80vw] md:text-[40vw] ghosted-letterform -rotate-90 whitespace-nowrap">
             SDx
           </div>
         </div>
@@ -251,27 +253,36 @@ const HeroSection: React.FC = () => {
                   <span className="text-sm text-white/40">SDx USD — Planned</span>
                 </div>
               </div>
+              <Link href="/chapters" className="inline-block mt-4">
+                <span className="btn-outline-glow px-4 py-1.5 text-xs uppercase tracking-widest rounded-sm inline-block">
+                  Explore chapters &rarr;
+                </span>
+              </Link>
             </MotionCard>
 
             <MotionCard enableHover={false}>
-              <span className="text-xs uppercase tracking-widest text-white/30">Partners</span>
+              <span className="text-xs uppercase tracking-widest text-white/30">Community</span>
               <h3 className="font-display text-2xl text-white mt-2 mb-4">Who we work with</h3>
-              <p className="text-sm text-white/40 leading-relaxed">
+              <p className="text-sm text-white/40 leading-relaxed mb-4">
                 Connected to the organizations that matter. Y Combinator, OpenAI, Anthropic, Qualcomm, Supabase, Vercel, Replit, and the university systems across San Diego.
               </p>
+              <Link href="/members" className="inline-block">
+                <span className="btn-outline-glow px-4 py-1.5 text-xs uppercase tracking-widest rounded-sm inline-block">
+                  Meet the builders &rarr;
+                </span>
+              </Link>
             </MotionCard>
 
             <MotionCard enableHover={false}>
-              <span className="text-xs uppercase tracking-widest text-white/30">Output</span>
-              <h3 className="font-display text-2xl text-white mt-2 mb-4">What gets built</h3>
+              <span className="text-xs uppercase tracking-widest text-white/30">Leadership</span>
+              <h3 className="font-display text-2xl text-white mt-2 mb-4">Executive Network</h3>
               <p className="text-sm text-white/40 leading-relaxed mb-4">
-                SDx members have launched 15+ startups, shipped open-source tools, and built projects that matter.
+                Peer-level AI implementation exchange for C-suite leaders. Real experience, shared openly.
               </p>
-              <Link
-                href="/startups"
-                className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-200"
-              >
-                See startups &rarr;
+              <Link href="/executives" className="inline-block">
+                <span className="btn-outline-glow px-4 py-1.5 text-xs uppercase tracking-widest rounded-sm inline-block">
+                  Learn more &rarr;
+                </span>
               </Link>
             </MotionCard>
           </MotionGrid>

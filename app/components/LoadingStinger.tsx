@@ -98,19 +98,6 @@ const LoadingStinger: React.FC = () => {
         transition: 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)',
       }}
     >
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-          `,
-          backgroundSize: '54px 54px',
-          backgroundPosition: 'center center',
-        }}
-      />
-
       {/* Metaball squares */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <svg style={{ position: 'absolute', width: 0, height: 0 }}>

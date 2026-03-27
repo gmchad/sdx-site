@@ -21,20 +21,20 @@ export default function UCSDChapterPage() {
         />
 
         {/* Stats */}
-        <div className="flex items-center gap-8 md:gap-12 mb-16">
+        <div className="flex flex-wrap items-center gap-4 md:gap-8 mb-16">
           <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-            <span className="block text-xl md:text-2xl font-bold text-white/90">50+</span>
-            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Students</span>
+            <span className="block text-xl md:text-2xl font-bold text-white/90">500+</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Members</span>
           </div>
-          <div className="w-px h-8 bg-white/10" />
+          <div className="hidden md:block w-px h-8 bg-white/10" />
           <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-            <span className="block text-xl md:text-2xl font-bold text-white/90">Monthly</span>
+            <span className="block text-xl md:text-2xl font-bold text-white/90">Weekly</span>
             <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Demos</span>
           </div>
-          <div className="w-px h-8 bg-white/10" />
+          <div className="hidden md:block w-px h-8 bg-white/10" />
           <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-            <span className="block text-xl md:text-2xl font-bold text-white/90">UCSD</span>
-            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Campus</span>
+            <span className="block text-xl md:text-2xl font-bold text-white/90">5</span>
+            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Companies</span>
           </div>
         </div>
 
@@ -97,7 +97,7 @@ export default function UCSDChapterPage() {
       {/* Connect CTA — full width, break out of parent padding */}
       <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
         <PrismaticCanvas intensity="subtle" />
-        <div className="relative z-10">
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Join the chapter.</h2>
           <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
             Motivated UCSD students who are building with AI and want to share their work.

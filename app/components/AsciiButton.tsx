@@ -16,7 +16,7 @@ const AsciiButton: React.FC<{ children: React.ReactNode; className?: string }> =
     if (!ctx) return;
 
     const chars = '.`-\'_,^:;=><+!*/?)s(d{x}[S]D|X#%&@';
-    const fontSize = 9;
+    const fontSize = 14;
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);

@@ -113,7 +113,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
 };
 
 export default function MembersPage() {
-  const featuredMembers = spotlightMembers.filter((member: typeof spotlightMembers[0]) => member.featured === true);
+  const featuredMembers = spotlightMembers;
 
   return (
     <main className="relative pt-24 px-4 sm:px-6 lg:px-8">
@@ -125,23 +125,23 @@ export default function MembersPage() {
       </div>
       <div className="max-w-7xl mx-auto py-12 relative z-[1]">
         <SectionHeader
-          title="Builders"
+          title="Featured Members"
           subtitle="The people shipping real things in San Diego. Engineers, founders, and operators building at the cutting edge."
           badge="Community"
         />
 
         {/* Stats */}
-        <MotionSection delay={0.1} className="flex items-center gap-8 md:gap-12 mb-16">
+        <MotionSection delay={0.1} className="flex flex-wrap items-center gap-4 md:gap-8 mb-16">
           <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
             <span className="block text-xl md:text-2xl font-bold text-white/90">3000+</span>
             <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Builders</span>
           </div>
-          <div className="w-px h-8 bg-white/10" />
+          <div className="hidden md:block w-px h-8 bg-white/10" />
           <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
             <span className="block text-xl md:text-2xl font-bold text-white/90">{featuredMembers.length}</span>
             <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Featured</span>
           </div>
-          <div className="w-px h-8 bg-white/10" />
+          <div className="hidden md:block w-px h-8 bg-white/10" />
           <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
             <span className="block text-xl md:text-2xl font-bold text-white/90">50+</span>
             <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Projects</span>
@@ -162,12 +162,12 @@ export default function MembersPage() {
       {/* CTA — full width, break out of parent padding */}
       <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
         <PrismaticCanvas intensity="subtle" />
-        <MotionSection className="relative z-10">
+        <MotionSection className="relative z-10 px-4 sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Come build.</h2>
           <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
             Join 3000+ builders shipping real things in San Diego.
           </p>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <MotionButton className="inline-block">
               <Link href="https://lu.ma/sdx" target="_blank" className="block">
                 <AsciiButton>Join Community</AsciiButton>

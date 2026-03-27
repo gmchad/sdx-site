@@ -67,7 +67,6 @@ const Footer: React.FC = () => {
               {[
                 { href: '/events', label: 'Events' },
                 { href: '/members', label: 'Members' },
-                { href: '/startups', label: 'Startups' },
                 { href: '/chapters', label: 'Chapters' },
               ].map((link) => (
                 <li key={link.href}>
@@ -105,10 +104,11 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/5 mt-10 pt-6">
-          <p className="text-xs text-white tracking-wider">
-            &copy; {new Date().getFullYear()} SDx. Build here.
-          </p>
+        <div className="mt-10 pt-6 flex items-center gap-3">
+          <span className="text-xs text-white tracking-wider">&copy; {new Date().getFullYear()} SDx.</span>
+          <span className="inline-flex items-center bg-white text-black font-bold text-xs tracking-wider pl-1 pr-1">
+            Build here.<span className="animate-blink ml-0.5">|</span>
+          </span>
         </div>
       </MotionSection>
     </footer>

@@ -26,6 +26,7 @@ const config: Config = {
   			'float-delayed': 'float 8s ease-in-out 2s infinite',
   			'float-slow': 'float 12s ease-in-out 1s infinite',
   			'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+			'blink': 'blink 1.2s cubic-bezier(1,0,0.31,1.39) infinite',
   		},
   		keyframes: {
   			marquee: {

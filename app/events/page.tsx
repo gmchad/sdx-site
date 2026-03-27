@@ -108,17 +108,17 @@ export default function EventsPage() {
           )}
 
           {/* Stats */}
-          <MotionSection className="flex items-center gap-8 md:gap-12" delay={0.1}>
+          <MotionSection className="flex flex-wrap items-center gap-4 md:gap-8" delay={0.1}>
             <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
               <span className="block text-xl md:text-2xl font-bold text-white/90">{upcomingCount}</span>
               <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Upcoming</span>
             </div>
-            <div className="w-px h-8 bg-white/10" />
+            <div className="hidden md:block w-px h-8 bg-white/10" />
             <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
               <span className="block text-xl md:text-2xl font-bold text-white/90">{pastCount}</span>
               <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Past</span>
             </div>
-            <div className="w-px h-8 bg-white/10" />
+            <div className="hidden md:block w-px h-8 bg-white/10" />
             <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
               <span className="block text-xl md:text-2xl font-bold text-white/90">{events.length}</span>
               <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Total</span>
@@ -245,7 +245,7 @@ export default function EventsPage() {
       {/* Lu.ma CTA — full width, break out of parent padding */}
       <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
         <PrismaticCanvas intensity="subtle" />
-        <MotionSection className="relative z-10">
+        <MotionSection className="relative z-10 px-4 sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Never miss an event</h2>
           <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
             All events are hosted on Lu.ma. Follow our calendar for updates.

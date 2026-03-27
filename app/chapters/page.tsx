@@ -164,12 +164,12 @@ export default function ChaptersPage() {
       {/* Start a Chapter CTA — full width, break out of parent padding */}
       <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
         <PrismaticCanvas intensity="subtle" />
-        <MotionSection className="relative z-10">
+        <MotionSection className="relative z-10 px-4 sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Start a chapter.</h2>
           <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
             Interested in bringing SDx to your university? We&apos;re looking for builders who want to lead.
           </p>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <MotionButton className="inline-block">
               <Link href="mailto:chapters@sdx.community?subject=Start a New Chapter" className="block">
                 <AsciiButton>Start a Chapter</AsciiButton>

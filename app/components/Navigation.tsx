@@ -13,7 +13,6 @@ const navLinks = [
   { href: '/events', label: 'Events' },
   { href: '/members', label: 'Members' },
   { href: '/chapters', label: 'Chapters' },
-  { href: '/startups', label: 'Startups' },
 ];
 
 const Navigation: React.FC = () => {

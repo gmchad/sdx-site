@@ -166,38 +166,35 @@ export default function ExecutivesPage() {
 
   return (
     <main className="pt-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto py-12">
-        <SectionHeader
-          title="Executive Network"
-          subtitle="Peer-level AI implementation exchange for C-suite leaders. Real experience, shared openly. Not a conference. Not a vendor pitch."
-          badge="Leadership"
-        />
+      {/* Full-width prismatic background behind header + hero */}
+      <div className="relative">
+        <PrismaticCanvas intensity="medium" palette="warm" />
+        <div className="relative z-10 max-w-7xl mx-auto py-12">
+          <SectionHeader
+            title="Executive Network"
+            subtitle="Peer-level AI implementation exchange for C-suite leaders. Real experience, shared openly. Not a conference. Not a vendor pitch."
+            badge="Leadership"
+          />
 
-        {/* Hero: Event + Form */}
-        <MotionSection delay={0.1} className="relative grid lg:grid-cols-5 gap-6 mb-16">
-          <PrismaticCanvas intensity="medium" palette="warm" className="rounded-lg" />
-          {/* Event Details */}
+          {/* Hero: About + Form */}
+          <MotionSection delay={0.1} className="grid lg:grid-cols-5 gap-6 mb-16">
+          {/* About the Network */}
           <div className="lg:col-span-3">
-            <Card className="h-full">
+            <Card className="h-full backdrop-blur-sm bg-white/[0.02]">
               <CardContent className="p-8">
-                <span className="text-xs uppercase tracking-widest text-white/30">Next roundtable</span>
-                <h2 className="font-display text-2xl text-white mt-2 mb-6">AI Implementation: Real-World Insights</h2>
-
-                <div className="flex flex-wrap gap-3 mb-6">
-                  <Badge variant="outline">September 30th, 12-2pm</Badge>
-                  <Badge variant="outline">Cadre HQ</Badge>
-                </div>
+                <span className="text-xs uppercase tracking-widest text-white/30">What it is</span>
+                <h2 className="font-display text-2xl text-white mt-2 mb-6">An executive peer network for AI leaders</h2>
 
                 <p className="text-sm text-white/40 leading-relaxed mb-8">
-                  Exclusive 2-hour executive roundtable on practical AI implementation. Share use cases, discuss inhibitors, and exchange solutions with peers navigating the same challenges.
+                  The SDx Executive Network brings together C-suite leaders and senior decision-makers navigating AI implementation. Small-group roundtables, off-the-record conversations, and direct access to peers who are solving the same problems you are. No vendors. No pitches. Just real experience shared openly.
                 </p>
 
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { title: 'Key Use Cases', desc: 'Share successful AI implementations' },
-                    { title: 'Inhibitors & Solutions', desc: 'Challenges and proven solutions' },
-                    { title: 'Open Exchange', desc: 'Collaborative, off-the-record' },
-                    { title: 'Industry Perspectives', desc: 'OpenAI and partner insights' },
+                    { title: 'Peer Roundtables', desc: 'Intimate sessions with fellow executives tackling AI adoption' },
+                    { title: 'Off-the-Record', desc: 'Candid conversations in a trusted, closed-door environment' },
+                    { title: 'Practical Focus', desc: 'Real use cases, real inhibitors, real solutions' },
+                    { title: 'Curated Network', desc: 'Vetted membership of senior leaders across industries' },
                   ].map((item) => (
                     <div key={item.title} className="flex items-start gap-2">
                       <div className="w-1 h-1 rounded-full bg-sdx-amber mt-1.5 flex-shrink-0" />
@@ -218,7 +215,7 @@ export default function ExecutivesPage() {
 
           {/* Application Form */}
           <div className="lg:col-span-2">
-            <Card className="h-full holographic-border">
+            <Card className="h-full backdrop-blur-xl bg-black/60 border border-white/10">
               <CardContent className="p-6">
                 <h3 className="font-display text-xl text-white mb-1">Apply</h3>
                 <p className="text-xs text-white/30 mb-6">
@@ -293,7 +290,10 @@ export default function ExecutivesPage() {
             </Card>
           </div>
         </MotionSection>
+        </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Featured Executives */}
         {featuredExecutives.length > 0 && (
           <div className="mb-16">

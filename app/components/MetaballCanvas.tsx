@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
+import { useCanvasSettings } from './CanvasDebugPanel';
 
 const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
+  const { settings } = useCanvasSettings();
   const gooRef = useRef<HTMLDivElement>(null);
   const cellsRef = useRef<HTMLDivElement[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
@@ -11,15 +13,15 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   const rafRef = useRef<number>(0);
   const built = useRef(false);
 
-  const opacity = 0.50;
-  const blur = 5;
-  const contrast = 40;
-  const threshold = -15;
+  const opacity = settings.heroOpacity;
+  const blur = settings.heroBlur;
+  const contrast = settings.heroContrast;
+  const threshold = settings.heroThreshold;
   const borderRadius = 0;
-  const cellSize = 42;
+  const cellSize = settings.heroCellSize;
   const mouseRadius = 280;
-  const mouseStrength = 80;
-  const mouseLag = 0.99;
+  const mouseStrength = 120;
+  const mouseLag = 0.85;
   const clearRadius = 0.45;
 
   const buildGrid = () => {
@@ -55,7 +57,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const s = r * cols + c + 7;
-        if (sr(s) > 0.55) continue;
+        if (sr(s) > settings.heroDensity) continue;
 
         const cx = offsetX + c * gap;
         const cy = offsetY + r * gap;
@@ -125,10 +127,8 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   };
 
   useEffect(() => {
-    if (!built.current) {
-      built.current = true;
-      requestAnimationFrame(() => buildGrid());
-    }
+    built.current = false;
+    requestAnimationFrame(() => buildGrid());
 
     let resizeTimer: NodeJS.Timeout;
     const onResize = () => {
@@ -145,7 +145,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
       clearTimeout(resizeTimer);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cellSize, settings.heroDensity]);
 
   // Mouse interaction + ASCII swirl rendering
   useEffect(() => {
