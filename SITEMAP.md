@@ -87,7 +87,7 @@ sdx-site/
 ### **Home Page (`/`)**
 **Status**: ✅ Complete
 - **Hero Section**: Dual-path design (Builders vs Executives)
-- **Impact Metrics**: 1000+ members, 50+ events, 15+ startups
+- **Impact Metrics**: 3000+ members, 50+ events, 15+ startups
 - **Social Links**: Discord, Twitter with proper analytics
 - **Sponsor Bar**: Animated marquee with sponsor logos
 - **Bottom CTA**: AI talent network link
