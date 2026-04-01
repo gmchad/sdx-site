@@ -141,7 +141,7 @@ export default function CanvasDebugPanel() {
             h1, h2, h3 {
               animation: sdx-party-text 4s linear infinite !important;
             }
-            .holographic-border, .btn-secondary, .btn-outline-glow {
+            .btn-secondary, .btn-outline-glow {
               animation: sdx-party-text 3s linear infinite !important;
               border-color: currentColor !important;
             }
@@ -187,7 +187,7 @@ export default function CanvasDebugPanel() {
             .bg-white, .bg-white\\/10, [class*="bg-white"] {
               background-color: rgba(1, 255, 0, 0.08) !important;
             }
-            .btn-secondary, .holographic-border {
+            .btn-secondary {
               background: rgba(1, 255, 0, 0.15) !important;
               color: #01FF00 !important;
             }

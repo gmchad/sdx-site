@@ -40,7 +40,7 @@ const chapters = [
     founder: "Matt Attardo",
     description: "Expanding SDx's presence with SDSU's vibrant student community. Builder-first programming for Aztec engineers and creators.",
     href: "#",
-    contactEmail: "sdsu@sdx.community",
+    contactEmail: "hello@sdx.community",
   },
 ];
 
@@ -171,7 +171,7 @@ export default function ChaptersPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <MotionButton className="inline-block">
-              <Link href="mailto:chapters@sdx.community?subject=Start a New Chapter" className="block">
+              <Link href="mailto:hello@sdx.community?subject=Start a New Chapter" className="block">
                 <AsciiButton>Start a Chapter</AsciiButton>
               </Link>
             </MotionButton>

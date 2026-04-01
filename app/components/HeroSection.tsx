@@ -48,10 +48,6 @@ const eventTypes = [
     description: 'Full-day build events with sponsor credits and prizes.',
   },
   {
-    name: 'OpenClaw',
-    description: 'Building with the OpenClaw agentic AI framework.',
-  },
-  {
     name: 'Executive Roundtables',
     description: 'Peer-level AI implementation exchange for senior leaders.',
   },
@@ -84,102 +80,104 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Content layer */}
-        <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <section className="relative z-10 min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8">
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <m.h1
-            className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6 prismatic-glow"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ ...transitions.heroEntrance, delay: d(2.4, 0.2) }}
-          >
-            Build here.
-          </m.h1>
-          <m.p
-            className="text-base md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ ...transitions.appear, delay: d(2.8, 0.4) }}
-          >
-            San Diego&apos;s builder-first technology community.
-          </m.p>
+          {/* Hero copy + CTAs — grows to fill available space, centered vertically */}
+          <div className="relative z-10 max-w-5xl mx-auto text-center flex-1 flex flex-col items-center justify-center">
+            <m.h1
+              className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6 prismatic-glow"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ...transitions.heroEntrance, delay: d(2.4, 0.2) }}
+            >
+              Build here.
+            </m.h1>
+            <m.p
+              className="text-base md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ...transitions.appear, delay: d(2.8, 0.4) }}
+            >
+              San Diego&apos;s builder-first technology community.
+            </m.p>
 
-          <m.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ ...transitions.appear, delay: d(3.0, 0.5) }}
-          >
-            <MotionButton>
-              <Link
-                href="https://lu.ma/sdx"
-                target="_blank"
-                onClick={() => handleLinkClick('https://lu.ma/sdx', 'hero-cta')}
-                className="block"
-              >
-                <AsciiButton>Start Building</AsciiButton>
-              </Link>
-            </MotionButton>
-            <MotionButton>
-              <Link
-                href="/executives"
-                onClick={() => handleLinkClick('/executives', 'hero-exec')}
-                className="btn-outline-glow px-6 py-3 text-xs uppercase tracking-widest rounded-sm block"
-              >
-                Executive Network &rarr;
-              </Link>
-            </MotionButton>
-          </m.div>
-        </div>
+            <m.div
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ...transitions.appear, delay: d(3.0, 0.5) }}
+            >
+              <MotionButton>
+                <Link
+                  href="https://lu.ma/sdx"
+                  target="_blank"
+                  onClick={() => handleLinkClick('https://lu.ma/sdx', 'hero-cta')}
+                  className="block"
+                >
+                  <AsciiButton>Start Building</AsciiButton>
+                </Link>
+              </MotionButton>
+              <MotionButton>
+                <Link
+                  href="/executives"
+                  onClick={() => handleLinkClick('/executives', 'hero-exec')}
+                  className="btn-outline-glow px-6 py-3 text-xs uppercase tracking-widest rounded-sm block"
+                >
+                  Executive Network &rarr;
+                </Link>
+              </MotionButton>
+            </m.div>
 
-        {/* Partners — full width with edge fade */}
-        <div className="absolute bottom-8 md:bottom-40 left-[10%] right-[10%] z-10">
-          <p className="text-xs uppercase tracking-widest text-white/40 text-center mb-4">Partners</p>
-          <div
-            className="overflow-hidden w-full"
-            style={{
-              maskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
-            }}
-          >
-            <div className="animate-marquee flex w-max">
-              {[partnerLogos, partnerLogos].map((set, setIndex) => (
-                <div key={setIndex} className="flex shrink-0">
-                  {set.map((logo, index) => (
-                    <div key={index} className="flex items-center justify-center mx-6">
-                      <Image
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={96}
-                        height={48}
-                        className={logo.className || 'w-24 h-12 object-contain'}
-                      />
-                    </div>
-                  ))}
-                </div>
+            {/* Metrics bar */}
+            <m.div
+              className="flex flex-wrap items-center justify-center gap-4 md:gap-8 lg:gap-12"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...transitions.appear, delay: d(3.2, 0.6) }}
+            >
+              {metrics.map((metric, i) => (
+                <React.Fragment key={metric.label}>
+                  {i > 0 && <div className="hidden md:block w-px h-8 bg-white/10" />}
+                  <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
+                    <span className="block text-xl md:text-2xl font-bold text-white/90">{metric.value}</span>
+                    <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">{metric.label}</span>
+                  </div>
+                </React.Fragment>
               ))}
+            </m.div>
+          </div>
+
+          {/* Partners — in normal flow, below the hero content */}
+          <div className="relative z-10 w-full py-10">
+            <p className="text-xs uppercase tracking-widest text-white/40 text-center mb-4">Partners</p>
+            <div
+              className="overflow-hidden w-full"
+              style={{
+                maskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, white 8%, white 92%, transparent 100%)',
+              }}
+            >
+              <div className="animate-marquee flex w-max">
+                {[partnerLogos, partnerLogos].map((set, setIndex) => (
+                  <div key={setIndex} className="flex shrink-0">
+                    {set.map((logo, index) => (
+                      <div key={index} className="flex items-center justify-center mx-6">
+                        <Image
+                          src={logo.src}
+                          alt={logo.alt}
+                          width={96}
+                          height={48}
+                          className={logo.className || 'w-24 h-12 object-contain'}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Metrics bar */}
-        <m.div
-          className="relative z-10 flex flex-wrap items-center gap-4 md:gap-8 lg:gap-12"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...transitions.appear, delay: d(3.2, 0.6) }}
-        >
-          {metrics.map((metric, i) => (
-            <React.Fragment key={metric.label}>
-              {i > 0 && <div className="hidden md:block w-px h-8 bg-white/10" />}
-              <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-                <span className="block text-xl md:text-2xl font-bold text-white/90">{metric.value}</span>
-                <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">{metric.label}</span>
-              </div>
-            </React.Fragment>
-          ))}
-        </m.div>
-      </section>
+        </section>
       </div>
 
       {/* Section 2: Event Types */}
@@ -250,7 +248,7 @@ const HeroSection: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                  <span className="text-sm text-white/40">SDx USD — Planned</span>
+                  <span className="text-sm text-white/40">SDx<span className="text-outline">USD</span> — Planned</span>
                 </div>
               </div>
               <Link href="/chapters" className="inline-block mt-4">

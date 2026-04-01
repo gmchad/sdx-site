@@ -16,11 +16,9 @@ const config: Config = {
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
   			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-  			'holographic': 'linear-gradient(135deg, hsl(175, 70%, 40%), hsl(220, 75%, 55%), hsl(270, 65%, 60%), hsl(330, 75%, 55%), hsl(35, 85%, 55%))',
   		},
   		animation: {
   			marquee: 'marquee 20s linear infinite',
-  			'holographic': 'holographic-shift 8s linear infinite',
   			'glow': 'glow-pulse 3s ease-in-out infinite',
   			'float': 'float 8s ease-in-out infinite',
   			'float-delayed': 'float 8s ease-in-out 2s infinite',
@@ -32,10 +30,6 @@ const config: Config = {
   			marquee: {
   				'0%': { transform: 'translateX(0%)' },
   				'100%': { transform: 'translateX(-50%)' },
-  			},
-  			'holographic-shift': {
-  				'0%': { backgroundPosition: '0% 50%' },
-  				'100%': { backgroundPosition: '200% 50%' },
   			},
   			'glow-pulse': {
   				'0%, 100%': { opacity: '0.4' },
@@ -91,13 +85,8 @@ const config: Config = {
   			ring: 'hsl(var(--ring))',
   			sdx: {
   				teal: 'hsl(var(--sdx-teal))',
-  				green: 'hsl(var(--sdx-green))',
   				amber: 'hsl(var(--sdx-amber))',
-  				orange: 'hsl(var(--sdx-orange))',
-  				magenta: 'hsl(var(--sdx-magenta))',
-  				pink: 'hsl(var(--sdx-pink))',
   				blue: 'hsl(var(--sdx-blue))',
-  				violet: 'hsl(var(--sdx-violet))',
   			},
   			chart: {
   				'1': 'hsl(var(--chart-1))',
@@ -108,11 +97,6 @@ const config: Config = {
   			},
   		},
   		boxShadow: {
-  			'glow-teal': '0 0 20px hsla(175, 70%, 40%, 0.15)',
-  			'glow-blue': '0 0 20px hsla(220, 75%, 55%, 0.15)',
-  			'glow-magenta': '0 0 20px hsla(330, 75%, 55%, 0.15)',
-  			'glow-violet': '0 0 20px hsla(270, 65%, 60%, 0.15)',
-  			'glow-amber': '0 0 20px hsla(35, 85%, 55%, 0.15)',
   			'glow-white': '0 0 20px rgba(255, 255, 255, 0.03)',
   		},
   	},
