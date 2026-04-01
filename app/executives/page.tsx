@@ -282,8 +282,8 @@ export default function ExecutivesPage() {
 
                 <p className="text-xs text-white/20 mt-4 text-center">
                   Questions?{' '}
-                  <Link href="mailto:contact@sdx.community" className="text-white/40 hover:text-white transition-colors duration-200">
-                    contact@sdx.community
+                  <Link href="mailto:hello@sdx.community" className="text-white/40 hover:text-white transition-colors duration-200">
+                    hello@sdx.community
                   </Link>
                 </p>
               </CardContent>

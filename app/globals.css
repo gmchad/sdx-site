@@ -32,13 +32,8 @@
 
     /* SDx brand accent palette */
     --sdx-teal: 175 70% 40%;
-    --sdx-green: 145 65% 45%;
     --sdx-amber: 35 85% 55%;
-    --sdx-orange: 20 90% 55%;
-    --sdx-magenta: 330 75% 55%;
-    --sdx-pink: 345 80% 65%;
     --sdx-blue: 220 75% 55%;
-    --sdx-violet: 270 65% 60%;
   }
 
   html {
@@ -66,24 +61,6 @@
     font-family: var(--font-display), sans-serif;
   }
 
-  .holographic-text {
-    background: linear-gradient(
-      90deg,
-      #d92c2d,
-      #fc5715,
-      #fac205,
-      #03C661,
-      #11BBCD,
-      #d92c2d
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: holographic-shift 8s linear infinite;
-  }
-
-  /* Prismatic glow — reusable drop shadow matching the ColorBends palette */
   .text-outline {
     color: transparent;
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
@@ -151,58 +128,6 @@
       0 0 70px rgba(255, 255, 255, 0.15);
   }
 
-  .holographic-border {
-    font-weight: 700;
-    position: relative;
-    background: linear-gradient(
-      90deg,
-      #2a0808,
-      #2a1505,
-      #2a2502,
-      #052a10,
-      #041e22,
-      #021222,
-      #2a0808
-    );
-    background-size: 400% 100%;
-    animation: holographic-slide 20s linear infinite;
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
-    box-shadow:
-      0 0 8px rgba(255, 255, 255, 0.3),
-      0 0 20px rgba(255, 255, 255, 0.15),
-      0 0 40px rgba(255, 255, 255, 0.08),
-      inset 0 0 8px rgba(255, 255, 255, 0.05);
-  }
-
-  .holographic-border:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    box-shadow:
-      0 0 12px rgba(255, 255, 255, 0.5),
-      0 0 30px rgba(255, 255, 255, 0.25),
-      0 0 60px rgba(255, 255, 255, 0.12),
-      inset 0 0 12px rgba(255, 255, 255, 0.08);
-  }
-
-  .holographic-bg {
-    background: linear-gradient(
-      135deg,
-      rgba(217, 44, 45, 0.15),
-      rgba(252, 87, 21, 0.12),
-      rgba(250, 194, 5, 0.1),
-      rgba(3, 198, 97, 0.1),
-      rgba(17, 187, 205, 0.12)
-    );
-  }
-}
-
-@keyframes holographic-shift {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-@keyframes holographic-slide {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 400% 50%; }
 }
 
 @keyframes blink {
@@ -257,15 +182,6 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .holographic-text {
-    animation: none;
-    background-position: 0% 50%;
-  }
-
-  .holographic-border::before {
-    animation: none;
-  }
-
   *,
   *::before,
   *::after {
