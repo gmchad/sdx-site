@@ -82,8 +82,8 @@ const HeroSection: React.FC = () => {
         {/* Content layer */}
         <section className="relative z-10 min-h-screen flex flex-col items-center px-4 sm:px-6 lg:px-8">
 
-          {/* Hero copy + CTAs — grows to fill available space, centered vertically */}
-          <div className="relative z-10 max-w-5xl mx-auto text-center flex-1 flex flex-col items-center justify-center">
+          {/* Hero copy + CTAs — centered vertically with fixed padding */}
+          <div className="relative z-10 max-w-5xl mx-auto text-center flex-1 flex flex-col items-center justify-center max-h-[75vh] pt-16">
             <m.h1
               className="font-display text-6xl md:text-8xl lg:text-9xl text-white tracking-tight mb-6 prismatic-glow"
               initial={{ opacity: 0 }}
@@ -148,7 +148,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Partners — in normal flow, below the hero content */}
-          <div className="relative z-10 w-full py-10">
+          <div className="relative z-10 w-full py-4">
             <p className="text-xs uppercase tracking-widest text-white/40 text-center mb-4">Partners</p>
             <div
               className="overflow-hidden w-full"
