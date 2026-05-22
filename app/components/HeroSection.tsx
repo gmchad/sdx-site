@@ -27,7 +27,7 @@ const partnerLogos: { src: string; alt: string; className?: string }[] = [
   { src: '/sponsors/ucsd.png', alt: 'UCSD' },
   { src: '/sponsors/groq.svg', alt: 'Groq', className: 'w-16 h-10 object-contain' },
   { src: '/sponsors/modal.svg', alt: 'Modal' },
-  { src: '/sponsors/yc.svg', alt: 'Y Combinator' },
+  // { src: '/sponsors/yc.svg', alt: 'Y Combinator' },
 ];
 
 const eventTypes = [
@@ -262,7 +262,8 @@ const HeroSection: React.FC = () => {
               <span className="text-xs uppercase tracking-widest text-white/30">Community</span>
               <h3 className="font-display text-2xl text-white mt-2 mb-4">Who we work with</h3>
               <p className="text-sm text-white/40 leading-relaxed mb-4">
-                Connected to the organizations that matter. Y Combinator, OpenAI, Anthropic, Qualcomm, Supabase, Vercel, Replit, and the university systems across San Diego.
+                {/* Connected to the organizations that matter. Y Combinator, OpenAI, Anthropic, Qualcomm, Supabase, Vercel, Replit, and the university systems across San Diego. */}
+                Connected to the organizations that matter. OpenAI, Anthropic, Qualcomm, Supabase, Vercel, Replit, and the university systems across San Diego.
               </p>
               <Link href="/members" className="inline-block">
                 <span className="btn-outline-glow px-4 py-1.5 text-xs uppercase tracking-widest rounded-sm inline-block">

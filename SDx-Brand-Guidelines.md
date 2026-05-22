@@ -75,7 +75,7 @@ Current partners in the site marquee. When co-branding, "SDx" always appears in 
 
 ```
 Cadre, Anthropic, ElevenLabs, Hugging Face, OpenAI, Qualcomm,
-Replit, Vercel, UCSD, Groq, Modal, Y Combinator
+Replit, Vercel, UCSD, Groq, Modal<!-- , Y Combinator -->
 ```
 
 ---
