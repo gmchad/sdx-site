@@ -8,6 +8,9 @@ import media from '../lib/media';
 
 type PastEvent = (typeof media.past)[number];
 
+/** Timeline starts at the Vercel Hackathon (Jan 25, 2026) — older events live on Luma */
+const TIMELINE_START = '2026-01-25';
+
 function formatDay(iso: string, timeZone: string) {
   return new Date(iso).toLocaleDateString('en-US', {
     month: 'short',
@@ -29,6 +32,7 @@ export default function PastEvents() {
     const map = new Map<string, { label: string; sort: string; events: PastEvent[] }>();
 
     for (const event of media.past) {
+      if (event.date < TIMELINE_START) continue;
       const tz = event.timezone || 'America/Los_Angeles';
       const { key, label, sort } = monthKey(event.date, tz);
       if (!map.has(key)) map.set(key, { label, sort, events: [] });
@@ -53,9 +57,6 @@ export default function PastEvents() {
               Upcoming events
             </h2>
             <p className="mt-6 text-base md:text-lg text-white/45 leading-relaxed">
-              Coming soon.
-            </p>
-            <p className="mt-3 text-sm text-white/30 leading-relaxed">
               New dates drop on{' '}
               <a
                 href={UCSD_LUMA}
@@ -78,15 +79,16 @@ export default function PastEvents() {
             <h2 className="font-display text-3xl md:text-5xl text-white tracking-tight prismatic-glow-sm">
               Past events
             </h2>
-            <p className="mt-4 text-sm text-white/35 leading-relaxed max-w-md">
-              Everything on the SDx @ UC San Diego Luma calendar — newest first.
-            </p>
           </MotionSection>
 
-          <div className="relative">
-            {/* Spine */}
+          <div className="relative pb-12">
+            {/* Spine — stays visible through the rows, fades out quickly in the tail below the last event */}
             <div
-              className="pointer-events-none absolute left-[0.4rem] md:left-[0.45rem] top-2 bottom-2 w-px bg-gradient-to-b from-white/25 via-white/10 to-transparent"
+              className="pointer-events-none absolute left-[0.4rem] md:left-[0.45rem] top-2 bottom-0 w-px"
+              style={{
+                background:
+                  'linear-gradient(to bottom, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.15) 82%, transparent 100%)',
+              }}
               aria-hidden="true"
             />
 
@@ -94,7 +96,7 @@ export default function PastEvents() {
               {groups.map((group, gi) => (
                 <MotionSection key={group.sort} delay={Math.min(gi * 0.04, 0.2)}>
                   <div className="relative pl-8 md:pl-10">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/35 mb-5">
+                    <p className="text-sm md:text-base font-bold tracking-wide text-white/60 mb-5">
                       {group.label}
                     </p>
 
@@ -113,7 +115,7 @@ export default function PastEvents() {
                             >
                               {/* Timeline node */}
                               <span
-                                className="absolute -left-8 md:-left-10 top-[1.35rem] h-2 w-2 rounded-full ring-4 ring-black"
+                                className="absolute -left-[1.32rem] md:-left-[1.77rem] top-[1.35rem] h-2 w-2 rounded-full ring-4 ring-black"
                                 style={{ backgroundColor: accent }}
                                 aria-hidden="true"
                               />
@@ -150,9 +152,9 @@ export default function PastEvents() {
               href={UCSD_LUMA}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/40 hover:text-white/70 transition-colors"
+              className="inline-flex items-center gap-2 text-xs tracking-wide text-white/40 hover:text-white/70 transition-colors"
             >
-              View full calendar on Luma
+              view full calendar on luma
               <ExternalLink className="w-3 h-3" strokeWidth={1.75} />
             </a>
           </MotionSection>
