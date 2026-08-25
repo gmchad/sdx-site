@@ -18,8 +18,8 @@ export default function About() {
 
       <div className="relative z-[1] max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
-          {/* Text column — top: what we do, bottom: who can join (aligned with collage) */}
-          <div className="lg:col-span-5 flex flex-col gap-10 lg:h-full lg:justify-between">
+          {/* Text column — vertically centered against the collage */}
+          <div className="lg:col-span-5 flex flex-col lg:h-full lg:justify-center">
             <MotionSection>
               <h2 className="font-display text-3xl md:text-5xl text-white tracking-tight leading-[1.08] prismatic-glow-sm">
                 What we do.
@@ -37,17 +37,6 @@ export default function About() {
                   nights, hikes, etc.)
                 </li>
               </ul>
-            </MotionSection>
-
-            <MotionSection delay={0.08} className="max-w-md">
-              <h2 className="font-display text-3xl md:text-5xl text-white tracking-tight leading-[1.08] prismatic-glow-sm">
-                Who can join.
-              </h2>
-              <p className="mt-5 text-sm md:text-base text-white/50 leading-relaxed">
-                UCSD students who are <em className="italic text-white/60">genuinely</em>{' '}
-                curious and <em className="italic text-white/60">passionate</em> about
-                building.
-              </p>
             </MotionSection>
           </div>
 

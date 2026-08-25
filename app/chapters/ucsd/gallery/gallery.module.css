@@ -1,0 +1,106 @@
+/* SDxUCSD route-local effects — scoped to /chapters/ucsd only */
+
+/* Scanning beam that sweeps the week timeline */
+@keyframes ucsdScan {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 2px);
+    opacity: 0;
+  }
+}
+
+.scanBeam {
+  animation: ucsdScan 8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  will-change: left, opacity;
+}
+
+/* Terminal caret blink */
+@keyframes ucsdCaret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  animation: ucsdCaret 1.1s steps(1) infinite;
+}
+
+/* Spotlight hover — radial highlight follows the cursor (Linear-style) */
+.spot {
+  position: relative;
+}
+
+.spot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.055),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* Slow drift for the hero color field (subtle life even without pointer) */
+@keyframes ucsdDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -2.5%, 0) scale(1.04);
+  }
+}
+
+.drift {
+  animation: ucsdDrift 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Film grain — monochrome noise, stepped jitter for a filmic texture */
+@keyframes ucsdGrain {
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+  20% {
+    background-position: -40px 30px;
+  }
+  40% {
+    background-position: 30px -50px;
+  }
+  60% {
+    background-position: -30px -20px;
+  }
+  80% {
+    background-position: 50px 40px;
+  }
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.045;
+  animation: ucsdGrain 1.2s steps(1) infinite;
+}
