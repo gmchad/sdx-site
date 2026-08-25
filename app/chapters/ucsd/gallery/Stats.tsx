@@ -30,7 +30,7 @@ export default function Stats() {
                 <p className="font-display text-4xl md:text-5xl text-white tracking-tight prismatic-glow-sm">
                   {stat.value}
                 </p>
-                <p className="mt-2 text-sm text-white/40 normal-case tracking-normal">
+                <p className="mt-2 text-xs uppercase tracking-widest text-white/40">
                   {stat.label}
                 </p>
               </div>
