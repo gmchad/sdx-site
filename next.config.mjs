@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async redirects() {
+  async rewrites() {
     return [
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'ucsd.sdx.community' }],
-        destination: 'https://www.sdx.community/chapters/ucsd',
-        permanent: false,
+        destination: '/chapters/ucsd',
       },
     ];
   },
