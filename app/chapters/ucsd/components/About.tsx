@@ -45,7 +45,8 @@ export default function About() {
               </h2>
               <p className="mt-5 text-sm md:text-base text-white/50 leading-relaxed">
                 UCSD students who are <em className="italic text-white/60">genuinely</em>{' '}
-                curious.
+                curious and <em className="italic text-white/60">passionate</em> about
+                building.
               </p>
             </MotionSection>
           </div>

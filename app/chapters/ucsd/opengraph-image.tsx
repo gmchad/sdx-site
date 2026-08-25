@@ -8,7 +8,7 @@ export const contentType = 'image/png';
 export default async function Image() {
   const [fonts, bgSrc] = await Promise.all([loadFonts(), loadBgImage()]);
   return new ImageResponse(
-    <OGImage title="SDxUCSD" subtitle="500+ members. Weekly demos. 5 companies spun out." badge="Chapter" bgSrc={bgSrc} />,
+    <OGImage title="SDxUCSD" subtitle="1,200+ attendees hosted. 30+ events. 6+ hackathons." badge="Chapter" bgSrc={bgSrc} />,
     { ...size, fonts }
   );
 }
