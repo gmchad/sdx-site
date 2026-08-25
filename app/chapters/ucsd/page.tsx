@@ -1,126 +1,18 @@
 'use client'
 
 import React from 'react';
-import Link from 'next/link';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Mail, ExternalLink } from 'lucide-react';
-import SectionHeader from '@/app/components/SectionHeader';
-import ChapterName from '@/app/components/ChapterName';
-import PrismaticCanvas from '@/app/components/PrismaticCanvas';
-import AsciiButton from '@/app/components/AsciiButton';
+import Hero from './components/Hero';
+import About from './components/About';
+import PastEvents from './components/PastEvents';
+import StartBuilding from './components/StartBuilding';
 
 export default function UCSDChapterPage() {
   return (
-    <main className="pt-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto py-12">
-        <SectionHeader
-          title={<ChapterName name="SDxUCSD" />}
-          subtitle="An invite-only community where the best UCSD students building with AI share their latest experiments and projects. Founded 2024 by Dhruv Kanetkar."
-          badge="Chapter"
-        />
-
-        {/* Stats */}
-        <div className="flex flex-wrap items-center gap-4 md:gap-8 mb-16">
-          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-            <span className="block text-xl md:text-2xl font-bold text-white/90">500+</span>
-            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Members</span>
-          </div>
-          <div className="hidden md:block w-px h-8 bg-white/10" />
-          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-            <span className="block text-xl md:text-2xl font-bold text-white/90">Weekly</span>
-            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Demos</span>
-          </div>
-          <div className="hidden md:block w-px h-8 bg-white/10" />
-          <div className="bg-white/10 rounded-sm px-4 py-2 text-center">
-            <span className="block text-xl md:text-2xl font-bold text-white/90">5</span>
-            <span className="block text-xs uppercase tracking-widest text-white/40 mt-0.5">Companies</span>
-          </div>
-        </div>
-
-        {/* About */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="font-display text-base font-bold text-white mb-3">What we do</h3>
-              <ul className="space-y-2">
-                {[
-                  'Monthly project demos and presentations',
-                  'Peer feedback and collaboration sessions',
-                  'Connection to industry professionals',
-                  'Access to the broader SDx ecosystem',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-white/40 leading-relaxed">
-                    <div className="w-1 h-1 rounded-full bg-sdx-teal mt-1.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="font-display text-base font-bold text-white mb-3">Who can join</h3>
-              <ul className="space-y-2">
-                {[
-                  'UCSD students actively building AI projects',
-                  'Undergraduate and graduate students',
-                  'Researchers and PhD candidates',
-                  'Students with demonstrated project experience',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-white/40 leading-relaxed">
-                    <div className="w-1 h-1 rounded-full bg-sdx-blue mt-1.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Coming Soon */}
-        <div className="mb-16">
-          <Card>
-            <CardContent className="p-6 text-center">
-              <Badge variant="outline" className="mb-3">Coming Soon</Badge>
-              <CardTitle className="text-base mb-2">2025 Cohort Projects</CardTitle>
-              <p className="text-sm text-white/40 max-w-md mx-auto leading-relaxed">
-                We&apos;re preparing to showcase projects from our 2025 cohort. Research, applications, and experiments from UCSD&apos;s best builders.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
-      </div>
-
-      {/* Connect CTA — full width, break out of parent padding */}
-      <div className="-mx-4 sm:-mx-6 lg:-mx-8 relative overflow-hidden border-t border-white/5 pt-16 pb-16 text-center">
-        <PrismaticCanvas intensity="subtle" />
-        <div className="relative z-10 px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-2xl text-white mb-3 prismatic-glow-sm">Join the chapter.</h2>
-          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">
-            Motivated UCSD students who are building with AI and want to share their work.
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link href="mailto:ucsd@sdx.community" className="block">
-              <AsciiButton>Contact Lead</AsciiButton>
-            </Link>
-            <Link
-              href="https://discord.gg/Rkgyzx2ykV"
-              target="_blank"
-              className="btn-secondary px-6 py-2 text-xs uppercase tracking-widest rounded-sm transition-shadow duration-200"
-            >
-              Discord
-            </Link>
-          </div>
-          <div className="flex items-center justify-center gap-6 mt-6 text-xs uppercase tracking-widest text-white/20">
-            <span>Monthly meetings</span>
-            <span>Invite-only</span>
-            <span>UCSD Campus</span>
-          </div>
-        </div>
-      </div>
+    <main className="relative">
+      <Hero />
+      <About />
+      <PastEvents compact />
+      <StartBuilding />
     </main>
   );
 }

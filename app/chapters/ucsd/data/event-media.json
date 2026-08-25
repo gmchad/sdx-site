@@ -1,0 +1,339 @@
+{
+  "about": [
+    {
+      "id": "builder-days",
+      "title": "Builder Days",
+      "accent": "#03C661",
+      "rotate": "1.2deg",
+      "url": "https://lu.ma/sdx-uc-san-diego",
+      "cover": "/chapters/ucsd/events/builder-days.jpg"
+    },
+    {
+      "id": "fireside-chats",
+      "title": "Fireside Chats",
+      "accent": "#FAC205",
+      "rotate": "-0.8deg",
+      "url": "https://lu.ma/sdx-uc-san-diego",
+      "cover": "/chapters/ucsd/events/fireside.jpg"
+    },
+    {
+      "id": "hackathons",
+      "title": "Hackathons",
+      "accent": "#FC5715",
+      "rotate": "-1.5deg",
+      "url": "https://lu.ma/sdx-uc-san-diego",
+      "cover": "/chapters/ucsd/events/hackathon.jpg"
+    },
+    {
+      "id": "flagship-events",
+      "title": "Flagship events",
+      "accent": "#11BBCD",
+      "rotate": "1.6deg",
+      "url": "https://lu.ma/sdx-uc-san-diego",
+      "cover": "/chapters/ucsd/events/flagship.jpg"
+    }
+  ],
+  "past": [
+    {
+      "id": "evt-kpE15ZMdVPHgiMy",
+      "title": "SDxUCSD Agent Hackathon",
+      "date": "2026-04-12T18:30:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/11mxu17s",
+      "accent": "#03C661"
+    },
+    {
+      "id": "evt-roRr04J21ucey8i",
+      "title": "SDxUCSD Demo Day",
+      "date": "2026-03-02T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/hkcvmwtw",
+      "accent": "#11BBCD"
+    },
+    {
+      "id": "evt-on1ePfsZUeEm2WP",
+      "title": "SDx Demo Day",
+      "date": "2026-02-23T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/s6aigs8l",
+      "accent": "#FAC205"
+    },
+    {
+      "id": "evt-LJoB8CZlXWGSl1R",
+      "title": "Demo Day",
+      "date": "2026-02-16T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/oa8gyytw",
+      "accent": "#FC5715"
+    },
+    {
+      "id": "evt-6mBPIb2hdvNcHS2",
+      "title": "Demo Day",
+      "date": "2026-02-09T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/13rineqy",
+      "accent": "#D92C2D"
+    },
+    {
+      "id": "evt-5XM0zG020hQxYpT",
+      "title": "SDx @ UC San Diego Vercel Hackathon",
+      "date": "2026-01-25T20:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/bfhm29ip",
+      "accent": "#035593"
+    },
+    {
+      "id": "evt-UcQyfp2PUeYFUMh",
+      "title": "SDx @ UC San Diego",
+      "date": "2026-01-19T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/rgu2aoo2",
+      "accent": "#03C661"
+    },
+    {
+      "id": "evt-vKFcfczsMLG3zWO",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-12-08T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/601wtf8i",
+      "accent": "#11BBCD"
+    },
+    {
+      "id": "evt-YwznmEn0uafb1SR",
+      "title": "SDx @ UC San Diego HelixDB Hackathon",
+      "date": "2025-11-23T20:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/il6hiolb",
+      "accent": "#FAC205"
+    },
+    {
+      "id": "evt-F1t1IykWKaPJfzV",
+      "title": "SDx @ UC San Diego - Demo Day w/ Jerry Qian",
+      "date": "2025-11-17T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/pd797b7t",
+      "accent": "#FC5715"
+    },
+    {
+      "id": "evt-D9DEEXfaHeNn6Xq",
+      "title": "SDx @ UC San Diego - Tom Zheng Fireside",
+      "date": "2025-11-10T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/u02uamim",
+      "accent": "#D92C2D"
+    },
+    {
+      "id": "evt-9bj8YXvdGtLlNTZ",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-11-03T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/i5mssx89",
+      "accent": "#035593"
+    },
+    {
+      "id": "evt-hdHZf3Q1APR1GIj",
+      "title": "SDx @ UC San Diego AI Agent Hackathon",
+      "date": "2025-10-26T19:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/eafwwc64",
+      "accent": "#03C661"
+    },
+    {
+      "id": "evt-xpbXPcmLhdqKrvu",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-10-19T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/thrpkai9",
+      "accent": "#11BBCD"
+    },
+    {
+      "id": "evt-lqlR2fvNl1acrF2",
+      "title": "SDx @ UC San Diego Kickoff",
+      "date": "2025-10-12T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/62tv55n7",
+      "accent": "#FAC205"
+    },
+    {
+      "id": "evt-iXg13zJTt9lyNGY",
+      "title": "SDx @ UC San Diego - Lunch @ Dirty Birds",
+      "date": "2025-06-08T19:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/1qefg06b",
+      "accent": "#FC5715"
+    },
+    {
+      "id": "evt-x5P0M5DD0YvUdw8",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-06-01T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/qnr2jxim",
+      "accent": "#D92C2D"
+    },
+    {
+      "id": "evt-qwInaL3mReol8SB",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-05-18T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/6rguripp",
+      "accent": "#035593"
+    },
+    {
+      "id": "evt-cC2TDPIO5ujCrQD",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-05-11T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/zc1clozl",
+      "accent": "#03C661"
+    },
+    {
+      "id": "evt-gwlRAsW1u5vYFn8",
+      "title": "SDx @ UC San Diego - Opennote Talk",
+      "date": "2025-05-10T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/4n0szb1p",
+      "accent": "#11BBCD"
+    },
+    {
+      "id": "evt-aQJAeDgBC1oxWEx",
+      "title": "SDx @ UC San Diego -  Groq Hack Day",
+      "date": "2025-05-04T19:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/5bgx0lwq",
+      "accent": "#FAC205"
+    },
+    {
+      "id": "evt-Rf1Wo1FcLA0hA7z",
+      "title": "SDx @ UC San Diego - Blake Anderson",
+      "date": "2025-04-27T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/a2vokot2",
+      "accent": "#FC5715"
+    },
+    {
+      "id": "evt-7dp8RVE7KD50Yeo",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-04-20T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/umrsl9bf",
+      "accent": "#D92C2D"
+    },
+    {
+      "id": "evt-z3xkpYlCwcCPXGC",
+      "title": "SDx @ UC San Diego - Eliam Medina Talk",
+      "date": "2025-04-12T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/pt2s467k",
+      "accent": "#035593"
+    },
+    {
+      "id": "evt-fFkNjZgIBG6n2Zk",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-04-06T23:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/snmxe428",
+      "accent": "#03C661"
+    },
+    {
+      "id": "evt-pP5NrNCKCQcPzoL",
+      "title": "SDx @ UC San Diego - Group Dinner",
+      "date": "2025-03-14T02:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/6hmc21v8",
+      "accent": "#11BBCD"
+    },
+    {
+      "id": "evt-oTXEkMvGpqzyNBb",
+      "title": "SDx @ UC San Diego - Perplexity Hackday",
+      "date": "2025-03-08T20:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/o6649x57",
+      "accent": "#FAC205"
+    },
+    {
+      "id": "evt-e2wYC4SaaY1rgwO",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-03-03T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/npqqotvj",
+      "accent": "#FC5715"
+    },
+    {
+      "id": "evt-RamS0BiGD4ki5J9",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-02-24T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/60jmd3kx",
+      "accent": "#D92C2D"
+    },
+    {
+      "id": "evt-WnGliRgl4MFPEdL",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-02-17T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/b0brxe9h",
+      "accent": "#035593"
+    },
+    {
+      "id": "evt-eDZH8tL6SH6OVHQ",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-02-03T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/b9za23f2",
+      "accent": "#03C661"
+    },
+    {
+      "id": "evt-wWq7dFZesDUmilB",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-01-27T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/qyzgj0t5",
+      "accent": "#11BBCD"
+    },
+    {
+      "id": "evt-k6TMi1SHhfpwuup",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-01-20T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/isx9svv6",
+      "accent": "#FAC205"
+    },
+    {
+      "id": "evt-PEghVBBCTHOsMOX",
+      "title": "SDx @ UC San Diego",
+      "date": "2025-01-13T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/347godby",
+      "accent": "#FC5715"
+    },
+    {
+      "id": "evt-fPuv6OD3TXQgCxU",
+      "title": "SDx @ UC San Diego",
+      "date": "2024-11-25T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/c0qukyrf",
+      "accent": "#D92C2D"
+    },
+    {
+      "id": "evt-UvwaEAqlYglNmHP",
+      "title": "SDx @ UC San Diego",
+      "date": "2024-11-18T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/844wmlo1",
+      "accent": "#035593"
+    },
+    {
+      "id": "evt-nPmsm16qlRPGp2Y",
+      "title": "SDx @ UC San Diego Chapter Meet",
+      "date": "2024-11-04T00:00:00.000Z",
+      "timezone": "America/Los_Angeles",
+      "url": "https://lu.ma/iafjoh9d",
+      "accent": "#03C661"
+    }
+  ],
+  "stats": {
+    "attendees": 1200,
+    "events": 30,
+    "hackathons": 6
+  }
+}
