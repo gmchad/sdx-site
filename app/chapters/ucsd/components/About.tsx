@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import Image from 'next/image';
 import MotionSection from '@/app/components/motion/MotionSection';
 import media from '../lib/media';
 
@@ -50,11 +51,12 @@ export default function About() {
                     className="relative aspect-square overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.02]"
                     style={{ transform: `rotate(${tile.rotate})` }}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={tile.cover}
                       alt={tile.title}
-                      className="absolute inset-0 h-full w-full object-cover opacity-85"
+                      fill
+                      sizes="(min-width: 1024px) 320px, 50vw"
+                      className="object-cover opacity-85"
                       onError={(e) => {
                         // Fallback wash if photo not dropped in yet
                         e.currentTarget.style.display = 'none';
