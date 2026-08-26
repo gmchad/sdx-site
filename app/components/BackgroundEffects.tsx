@@ -1,5 +1,12 @@
+'use client'
+
 import React from 'react';
-import PrismaticCanvas from './PrismaticCanvas';
+import dynamic from 'next/dynamic';
+
+// showPrismatic defaults to false and is rarely enabled — dynamic-import so
+// PrismaticCanvas (and the three.js it pulls in via ColorBends) never lands
+// in a page's bundle unless this layer is actually turned on.
+const PrismaticCanvas = dynamic(() => import('./PrismaticCanvas'), { ssr: false });
 
 interface BackgroundEffectsProps {
   showLetterforms?: boolean;
