@@ -2,9 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { sendGAEvent } from '@next/third-parties/google';
 import MotionSection from '@/app/components/motion/MotionSection';
-import FooterCanvas from './FooterCanvas';
+
+// FooterCanvas is a client-only canvas effect below the fold on first
+// load — split it out of the main layout chunk.
+const FooterCanvas = dynamic(() => import('./FooterCanvas'), { ssr: false });
 
 const Footer: React.FC = () => {
   const handleLinkClick = (linkUrl: string, label: string) => {

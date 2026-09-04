@@ -1,17 +1,34 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
-import { useCanvasSettings } from './CanvasDebugPanel';
+import { useCanvasSettings } from './CanvasSettingsContext';
 
 const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) => {
   const { settings } = useCanvasSettings();
+  const rootRef = useRef<HTMLDivElement>(null);
   const gooRef = useRef<HTMLDivElement>(null);
   const cellsRef = useRef<HTMLDivElement[]>([]);
+  // Parallel plain-number arrays for per-cell home position + current/
+  // last-written mouse offset — avoids per-frame dataset (DOM attribute)
+  // reads/writes and their string parsing.
+  const homeXRef = useRef<number[]>([]);
+  const homeYRef = useRef<number[]>([]);
+  const offXRef = useRef<number[]>([]);
+  const offYRef = useRef<number[]>([]);
+  const lastWriteXRef = useRef<number[]>([]);
+  const lastWriteYRef = useRef<number[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const smoothMouseRef = useRef({ x: -1000, y: -1000 });
   const asciiCanvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
   const built = useRef(false);
+  // Cached container size — refreshed by ResizeObserver instead of a
+  // getBoundingClientRect() layout read inside the 60fps tick loop.
+  const sizeRef = useRef({ w: 0, h: 0 });
+  // Two-way visibility: the hero canvas has no lazy-mount gate (it's above
+  // the fold on load), but its rAF loop should stop doing real work once
+  // scrolled out of view — e.g. while the user is dwelling at the footer.
+  const visibleRef = useRef(true);
 
   const opacity = settings.heroOpacity;
   const blur = settings.heroBlur;
@@ -30,6 +47,12 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
 
     while (el.firstChild) el.removeChild(el.firstChild);
     cellsRef.current = [];
+    homeXRef.current = [];
+    homeYRef.current = [];
+    offXRef.current = [];
+    offYRef.current = [];
+    lastWriteXRef.current = [];
+    lastWriteYRef.current = [];
 
     const sr = (seed: number) => {
       const x = Math.sin(seed) * 10000;
@@ -84,10 +107,6 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
         const delay = sr(s + 4) * 6;
 
         const div = document.createElement('div');
-        div.dataset.homeX = String(cx);
-        div.dataset.homeY = String(cy);
-        div.dataset.offX = '0';
-        div.dataset.offY = '0';
         Object.assign(div.style, {
           position: 'absolute',
           left: `${cx}px`,
@@ -97,7 +116,8 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
           background: 'white',
           borderRadius: `${borderRadius}%`,
           transform: 'translate(-50%, -50%)',
-          willChange: 'transform',
+          translate: '0px 0px',
+          willChange: 'transform, translate',
           animation: `md${idx} ${dur.toFixed(1)}s cubic-bezier(1,0,0.31,1.39) ${delay.toFixed(1)}s infinite`,
         });
 
@@ -114,6 +134,12 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
 
         frag.appendChild(div);
         cellsRef.current.push(div);
+        homeXRef.current.push(cx);
+        homeYRef.current.push(cy);
+        offXRef.current.push(0);
+        offYRef.current.push(0);
+        lastWriteXRef.current.push(0);
+        lastWriteYRef.current.push(0);
         idx++;
       }
     }
@@ -127,6 +153,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
   };
 
   useEffect(() => {
+    const root = rootRef.current;
     built.current = false;
     requestAnimationFrame(() => buildGrid());
 
@@ -140,20 +167,62 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
     };
 
     window.addEventListener('resize', onResize);
+
+    // Keep the cached size in sync with actual layout changes (e.g. the
+    // hero container resizing) without a per-frame layout read in tick().
+    let ro: ResizeObserver | null = null;
+    if (root && 'ResizeObserver' in window) {
+      ro = new ResizeObserver(entries => {
+        const entry = entries[0];
+        if (entry) {
+          const { width, height } = entry.contentRect;
+          sizeRef.current = { w: width, h: height };
+        }
+      });
+      ro.observe(root);
+    } else if (root) {
+      const rect = root.getBoundingClientRect();
+      sizeRef.current = { w: rect.width, h: rect.height };
+    }
+
     return () => {
       window.removeEventListener('resize', onResize);
       clearTimeout(resizeTimer);
+      if (ro) ro.disconnect();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellSize, settings.heroDensity]);
 
+  // Two-way visibility gate: stop doing per-frame work while the hero
+  // canvas is scrolled out of view (e.g. user dwelling at the footer).
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        visibleRef.current = entries.some(entry => entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(root);
+
+    return () => observer.disconnect();
+  }, []);
+
   // Mouse interaction + ASCII swirl rendering
   useEffect(() => {
-    const container = gooRef.current?.parentElement;
+    const container = rootRef.current;
     const asciiCanvas = asciiCanvasRef.current;
     if (!container || !asciiCanvas) return;
 
     const onDocMove = (e: MouseEvent) => {
+      // Skip the layout read entirely while scrolled out of view — the
+      // canvas can't be under the cursor anyway.
+      if (!visibleRef.current) {
+        mouseRef.current = { x: -1000, y: -1000 };
+        return;
+      }
       const rect = container.getBoundingClientRect();
       if (
         e.clientX >= rect.left && e.clientX <= rect.right &&
@@ -170,9 +239,16 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
     const charFontSize = 11;
 
     const tick = () => {
-      const rect = container.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
+      // Tab is backgrounded, or the hero has scrolled out of view — nothing
+      // is visible, so skip the work but keep the rAF chain alive (cheap)
+      // so it resumes automatically the moment either condition clears.
+      if (document.hidden || !visibleRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      const w = sizeRef.current.w;
+      const h = sizeRef.current.h;
 
       if (w === 0 || h === 0) {
         rafRef.current = requestAnimationFrame(tick);
@@ -185,9 +261,17 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
       smooth.x += (target.x - smooth.x) * mouseLag;
       smooth.y += (target.y - smooth.y) * mouseLag;
 
-      for (const cell of cellsRef.current) {
-        const hx = parseFloat(cell.dataset.homeX || '0');
-        const hy = parseFloat(cell.dataset.homeY || '0');
+      const cells = cellsRef.current;
+      const homeX = homeXRef.current;
+      const homeY = homeYRef.current;
+      const offX = offXRef.current;
+      const offY = offYRef.current;
+      const lastWriteX = lastWriteXRef.current;
+      const lastWriteY = lastWriteYRef.current;
+
+      for (let i = 0; i < cells.length; i++) {
+        const hx = homeX[i];
+        const hy = homeY[i];
         const ddx = hx - smooth.x;
         const ddy = hy - smooth.y;
         const dist = Math.sqrt(ddx * ddx + ddy * ddy);
@@ -200,15 +284,22 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
           targetOffY = -(ddy / dist) * force;
         }
 
-        const curOffX = parseFloat(cell.dataset.offX || '0');
-        const curOffY = parseFloat(cell.dataset.offY || '0');
+        const curOffX = offX[i];
+        const curOffY = offY[i];
         const newOffX = curOffX + (targetOffX - curOffX) * 0.08;
         const newOffY = curOffY + (targetOffY - curOffY) * 0.08;
-        cell.dataset.offX = String(newOffX);
-        cell.dataset.offY = String(newOffY);
+        offX[i] = newOffX;
+        offY[i] = newOffY;
 
-        cell.style.left = `${hx + newOffX}px`;
-        cell.style.top = `${hy + newOffY}px`;
+        // Skip the style write once the offset has settled to within a
+        // sub-pixel epsilon of what's already rendered — avoids needless
+        // compositor work (and possible filter-layer re-raster) for the
+        // vast majority of cells, which sit at rest most of the time.
+        if (Math.abs(newOffX - lastWriteX[i]) > 0.02 || Math.abs(newOffY - lastWriteY[i]) > 0.02) {
+          cells[i].style.translate = `${newOffX}px ${newOffY}px`;
+          lastWriteX[i] = newOffX;
+          lastWriteY[i] = newOffY;
+        }
       }
 
       // Draw ASCII swirl — use same rect as container for exact match
@@ -265,6 +356,7 @@ const MetaballCanvas: React.FC<{ className?: string }> = ({ className = '' }) =>
 
   return (
     <div
+      ref={rootRef}
       className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
       aria-hidden="true"
     >

@@ -6,7 +6,8 @@ import Footer from '@/app/components/Footer';
 import LoadingStinger from '@/app/components/LoadingStinger';
 import PageTransition from '@/app/components/PageTransition';
 import MotionProvider from '@/app/components/motion/MotionProvider';
-import CanvasDebugPanel, { CanvasSettingsProvider } from '@/app/components/CanvasDebugPanel';
+import { CanvasSettingsProvider } from '@/app/components/CanvasSettingsContext';
+import CanvasDebugPanel from '@/app/components/CanvasDebugPanelLazy';
 import "./globals.css";
 
 
