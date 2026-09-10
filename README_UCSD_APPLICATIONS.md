@@ -1,29 +1,32 @@
 # UCSD member applications: Tally → Notion
 
-The UCSD chapter application is a Tally form. Every "Join" button on the
-chapter (hero, bottom section, top bar) opens it in a new tab, and Tally
-writes each submission into a Notion database. This replaces the Google Form.
+The UCSD chapter application is a Tally form (https://tally.so/r/eqJV5q).
+Every "Join" button on the chapter (hero, bottom section, top bar) opens it
+in a new tab. Tally writes each submission into the **Applications** database
+in the SDxUCSD Core Documentation page in Notion (Dani's Space), under the
+Applications heading at the bottom of that page. This replaced the Google
+Form on 2026-09-09.
 
-## 1. Create the Tally form
+## What is wired up
 
-1. Sign in at https://tally.so and create a blank form.
-2. Rebuild the Google Form question for question. Keep the question text and
-   the required flags so applicants see no change.
-3. Under **Design**, pick the dark theme and add the SDx logo.
-4. Under **Settings → Access**, leave the form open. Do not require sign-in.
-5. Publish the form and copy the share link from the **Share** dialog. It
-   looks like `https://tally.so/r/<id>`.
+- Tally integration "form submissions" on the form, connected to the
+  Applications database. Every question maps to a property of the same
+  meaning: First Name (title), Last Name, UCSD Email, Year (select), Topics,
+  Technical Fields and Cool Stuff (multi-select), Resume (files), LinkedIn and
+  Website (URL), Most Impressive Build, Company You Like, Anything Else (text).
+- Review columns Tally does not fill: Status (New, Reviewing, Accepted,
+  Rejected), Reviewer (person), Submitted (created time).
+- Select and multi-select options are created by Notion the first time a
+  value arrives, so new form options need no Notion change.
 
-## 2. Connect Tally to Notion
+## If the form changes
 
-1. In the Tally form, open **Integrations → Notion → Connect**.
-2. Notion asks which pages Tally may use. Pick the **Applications** database
-   in the SDxUCSD core documentation page, under the Applications section.
-3. Map each Tally question to the matching Notion property. Map the
-   applicant's name to the title property so each row reads as a person.
-4. Submit a test entry from the Tally preview and check that a row appears.
+1. Add the question in Tally.
+2. Add a matching property to the Applications database in Notion.
+3. In Tally, open Integrations → form submissions → edit, add a row under
+   Map properties, and save.
 
-## 3. Point the site at the form
+## Site link
 
-`UCSD_JOIN_FORM` in `app/chapters/ucsd/lib/links.ts` holds the share link
-(https://tally.so/r/eqJV5q). Change it there if the form is ever replaced.
+`UCSD_JOIN_FORM` in `app/chapters/ucsd/lib/links.ts` holds the share link.
+Change it there if the form is ever replaced.
