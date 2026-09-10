@@ -9,8 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import AsciiButton from './AsciiButton';
 import LogoContextMenu from './LogoContextMenu';
-import { UCSD_APPLY_PATH } from '@/app/chapters/ucsd/lib/links';
-import { useIsUcsdHost, ucsdPath } from '@/app/chapters/ucsd/lib/ucsd-host';
+import { UCSD_JOIN_FORM } from '@/app/chapters/ucsd/lib/links';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -24,13 +23,11 @@ const MAIN_JOIN_URL = 'https://lu.ma/sdx';
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Route segments reflect the matched route, so they are right on the server even when
-  // ucsd.sdx.community rewrites "/" to /chapters/ucsd. On the chapter "Join" opens the chapter
+  // ucsd.sdx.community rewrites "/" to /chapters/ucsd. On the chapter "Join" opens the member
   // application and the Executives link is hidden.
   const segments = useSelectedLayoutSegments();
   const onUcsdChapter = segments[0] === 'chapters' && segments[1] === 'ucsd';
-  const onUcsdHost = useIsUcsdHost();
-  const joinHref = onUcsdChapter ? ucsdPath(UCSD_APPLY_PATH, onUcsdHost) : MAIN_JOIN_URL;
-  const joinTarget = onUcsdChapter ? undefined : '_blank';
+  const joinHref = onUcsdChapter ? UCSD_JOIN_FORM : MAIN_JOIN_URL;
 
   const handleLinkClick = (linkUrl: string) => {
     sendGAEvent('clicked', { link_url: linkUrl });
@@ -98,7 +95,7 @@ const Navigation: React.FC = () => {
             )}
             <Link
               href={joinHref}
-              target={joinTarget}
+              target="_blank"
               onClick={() => handleLinkClick(joinHref)}
               className="block"
             >
@@ -140,7 +137,7 @@ const Navigation: React.FC = () => {
                   <div className="px-6 pt-4">
                     <Link
                       href={joinHref}
-                      target={joinTarget}
+                      target="_blank"
                       onClick={() => handleLinkClick(joinHref)}
                       className="block"
                     >

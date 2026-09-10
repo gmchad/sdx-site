@@ -3,21 +3,20 @@
 import React from 'react';
 import Link from 'next/link';
 import { m, useScroll, useTransform } from 'motion/react';
+import { Calendar } from 'lucide-react';
 import { EASE_SOFT } from '@/lib/motion';
 import BackgroundEffects from '@/app/components/BackgroundEffects';
 import MetaballCanvas from '@/app/components/MetaballCanvas';
 import AsciiButton from '@/app/components/AsciiButton';
 import MotionButton from '@/app/components/motion/MotionButton';
 import SpecStrip from './SpecStrip';
-import { UCSD_APPLY_PATH } from '../lib/links';
-import { useIsUcsdHost, ucsdPath } from '../lib/ucsd-host';
+import IconTile from './IconTile';
+import { UCSD_JOIN_FORM, UCSD_LUMA } from '../lib/links';
 
 const TITLE = 'SDxUCSD';
 
 export default function Hero() {
   const d = (_stingerDelay: number, navDelay: number) => navDelay;
-  const onUcsdHost = useIsUcsdHost();
-  const applyHref = ucsdPath(UCSD_APPLY_PATH, onUcsdHost);
 
   const { scrollY } = useScroll();
   const contentOpacity = useTransform(scrollY, [0, 480], [1, 0]);
@@ -68,13 +67,16 @@ export default function Hero() {
 
         {/* CTA row */}
         <m.div
-          className="relative mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="relative mt-10 flex flex-wrap items-center justify-center gap-3"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, ease: EASE_SOFT, delay: d(3.05, 0.65) }}
         >
+          <IconTile href={UCSD_LUMA} label="Luma calendar" external>
+            <Calendar className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+          </IconTile>
           <MotionButton>
-            <Link href={applyHref} className="block">
+            <Link href={UCSD_JOIN_FORM} target="_blank" rel="noopener noreferrer" className="block">
               <AsciiButton>Join us</AsciiButton>
             </Link>
           </MotionButton>
