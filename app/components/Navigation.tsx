@@ -2,12 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useSelectedLayoutSegments } from 'next/navigation';
 import { sendGAEvent } from '@next/third-parties/google';
 import { m } from 'motion/react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import AsciiButton from './AsciiButton';
 import LogoContextMenu from './LogoContextMenu';
+import { UCSD_APPLY_PATH } from '@/app/chapters/ucsd/lib/links';
+import { useIsUcsdHost, ucsdPath } from '@/app/chapters/ucsd/lib/ucsd-host';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -16,8 +19,18 @@ const navLinks = [
   { href: '/chapters', label: 'Chapters' },
 ];
 
+const MAIN_JOIN_URL = 'https://lu.ma/sdx';
+
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Route segments reflect the matched route, so they are right on the server even when
+  // ucsd.sdx.community rewrites "/" to /chapters/ucsd. On the chapter "Join" opens the chapter
+  // application and the Executives link is hidden.
+  const segments = useSelectedLayoutSegments();
+  const onUcsdChapter = segments[0] === 'chapters' && segments[1] === 'ucsd';
+  const onUcsdHost = useIsUcsdHost();
+  const joinHref = onUcsdChapter ? ucsdPath(UCSD_APPLY_PATH, onUcsdHost) : MAIN_JOIN_URL;
+  const joinTarget = onUcsdChapter ? undefined : '_blank';
 
   const handleLinkClick = (linkUrl: string) => {
     sendGAEvent('clicked', { link_url: linkUrl });
@@ -74,17 +87,19 @@ const Navigation: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
+            {!onUcsdChapter && (
+              <Link
+                href="/executives"
+                onClick={() => handleLinkClick('/executives')}
+                className="px-3 py-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-200"
+              >
+                Executives
+              </Link>
+            )}
             <Link
-              href="/executives"
-              onClick={() => handleLinkClick('/executives')}
-              className="px-3 py-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-200"
-            >
-              Executives
-            </Link>
-            <Link
-              href="https://lu.ma/sdx"
-              target="_blank"
-              onClick={() => handleLinkClick('https://lu.ma/sdx')}
+              href={joinHref}
+              target={joinTarget}
+              onClick={() => handleLinkClick(joinHref)}
               className="block"
             >
               <AsciiButton>Join</AsciiButton>
@@ -113,18 +128,20 @@ const Navigation: React.FC = () => {
                     </Link>
                   ))}
                   <div className="border-t border-white/5 my-2" />
-                  <Link
-                    href="/executives"
-                    onClick={() => handleLinkClick('/executives')}
-                    className="px-6 py-3 text-xs uppercase tracking-widest text-white/60 hover:text-white hover:bg-white/[0.03] transition-colors duration-200"
-                  >
-                    Executives
-                  </Link>
+                  {!onUcsdChapter && (
+                    <Link
+                      href="/executives"
+                      onClick={() => handleLinkClick('/executives')}
+                      className="px-6 py-3 text-xs uppercase tracking-widest text-white/60 hover:text-white hover:bg-white/[0.03] transition-colors duration-200"
+                    >
+                      Executives
+                    </Link>
+                  )}
                   <div className="px-6 pt-4">
                     <Link
-                      href="https://lu.ma/sdx"
-                      target="_blank"
-                      onClick={() => handleLinkClick('https://lu.ma/sdx')}
+                      href={joinHref}
+                      target={joinTarget}
+                      onClick={() => handleLinkClick(joinHref)}
                       className="block"
                     >
                       <AsciiButton>Join</AsciiButton>

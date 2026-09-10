@@ -9,12 +9,15 @@ import MetaballCanvas from '@/app/components/MetaballCanvas';
 import AsciiButton from '@/app/components/AsciiButton';
 import MotionButton from '@/app/components/motion/MotionButton';
 import SpecStrip from './SpecStrip';
-import { UCSD_JOIN_FORM } from '../lib/links';
+import { UCSD_APPLY_PATH } from '../lib/links';
+import { useIsUcsdHost, ucsdPath } from '../lib/ucsd-host';
 
 const TITLE = 'SDxUCSD';
 
 export default function Hero() {
   const d = (_stingerDelay: number, navDelay: number) => navDelay;
+  const onUcsdHost = useIsUcsdHost();
+  const applyHref = ucsdPath(UCSD_APPLY_PATH, onUcsdHost);
 
   const { scrollY } = useScroll();
   const contentOpacity = useTransform(scrollY, [0, 480], [1, 0]);
@@ -71,7 +74,7 @@ export default function Hero() {
           transition={{ duration: 1.0, ease: EASE_SOFT, delay: d(3.05, 0.65) }}
         >
           <MotionButton>
-            <Link href={UCSD_JOIN_FORM} target="_blank" rel="noopener noreferrer" className="block">
+            <Link href={applyHref} className="block">
               <AsciiButton>Join us</AsciiButton>
             </Link>
           </MotionButton>

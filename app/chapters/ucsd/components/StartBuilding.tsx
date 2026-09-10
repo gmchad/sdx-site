@@ -1,83 +1,67 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { m, useInView } from 'motion/react';
-import { EASE_SOFT } from '@/lib/motion';
+import { Calendar, Mail } from 'lucide-react';
 import PrismaticCanvas from '@/app/components/PrismaticCanvas';
 import AsciiButton from '@/app/components/AsciiButton';
 import MotionSection from '@/app/components/motion/MotionSection';
 import MotionButton from '@/app/components/motion/MotionButton';
-import { UCSD_EMAIL, UCSD_JOIN_FORM, UCSD_LUMA } from '../lib/links';
+import { UCSD_APPLY_PATH, UCSD_EMAIL, UCSD_LUMA } from '../lib/links';
+import { useIsUcsdHost, ucsdPath } from '../lib/ucsd-host';
 
-/** Judgment-style animated strikethrough — a bar sweeps across on scroll into view. */
-function Strike({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-15% 0px' });
-
+/** Square icon tile beside the Join button: same height as the button, icon centered. */
+function IconTile({
+  href,
+  label,
+  external = false,
+  children,
+}: {
+  href: string;
+  label: string;
+  external?: boolean;
+  children: React.ReactNode;
+}) {
   return (
-    <span ref={ref} className="relative inline-block whitespace-nowrap text-white/40">
-      {children}
-      <m.span
-        aria-hidden="true"
-        className="absolute left-0 top-1/2 block h-[0.055em] w-full -translate-y-1/2"
-        style={{ backgroundColor: 'rgba(217, 44, 45, 0.75)', originX: 0 }}
-        initial={{ scaleX: 0 }}
-        animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-        transition={{ duration: 0.7, ease: EASE_SOFT, delay: 0.5 }}
-      />
-    </span>
+    <MotionButton className="self-stretch">
+      <a
+        href={href}
+        aria-label={label}
+        title={label}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className="flex h-full aspect-square items-center justify-center rounded-sm border border-white/15 bg-white/[0.04] text-white/60 transition-colors hover:border-white/40 hover:bg-white/10 hover:text-white"
+      >
+        {children}
+      </a>
+    </MotionButton>
   );
 }
 
 export default function StartBuilding() {
+  const onUcsdHost = useIsUcsdHost();
+  const applyHref = ucsdPath(UCSD_APPLY_PATH, onUcsdHost);
+
   return (
     <section id="join" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <PrismaticCanvas intensity="subtle" />
 
       <MotionSection className="relative z-10 max-w-3xl mx-auto text-center">
-        <h2 className="font-display text-4xl md:text-5xl text-white tracking-tight mb-6 prismatic-glow">
-          Stop <Strike>waiting</Strike>.
-          <br />
-          Start shipping.
+        <h2 className="font-display text-4xl md:text-5xl text-white tracking-tight mb-10 prismatic-glow">
+          Start building.
         </h2>
 
-        {/* Who can join — the qualifier for the button below */}
-        <p className="text-base text-white/50 mb-10 max-w-md mx-auto leading-relaxed">
-          For UCSD students who are <em className="italic text-white/60">genuinely</em>{' '}
-          curious and <em className="italic text-white/60">passionate</em> about building.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex items-stretch justify-center gap-3">
+          <IconTile href={`mailto:${UCSD_EMAIL}`} label={`Email ${UCSD_EMAIL}`}>
+            <Mail className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+          </IconTile>
+          <IconTile href={UCSD_LUMA} label="Luma calendar" external>
+            <Calendar className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+          </IconTile>
           <MotionButton>
-            <Link
-              href={UCSD_JOIN_FORM}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
+            <Link href={applyHref} className="block">
               <AsciiButton>Join us</AsciiButton>
             </Link>
           </MotionButton>
-        </div>
-
-        {/* Chapter-specific contact + calendar */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-widest">
-          <a
-            href={`mailto:${UCSD_EMAIL}`}
-            className="text-white/40 hover:text-white/70 transition-colors"
-          >
-            {UCSD_EMAIL}
-          </a>
-          <span className="hidden sm:block w-px h-3 bg-white/15" aria-hidden="true" />
-          <a
-            href={UCSD_LUMA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/40 hover:text-white/70 transition-colors"
-          >
-            Luma calendar
-          </a>
         </div>
       </MotionSection>
     </section>
