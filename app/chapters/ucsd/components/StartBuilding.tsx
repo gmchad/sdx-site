@@ -12,10 +12,10 @@ import { UCSD_EMAIL, UCSD_JOIN_FORM, UCSD_LUMA } from '../lib/links';
 
 export default function StartBuilding() {
   return (
-    <section id="join" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="join" className="relative flex min-h-[80svh] items-center py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <PrismaticCanvas intensity="subtle" />
 
-      <MotionSection className="relative z-10 max-w-3xl mx-auto text-center">
+      <MotionSection className="relative z-10 w-full max-w-3xl mx-auto text-center">
         <h2 className="font-display text-4xl md:text-5xl text-white tracking-tight mb-10 prismatic-glow">
           Start building.
         </h2>

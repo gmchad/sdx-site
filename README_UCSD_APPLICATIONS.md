@@ -25,6 +25,5 @@ writes each submission into a Notion database. This replaces the Google Form.
 
 ## 3. Point the site at the form
 
-1. Open `app/chapters/ucsd/lib/links.ts`.
-2. Set `UCSD_JOIN_FORM` to the share link from step 1.5.
-3. Deploy. Until then the buttons keep opening the old Google Form.
+`UCSD_JOIN_FORM` in `app/chapters/ucsd/lib/links.ts` holds the share link
+(https://tally.so/r/eqJV5q). Change it there if the form is ever replaced.
