@@ -172,6 +172,23 @@ export default function ColorBends({
 
     const clock = new THREE.Clock();
 
+    // Pause the render loop entirely while the canvas is scrolled out of
+    // view (or the tab is backgrounded) — the loop keeps ticking (cheap:
+    // just a rAF reschedule) so it resumes seamlessly the moment either
+    // condition clears, but skips the actual WebGL submission and uniform
+    // work that costs real main-thread + GPU time.
+    let isIntersecting = true;
+    let intersectionObserver = null;
+    if ('IntersectionObserver' in window) {
+      intersectionObserver = new IntersectionObserver(
+        entries => {
+          isIntersecting = entries.some(entry => entry.isIntersecting);
+        },
+        { threshold: 0 }
+      );
+      intersectionObserver.observe(container);
+    }
+
     const handleResize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
@@ -190,6 +207,11 @@ export default function ColorBends({
     }
 
     const loop = () => {
+      if (document.hidden || !isIntersecting) {
+        rafRef.current = requestAnimationFrame(loop);
+        return;
+      }
+
       const dt = clock.getDelta();
       const elapsed = clock.elapsedTime;
       material.uniforms.uTime.value = elapsed;
@@ -212,6 +234,7 @@ export default function ColorBends({
 
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      if (intersectionObserver) intersectionObserver.disconnect();
       if (resizeObserverRef.current) resizeObserverRef.current.disconnect();
       else window.removeEventListener('resize', handleResize);
       geometry.dispose();

@@ -12,6 +12,7 @@ import MotionButton from '@/app/components/motion/MotionButton';
 import SpecStrip from './SpecStrip';
 import IconTile from './IconTile';
 import { UCSD_JOIN_FORM, UCSD_LUMA } from '../lib/links';
+import styles from './Hero.module.css';
 
 const TITLE = 'SDxUCSD';
 
@@ -42,16 +43,14 @@ export default function Hero() {
           className="relative font-display text-[clamp(3.25rem,12.5vw,10.5rem)] leading-[0.95] tracking-tight prismatic-glow select-none"
         >
           {TITLE.split('').map((ch, i) => (
-            <m.span
+            <span
               key={i}
               aria-hidden="true"
-              className={`inline-block ${i < 3 ? 'text-white' : 'text-outline'}`}
-              initial={{ opacity: 0, y: '0.4em' }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: EASE_SOFT, delay: d(2.3 + i * 0.055, 0.2 + i * 0.055) }}
+              className={`${styles.letter} ${i < 3 ? 'text-white' : 'text-outline'}`}
+              style={{ '--letter-delay': `${(0.2 + i * 0.055).toFixed(3)}s` } as React.CSSProperties}
             >
               {ch}
-            </m.span>
+            </span>
           ))}
         </h1>
 
