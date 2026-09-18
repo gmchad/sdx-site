@@ -3,15 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { m, useScroll, useTransform } from 'motion/react';
-import { Calendar } from 'lucide-react';
 import { EASE_SOFT } from '@/lib/motion';
 import BackgroundEffects from '@/app/components/BackgroundEffects';
 import MetaballCanvas from '@/app/components/MetaballCanvas';
 import AsciiButton from '@/app/components/AsciiButton';
 import MotionButton from '@/app/components/motion/MotionButton';
 import SpecStrip from './SpecStrip';
-import IconTile from './IconTile';
-import { UCSD_JOIN_FORM, UCSD_LUMA } from '../lib/links';
+import { UCSD_JOIN_FORM } from '../lib/links';
 import styles from './Hero.module.css';
 
 const TITLE = 'SDxUCSD';
@@ -66,14 +64,11 @@ export default function Hero() {
 
         {/* CTA row */}
         <m.div
-          className="relative mt-10 flex flex-wrap items-center justify-center gap-3"
+          className="relative mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, ease: EASE_SOFT, delay: d(3.05, 0.65) }}
         >
-          <IconTile href={UCSD_LUMA} label="Luma calendar" external>
-            <Calendar className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
-          </IconTile>
           <MotionButton>
             <Link href={UCSD_JOIN_FORM} target="_blank" rel="noopener noreferrer" className="block">
               <AsciiButton>Join us</AsciiButton>

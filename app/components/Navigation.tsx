@@ -23,8 +23,8 @@ const MAIN_JOIN_URL = 'https://lu.ma/sdx';
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Route segments reflect the matched route, so they are right on the server even when
-  // ucsd.sdx.community rewrites "/" to /chapters/ucsd. On the chapter "Join" opens the member
-  // application and the Executives link is hidden.
+  // ucsd.sdx.community rewrites "/" to /chapters/ucsd. The header is the same everywhere;
+  // only the "Join" href changes, opening the chapter member application.
   const segments = useSelectedLayoutSegments();
   const onUcsdChapter = segments[0] === 'chapters' && segments[1] === 'ucsd';
   const joinHref = onUcsdChapter ? UCSD_JOIN_FORM : MAIN_JOIN_URL;
@@ -84,15 +84,13 @@ const Navigation: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            {!onUcsdChapter && (
-              <Link
-                href="/executives"
-                onClick={() => handleLinkClick('/executives')}
-                className="px-3 py-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-200"
-              >
-                Executives
-              </Link>
-            )}
+            <Link
+              href="/executives"
+              onClick={() => handleLinkClick('/executives')}
+              className="px-3 py-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-200"
+            >
+              Executives
+            </Link>
             <Link
               href={joinHref}
               target="_blank"
@@ -125,15 +123,13 @@ const Navigation: React.FC = () => {
                     </Link>
                   ))}
                   <div className="border-t border-white/5 my-2" />
-                  {!onUcsdChapter && (
-                    <Link
-                      href="/executives"
-                      onClick={() => handleLinkClick('/executives')}
-                      className="px-6 py-3 text-xs uppercase tracking-widest text-white/60 hover:text-white hover:bg-white/[0.03] transition-colors duration-200"
-                    >
-                      Executives
-                    </Link>
-                  )}
+                  <Link
+                    href="/executives"
+                    onClick={() => handleLinkClick('/executives')}
+                    className="px-6 py-3 text-xs uppercase tracking-widest text-white/60 hover:text-white hover:bg-white/[0.03] transition-colors duration-200"
+                  >
+                    Executives
+                  </Link>
                   <div className="px-6 pt-4">
                     <Link
                       href={joinHref}
