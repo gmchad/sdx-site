@@ -68,8 +68,8 @@ const Navigation: React.FC = () => {
             </Link>
           </LogoContextMenu>
 
-          {/* Desktop Navigation — centered */}
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {/* Desktop Navigation — in flow on tablets, absolutely centered from lg so it never overlaps the CTAs */}
+          <div className="hidden md:flex items-center gap-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
