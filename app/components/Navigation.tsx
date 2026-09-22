@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useSelectedLayoutSegments } from 'next/navigation';
 import { sendGAEvent } from '@next/third-parties/google';
 import { m } from 'motion/react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import AsciiButton from './AsciiButton';
 import LogoContextMenu from './LogoContextMenu';
+import { UCSD_JOIN_FORM } from '@/app/chapters/ucsd/lib/links';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -16,8 +18,16 @@ const navLinks = [
   { href: '/chapters', label: 'Chapters' },
 ];
 
+const MAIN_JOIN_URL = 'https://lu.ma/sdx';
+
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Route segments reflect the matched route, so they are right on the server even when
+  // ucsd.sdx.community rewrites "/" to /chapters/ucsd. The header is the same everywhere;
+  // only the "Join" href changes, opening the chapter member application.
+  const segments = useSelectedLayoutSegments();
+  const onUcsdChapter = segments[0] === 'chapters' && segments[1] === 'ucsd';
+  const joinHref = onUcsdChapter ? UCSD_JOIN_FORM : MAIN_JOIN_URL;
 
   const handleLinkClick = (linkUrl: string) => {
     sendGAEvent('clicked', { link_url: linkUrl });
@@ -58,8 +68,8 @@ const Navigation: React.FC = () => {
             </Link>
           </LogoContextMenu>
 
-          {/* Desktop Navigation — centered */}
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {/* Desktop Navigation — in flow on tablets, absolutely centered from lg so it never overlaps the CTAs */}
+          <div className="hidden md:flex items-center gap-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -82,9 +92,9 @@ const Navigation: React.FC = () => {
               Executives
             </Link>
             <Link
-              href="https://lu.ma/sdx"
+              href={joinHref}
               target="_blank"
-              onClick={() => handleLinkClick('https://lu.ma/sdx')}
+              onClick={() => handleLinkClick(joinHref)}
               className="block"
             >
               <AsciiButton>Join</AsciiButton>
@@ -122,9 +132,9 @@ const Navigation: React.FC = () => {
                   </Link>
                   <div className="px-6 pt-4">
                     <Link
-                      href="https://lu.ma/sdx"
+                      href={joinHref}
                       target="_blank"
-                      onClick={() => handleLinkClick('https://lu.ma/sdx')}
+                      onClick={() => handleLinkClick(joinHref)}
                       className="block"
                     >
                       <AsciiButton>Join</AsciiButton>

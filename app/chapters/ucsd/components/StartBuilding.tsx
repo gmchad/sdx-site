@@ -36,17 +36,11 @@ export default function StartBuilding() {
       <PrismaticCanvas intensity="subtle" />
 
       <MotionSection className="relative z-10 max-w-3xl mx-auto text-center">
-        <h2 className="font-display text-4xl md:text-5xl text-white tracking-tight mb-6 prismatic-glow">
+        <h2 className="font-display text-4xl md:text-5xl text-white tracking-tight mb-10 prismatic-glow">
           Stop <Strike>waiting</Strike>.
           <br />
           Start shipping.
         </h2>
-
-        {/* Who can join — the qualifier for the button below */}
-        <p className="text-base text-white/50 mb-10 max-w-md mx-auto leading-relaxed">
-          For UCSD students who are <em className="italic text-white/60">genuinely</em>{' '}
-          curious and <em className="italic text-white/60">passionate</em> about building.
-        </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
           <MotionButton>
